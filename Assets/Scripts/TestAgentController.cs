@@ -50,7 +50,7 @@ public class TestAgentController : Agent
     {
         if (other.CompareTag("target"))
         {
-            AddReward(10);
+            AddReward(50);
             EndEpisode();
         }
 
