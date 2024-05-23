@@ -5,9 +5,14 @@ using UnityEngine;
 public class PositionFollower : MonoBehaviour
 {
 
-    public Transform targetTransform;
+    [HideInInspector] public Transform targetTransform;
     public Vector3 offset;
 
+
+    private void Start()
+    {
+        targetTransform = Camera.main.transform;
+    }
 
     // Update is called once per frame
     void Update()

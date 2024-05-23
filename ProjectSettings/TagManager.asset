@@ -6,6 +6,8 @@ TagManager:
   tags:
   - target
   - Wall
+  - Gun
+  - Mag
   layers:
   - Default
   - TransparentFX

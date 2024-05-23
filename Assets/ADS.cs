@@ -7,7 +7,7 @@ public class ADS : MonoBehaviour
 {
 
     Transform gun;
-    Vector3 normalPosition;
+    public Vector3 normalPosition;
     public Vector3 adsPosition;     
     public float adsSpeed = 5.0f;     
 
@@ -18,7 +18,7 @@ public class ADS : MonoBehaviour
     private void Start()
     {
         gun = transform.GetChild(0);
-        normalPosition = gun.localPosition;
+        //normalPosition = gun.localPosition;
     }
 
     //Vector3(0,-0.0680000037,-0.184)

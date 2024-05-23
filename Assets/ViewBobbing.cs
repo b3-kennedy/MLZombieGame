@@ -12,7 +12,7 @@ public class ViewBobbing : MonoBehaviour
     float normalIntensity;
     float normalIntensityX;
 
-    public PositionFollower follower;
+    [HideInInspector] public PositionFollower follower;
     Vector3 originalOffset;
     float sinTime;
 
@@ -25,7 +25,7 @@ public class ViewBobbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        move = transform.parent.parent.parent.parent.GetComponent<PlayerMove>();
+        move = transform.parent.parent.parent.parent.parent.parent.GetComponent<PlayerMove>();
         normalIntensity = intensity;
         normalIntensityX = intensityX;
         follower = GetComponent<PositionFollower>();
