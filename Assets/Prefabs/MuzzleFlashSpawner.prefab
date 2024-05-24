@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &445021677656517858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8507276454389657440}
+  - component: {fileID: 8355593298565518069}
+  - component: {fileID: 6445103203374773462}
+  m_Layer: 0
+  m_Name: MuzzleFlashSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8507276454389657440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445021677656517858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 3.0937378, y: -1.9107311, z: -0.5773327}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &8355593298565518069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445021677656517858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7510c765f1e6242bc9f91e61714da9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlashes:
+  - {fileID: 100000, guid: 100eb7e96a85e9442b513f917a4bea65, type: 3}
+  - {fileID: 100000, guid: 321e16248b7f61f498bc176d571debe6, type: 3}
+  - {fileID: 100000, guid: 1aab78a1a2f1055468c4dde96bbbd91b, type: 3}
+  - {fileID: 100000, guid: 82642fd4a1024ae428a678d60a74933f, type: 3}
+  - {fileID: 100000, guid: 21aaf62f5f4fb2447932f6b22c24f9d2, type: 3}
+--- !u!114 &6445103203374773462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445021677656517858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cec3b121c99be54189cd6a70735ae56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 0.05

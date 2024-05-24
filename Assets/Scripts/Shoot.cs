@@ -8,6 +8,13 @@ public class Shoot : MonoBehaviour
     public enum ShootType {SINGLE, AUTO};
     public enum GunType {PISTOL, ASSAULT_RIFLE};
 
+    public GameObject muzzleFlashSpawner;
+
+    [Header("Audio Settings")]
+    public AudioClip shotSound;
+    public AudioClip emptySound;
+    public Transform audioSpawn;
+
     [Header("Gun Settings")]
     public ShootType shootType;
     public GunType gunType;
@@ -113,6 +120,10 @@ public class Shoot : MonoBehaviour
         }
         else
         {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
+            }
             anim.SetBool("shoot", false);
         }
 
@@ -155,7 +166,16 @@ public class Shoot : MonoBehaviour
 
     void Fire()
     {
+
+        GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
+        muzzleFlash.transform.SetParent(audioSpawn.transform);
+
+        AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
         currentAmmo -= 1;
+        if(currentAmmo <= 0) 
+        {
+            AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
+        }
         anim.SetBool("shoot", true);
         //Debug.Log("shoot");
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))

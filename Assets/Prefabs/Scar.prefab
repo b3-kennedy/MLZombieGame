@@ -173,6 +173,37 @@ MonoBehaviour:
   adsPosition: {x: 0, y: -0.068, z: -0.184}
   adsSpeed: 5
   isAiming: 0
+--- !u!1 &8086907104033254799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8568039807671258939}
+  m_Layer: 0
+  m_Name: AudioSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8568039807671258939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8086907104033254799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.3576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5156398081594948792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5152598742743358318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,7 +270,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8568039807671258939}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1854033573558392, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
       insertIndex: -1
@@ -262,6 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
+  shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+  emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
+  audioSpawn: {fileID: 8568039807671258939}
   shootType: 1
   gunType: 1
   fireRate: 14
@@ -270,7 +308,7 @@ MonoBehaviour:
   currentMags: 0
   reloadTime: 2
   reload: 0
-  recoilX: -2
+  recoilX: -1
   recoilY: 2
   recoilZ: 0.35
   snap: 6
