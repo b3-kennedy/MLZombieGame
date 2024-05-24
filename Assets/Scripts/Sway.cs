@@ -14,7 +14,9 @@ public class Sway : MonoBehaviour
     public float maxSway;
     public float smoothing;
     public float rotSwayMultiplier;
+    public float adsRotSwayMultiplier;
     public float moveMultiplier;
+    float normalRotSway;
 
     Quaternion initialRot;
     Vector3 gunStartPos;
@@ -27,6 +29,7 @@ public class Sway : MonoBehaviour
     void Start()
     {
         initialRot = transform.localRotation;
+        normalRotSway = rotSwayMultiplier;
         gun = transform.GetChild(0);
         gunStartPos = gun.localPosition;
         ads = GetComponent<ADS>();
@@ -43,7 +46,7 @@ public class Sway : MonoBehaviour
 
     void MouseSway()
     {
-        if (enableMouseSway)
+        if (enableMouseSway && !ads.isAiming)
         {
             float mouseX = Input.GetAxis("Mouse X") * swayAmount;
             float mouseY = Input.GetAxis("Mouse Y") * swayAmount;
@@ -57,6 +60,10 @@ public class Sway : MonoBehaviour
 
             transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRot, Time.deltaTime * smoothing);
         }
+        else if (ads.isAiming)
+        {
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0f, 0f, 0f), Time.deltaTime * 100);
+        }
 
     }
 
@@ -64,6 +71,14 @@ public class Sway : MonoBehaviour
     {
         if (enableMoveRot)
         {
+            if (ads.isAiming)
+            {
+                rotSwayMultiplier = adsRotSwayMultiplier;
+            }
+            else
+            {
+                rotSwayMultiplier = normalRotSway;
+            }
             float moveX = Input.GetAxis("Horizontal");
             Quaternion newRot = new Quaternion(gun.localRotation.x, gun.localRotation.y, moveX * rotSwayMultiplier, gun.localRotation.w);
             gun.localRotation = Quaternion.Lerp(gun.localRotation, newRot, Time.deltaTime * 10);
@@ -73,7 +88,7 @@ public class Sway : MonoBehaviour
 
     void MoveGun()
     {
-        if (enableMoveOnMove)
+        if (enableMoveOnMove && !ads.isAiming)
         {
             float moveZ = Input.GetAxisRaw("Vertical");
 

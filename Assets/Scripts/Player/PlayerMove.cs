@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
-
     public enum PlayerState {NORMAL, CROUCH, SPRINT};
     public PlayerState playerState = PlayerState.NORMAL;
 
@@ -51,10 +50,16 @@ public class PlayerMove : MonoBehaviour
     public float leanDistance;
     public float leanSpeed;
 
+
+    private void Awake()
+    {
+        ch = GetComponent<CharacterController>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        ch = GetComponent<CharacterController>();
+        
         normalCamPos = cam.transform.localPosition;
         defaultCamPos = cam.transform.localPosition;
         defaultCamRot = cam.transform.localRotation;

@@ -27,6 +27,7 @@ public class ADS : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))  
         {
+            transform.localPosition = Vector3.zero;
             isAiming = true;
         }
         else if (Input.GetMouseButtonUp(1))

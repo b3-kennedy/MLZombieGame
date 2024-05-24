@@ -6,6 +6,7 @@ public class PickUpWeapons : MonoBehaviour
 {
 
     public Transform weaponPos;
+    List<GameObject> guns = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -30,6 +31,32 @@ public class PickUpWeapons : MonoBehaviour
 
             }
         }
+
+        SwitchWeapon();
+
+    }
+
+
+    void SwitchWeapon()
+    {
+        if(weaponPos.childCount > 1)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                foreach (var gun in guns)
+                {
+                    if (gun.activeSelf)
+                    {
+                        gun.SetActive(false);
+                    }
+                    else
+                    {
+                        gun.SetActive(true);
+                    }
+                }
+            }
+        }
+
     }
 
     void PickUpMag(GameObject mag)
@@ -58,25 +85,51 @@ public class PickUpWeapons : MonoBehaviour
 
     void PickUpGun(GameObject gun)
     {
-
-        Debug.Log("pickup");
-        WeaponPickupObject wpo = gun.GetComponent<WeaponPickupObject>();
-
-        if(weaponPos.childCount > 0)
+        if(weaponPos.childCount < 3)
         {
-            GameObject currentGun = weaponPos.GetChild(0).gameObject;
-            GameObject droppedGun = Instantiate(currentGun.GetComponent<WeaponDropObject>().gunObject, gun.transform.position, gun.transform.rotation);
-            droppedGun.GetComponent<WeaponPickupObject>().currentAmmo = currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().currentAmmo;
-            Destroy(currentGun);
+            Debug.Log("pickup");
+            WeaponPickupObject wpo = gun.GetComponent<WeaponPickupObject>();
+
+            if (weaponPos.childCount > 1)
+            {
+                Debug.Log("2");
+                for (int i = 0; i < weaponPos.childCount; i++)
+                {
+                    if (weaponPos.GetChild(i).gameObject.activeSelf)
+                    {
+                        GameObject currentGun = weaponPos.GetChild(i).gameObject;
+                        GameObject droppedGun = Instantiate(currentGun.GetComponent<WeaponDropObject>().gunObject, gun.transform.position, gun.transform.rotation);
+                        droppedGun.GetComponent<WeaponPickupObject>().currentAmmo = currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().currentAmmo;
+                        Destroy(currentGun);
+                        guns.Remove(currentGun);
+                    }
+                }
+
+            }
+
+
+
+            GameObject newGun = Instantiate(wpo.gunObject, weaponPos);
+            guns.Add(newGun);
+            newGun.transform.SetAsFirstSibling();
+            Shoot newGunShootScript = newGun.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Shoot>();
+            newGunShootScript.currentAmmo = wpo.currentAmmo;
+            Debug.Log(newGunShootScript.currentAmmo);
+            newGun.transform.localPosition = Vector3.zero;
+
+            if(weaponPos.childCount > 0)
+            {
+                weaponPos.GetChild(0).gameObject.SetActive(true);
+                if(weaponPos.childCount > 1)
+                {
+                    weaponPos.GetChild(1).gameObject.SetActive(false);
+                }
+                
+            }
+
+
+            Destroy(gun);
         }
-        
 
-        GameObject newGun = Instantiate(wpo.gunObject, weaponPos);
-        Shoot newGunShootScript = newGun.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Shoot>();
-        newGunShootScript.currentAmmo = wpo.currentAmmo;
-        Debug.Log(newGunShootScript.currentAmmo);
-        newGun.transform.localPosition = Vector3.zero;
-
-        Destroy(gun);
     }
 }

@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 0.02
   intensityX: 1
+  adsIntensity: 0.0005
+  adsIntensityX: 0.2
   speed: 4
   follower: {fileID: 4117557851382185958}
 --- !u!114 &4117557851382185958
@@ -153,6 +155,7 @@ MonoBehaviour:
   maxSway: 5
   smoothing: 6
   rotSwayMultiplier: 0.05
+  adsRotSwayMultiplier: 0.005
   moveMultiplier: 1
 --- !u!114 &3768888990131400625
 MonoBehaviour:
@@ -263,7 +266,6 @@ MonoBehaviour:
   gunType: 1
   fireRate: 14
   maxAmmo: 30
-  maxMags: 1
   currentAmmo: 0
   currentMags: 0
   reloadTime: 2

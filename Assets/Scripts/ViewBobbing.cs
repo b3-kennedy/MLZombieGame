@@ -8,6 +8,8 @@ public class ViewBobbing : MonoBehaviour
 
     public float intensity;
     public float intensityX;
+    public float adsIntensity = 0.0005f;
+    public float adsIntensityX = 0.2f;
     public float speed;
     float normalIntensity;
     float normalIntensityX;
@@ -34,11 +36,18 @@ public class ViewBobbing : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (ads.isAiming)
         {
-            intensity = intensity / 5;
+            intensityX = adsIntensityX;
+            intensity = adsIntensity;
+            
+        }
+        else
+        {
+            intensity = normalIntensity;
+            intensityX = normalIntensityX;
         }
 
 
@@ -54,8 +63,7 @@ public class ViewBobbing : MonoBehaviour
         }
         else
         {
-            intensity = Mathf.Lerp(intensity, 0, Time.deltaTime * 10);
-            //intensityX = Mathf.Lerp(intensityX, 0, Time.deltaTime * 10);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * 10);
         }
 
         float sinY = Mathf.Abs(intensity * Mathf.Sin(sinTime));

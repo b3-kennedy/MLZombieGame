@@ -116,7 +116,11 @@ public class Shoot : MonoBehaviour
             anim.SetBool("shoot", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && currentMags > 0)
+        if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.ASSAULT_RIFLE && ammoHolder.arMags > 0)
+        {
+            reload = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.PISTOL && ammoHolder.pistolMags > 0)
         {
             reload = true;
         }
