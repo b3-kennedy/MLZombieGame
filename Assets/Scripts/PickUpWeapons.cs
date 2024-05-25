@@ -1,35 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickUpWeapons : MonoBehaviour
 {
 
     public Transform weaponPos;
     List<GameObject> guns = new List<GameObject>();
+    GameObject currentActiveGun;
 
     // Update is called once per frame
     void Update()
     {
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 10))
         {
-            if (hit.collider.CompareTag("Gun"))
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("hit gun");
-                if (Input.GetKeyDown(KeyCode.F))
+                if (hit.collider.CompareTag("Gun"))
                 {
-                    PickUpGun(hit.collider.gameObject);
-                }
-            }
-            else if (hit.collider.CompareTag("Mag"))
-            {
-                Debug.Log("hit mag");
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    PickUpMag(hit.collider.gameObject);
-                }
 
+                    PickUpGun(hit.collider.gameObject);
+                    
+                }
+                else if (hit.collider.CompareTag("Mag"))
+                {
+
+                    PickUpMag(hit.collider.gameObject);
+                    
+
+                }
+                else if (hit.collider.CompareTag("Attachment"))
+                {
+                    PickUpAttachment(hit.collider.gameObject);
+                }
             }
+
         }
 
         SwitchWeapon();
@@ -43,6 +49,7 @@ public class PickUpWeapons : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
+                
                 foreach (var gun in guns)
                 {
                     if (gun.activeSelf)
@@ -52,17 +59,44 @@ public class PickUpWeapons : MonoBehaviour
                     else
                     {
                         gun.SetActive(true);
+                        currentActiveGun = gun;
                     }
                 }
+
+                InventoryManager.Instance.OnOpenInventory();
             }
         }
 
     }
 
+    void PickUpAttachment(GameObject attachment)
+    {
+        GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
+        Debug.Log(currentActiveGun.transform.GetChild(0));
+        switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
+        {
+            case AttachmentSlotType.AttachmentType.SIGHT:
+                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                });
+                break;
+            case AttachmentSlotType.AttachmentType.BARREL:
+                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                });
+                break;
+            case AttachmentSlotType.AttachmentType.UNDERBARREL:
+                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                });
+                break;
+        }
+
+        Destroy(attachment);
+    }
+
     void PickUpMag(GameObject mag)
     {
-
-        
         MagazineType.MagType type = mag.GetComponent<MagazineType>().magType;
         switch (type)
         {
@@ -90,9 +124,10 @@ public class PickUpWeapons : MonoBehaviour
             Debug.Log("pickup");
             WeaponPickupObject wpo = gun.GetComponent<WeaponPickupObject>();
 
+            
+
             if (weaponPos.childCount > 1)
             {
-                Debug.Log("2");
                 for (int i = 0; i < weaponPos.childCount; i++)
                 {
                     if (weaponPos.GetChild(i).gameObject.activeSelf)
@@ -114,21 +149,24 @@ public class PickUpWeapons : MonoBehaviour
             newGun.transform.SetAsFirstSibling();
             Shoot newGunShootScript = newGun.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Shoot>();
             newGunShootScript.currentAmmo = wpo.currentAmmo;
-            Debug.Log(newGunShootScript.currentAmmo);
             newGun.transform.localPosition = Vector3.zero;
 
-            if(weaponPos.childCount > 0)
+            
+
+            if (weaponPos.childCount > 0)
             {
                 weaponPos.GetChild(0).gameObject.SetActive(true);
-                if(weaponPos.childCount > 1)
+                currentActiveGun = weaponPos.GetChild(0).gameObject;
+                if (weaponPos.childCount > 1)
                 {
                     weaponPos.GetChild(1).gameObject.SetActive(false);
                 }
                 
             }
 
-
+            
             Destroy(gun);
+            InventoryManager.Instance.OnPickUpWeapon(newGun);
         }
 
     }

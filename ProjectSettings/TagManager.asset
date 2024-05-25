@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Gun
   - Mag
+  - Attachment
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1486629059201321680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1322758375697885826}
+  m_Layer: 0
+  m_Name: UnderbarrelPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1322758375697885826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486629059201321680}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: -0.145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5156398081594948792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2207874534432571295
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,6 +99,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunObject: {fileID: 1987822036887406615, guid: e8acf73c00ead534cbeb3949e5800852, type: 3}
+--- !u!1 &3957861340563754694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6955564373868394930}
+  m_Layer: 0
+  m_Name: SightPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6955564373868394930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957861340563754694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0407, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5156398081594948792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5263981836030158610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6314601177498613047}
+  m_Layer: 0
+  m_Name: BarrelAttachmentPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6314601177498613047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263981836030158610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.4376}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5156398081594948792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5857079111384519911
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,6 +174,7 @@ GameObject:
   - component: {fileID: 4117557851382185958}
   - component: {fileID: 6426292109505724483}
   - component: {fileID: 3768888990131400625}
+  - component: {fileID: 6478075748204476216}
   m_Layer: 0
   m_Name: ScarParent
   m_TagString: Untagged
@@ -173,6 +267,24 @@ MonoBehaviour:
   adsPosition: {x: 0, y: -0.068, z: -0.184}
   adsSpeed: 5
   isAiming: 0
+--- !u!114 &6478075748204476216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857079111384519911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75215cea07b58a4e81227121e239f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrelAttachment: {fileID: 0}
+  barrelAttachmentPos: {fileID: 6314601177498613047}
+  sightAttachment: {fileID: 0}
+  sightAttachmentPos: {fileID: 6955564373868394930}
+  underbarrelAttachment: {fileID: 0}
+  underbarrelAttachmentPos: {fileID: 1322758375697885826}
 --- !u!1 &8086907104033254799
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +327,10 @@ PrefabInstance:
     - target: {fileID: 1854033573558392, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
       propertyPath: m_Name
       value: SCAR_H
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880569936150442, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
       propertyPath: m_LocalScale.x
@@ -274,6 +390,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8568039807671258939}
+    - targetCorrespondingSourceObject: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6314601177498613047}
+    - targetCorrespondingSourceObject: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6955564373868394930}
+    - targetCorrespondingSourceObject: {fileID: 4083575560300502, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1322758375697885826}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1854033573558392, guid: 68af8b9755dbd4b4e87aa82c6063978e, type: 3}
       insertIndex: -1

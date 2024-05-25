@@ -39,17 +39,23 @@ public class Shoot : MonoBehaviour
     
     
 
-    Recoil recoil;
+    [HideInInspector] public Recoil recoil;
 
     [Header("Recoil Settings")]
     public float recoilX;
     public float recoilY;
     public float recoilZ;
 
+    [HideInInspector] public float normalRecoilX;
+    [HideInInspector] public float normalRecoilY;
+    [HideInInspector] public float normalRecoilZ;
+
     public float snap;
     public float returnSpeed;
     Animator anim;
     AmmoHolder ammoHolder;
+
+    public bool canShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +75,12 @@ public class Shoot : MonoBehaviour
 
         recoil.snap = snap;
         recoil.returnSpeed = returnSpeed;
+
+        normalRecoilX = recoilX;
+        normalRecoilY = recoilY;
+        normalRecoilZ = recoilZ;
+
+
     }
 
     public void UpdateMagCount()
@@ -88,44 +100,43 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-
-
-        if (currentAmmo > 0)
+        if (!InventoryManager.Instance.inventory.activeSelf)
         {
-            if (shootType == ShootType.AUTO)
+            if (currentAmmo > 0)
             {
-                if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                if (shootType == ShootType.AUTO)
                 {
-                    nextFire = Time.time + 1f / fireRate;
-                    Fire();
-                    recoil.RecoilFire();
+                    if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                    {
+                        nextFire = Time.time + 1f / fireRate;
+                        Fire();
+                        recoil.RecoilFire();
+                    }
+                    else if (Input.GetButtonUp("Fire1"))
+                    {
+                        anim.SetBool("shoot", false);
+                    }
                 }
-                else if (Input.GetButtonUp("Fire1"))
+                else if (shootType == ShootType.SINGLE)
                 {
-                    anim.SetBool("shoot", false);
+                    if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                    {
+                        nextFire = Time.time + 1f / fireRate;
+                        Fire();
+                        recoil.RecoilFire();
+                    }
                 }
             }
-            else if (shootType == ShootType.SINGLE)
+            else
             {
-                if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                if (Input.GetButtonDown("Fire1"))
                 {
-                    nextFire = Time.time + 1f / fireRate;
-                    Fire();
-                    recoil.RecoilFire();
+                    AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
                 }
+                anim.SetBool("shoot", false);
             }
         }
-        else
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
-            }
-            anim.SetBool("shoot", false);
-        }
+
 
         if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.ASSAULT_RIFLE && ammoHolder.arMags > 0)
         {
@@ -180,7 +191,7 @@ public class Shoot : MonoBehaviour
         //Debug.Log("shoot");
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
         {
-            //Debug.Log("hit");
+            Debug.Log(hit.transform);
         }
     }
 }
