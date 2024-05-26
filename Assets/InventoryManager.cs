@@ -105,13 +105,8 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < attachmentsList.Count; i++)
-        {
-
-        }
-
-        foreach (var attachment in attachmentsList.ToArray())
+        List<GameObject> tempList = attachmentsList;
+        foreach (var attachment in tempList)
         {
             switch (attachment.GetComponent<AttachmentItem>().attachmentType)
             {
@@ -119,7 +114,6 @@ public class InventoryManager : MonoBehaviour
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachment.GetComponent<AttachmentItem>().item, attachment);
                     });
-                    attachmentsList.Remove(attachment);
 
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         OnOpenInventory();
@@ -129,7 +123,6 @@ public class InventoryManager : MonoBehaviour
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachment.GetComponent<AttachmentItem>().item, attachment);
                     });
-                    attachmentsList.Remove(attachment);
 
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         OnOpenInventory();
@@ -139,7 +132,6 @@ public class InventoryManager : MonoBehaviour
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachment.GetComponent<AttachmentItem>().item, attachment);
                     });
-                    attachmentsList.Remove(attachment);
 
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         OnOpenInventory();
