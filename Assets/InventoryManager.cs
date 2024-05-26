@@ -20,6 +20,8 @@ public class InventoryManager : MonoBehaviour
 
     public Transform itemParent;
 
+    public List<GameObject> attachmentsList;
+
     [HideInInspector] public GameObject activeGun;
 
     List<GameObject> createdSlots = new List<GameObject>();
@@ -65,23 +67,22 @@ public class InventoryManager : MonoBehaviour
             attachmentSlots.Add(attachments.GetChild(i).gameObject);
         }
 
-        
         foreach (var slot in attachmentSlots)
         {
-            if(slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.SIGHT)
+            if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.SIGHT)
             {
                 GameObject sight = Instantiate(sightSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(sight);
-                if(slot.transform.childCount > 0)
+                if (slot.transform.childCount > 0)
                 {
                     Debug.Log(slot.transform.GetChild(0).gameObject);
                     sight.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
                     sight.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
                     sight.GetComponent<Image>().color = Color.green;
                 }
-                
+
             }
-            else if(slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.BARREL)
+            else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.BARREL)
             {
                 GameObject barrel = Instantiate(barrelSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(barrel);
@@ -92,7 +93,7 @@ public class InventoryManager : MonoBehaviour
                     barrel.GetComponent<Image>().color = Color.green;
                 }
             }
-            else if(slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
+            else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
             {
                 GameObject underbarrel = Instantiate(underbarrelSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(underbarrel);
@@ -104,6 +105,50 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < attachmentsList.Count; i++)
+        {
+
+        }
+
+        foreach (var attachment in attachmentsList.ToArray())
+        {
+            switch (attachment.GetComponent<AttachmentItem>().attachmentType)
+            {
+                case AttachmentSlotType.AttachmentType.SIGHT:
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachment.GetComponent<AttachmentItem>().item, attachment);
+                    });
+                    attachmentsList.Remove(attachment);
+
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+                case AttachmentSlotType.AttachmentType.BARREL:
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachment.GetComponent<AttachmentItem>().item, attachment);
+                    });
+                    attachmentsList.Remove(attachment);
+
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+                case AttachmentSlotType.AttachmentType.UNDERBARREL:
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachment.GetComponent<AttachmentItem>().item, attachment);
+                    });
+                    attachmentsList.Remove(attachment);
+
+                    attachment.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+            }
+        }
+        
+
     }
 
     public void OnUnequipItem(GameObject itemUI, GameObject itemGameObject, Image slot)
@@ -111,6 +156,7 @@ public class InventoryManager : MonoBehaviour
         if(itemUI != null)
         {
             GameObject attachmentUI = Instantiate(itemUI, InventoryManager.Instance.itemParent);
+
             switch (attachmentUI.GetComponent<AttachmentItem>().attachmentType)
             {
                 case AttachmentSlotType.AttachmentType.SIGHT:
@@ -163,45 +209,44 @@ public class InventoryManager : MonoBehaviour
 
     public void OnPickUpItem(GameObject attachment, GameObject currentActiveGun)
     {
-        List<GameObject> attachments = new List<GameObject>();
         GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
-        attachments.Add(attachmentUI);
+        attachmentsList.Add(attachmentUI);
         activeGun = currentActiveGun;
         Debug.Log(currentActiveGun);
-        if(currentActiveGun != null)
-        {
-            switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
-            {
-                case AttachmentSlotType.AttachmentType.SIGHT:
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                    });
+        //if(currentActiveGun != null)
+        //{
+        //    switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
+        //    {
+        //        case AttachmentSlotType.AttachmentType.SIGHT:
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+        //            });
 
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        OnOpenInventory();
-                    });
-                    break;
-                case AttachmentSlotType.AttachmentType.BARREL:
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                    });
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                OnOpenInventory();
+        //            });
+        //            break;
+        //        case AttachmentSlotType.AttachmentType.BARREL:
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+        //            });
 
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        OnOpenInventory();
-                    });
-                    break;
-                case AttachmentSlotType.AttachmentType.UNDERBARREL:
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                    });
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                OnOpenInventory();
+        //            });
+        //            break;
+        //        case AttachmentSlotType.AttachmentType.UNDERBARREL:
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+        //            });
 
-                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                        OnOpenInventory();
-                    });
-                    break;
-            }
+        //            attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+        //                OnOpenInventory();
+        //            });
+        //            break;
+        //    }
             
-        }
+        //}
 
 
         Destroy(attachment);

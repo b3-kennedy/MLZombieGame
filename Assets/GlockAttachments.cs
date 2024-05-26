@@ -22,6 +22,7 @@ public class GlockAttachments : Attachments
 
         newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
         barrelAttachment = newAttachment;
+        InventoryManager.Instance.attachmentsList.Remove(button);
         Destroy(button);
     }
 }

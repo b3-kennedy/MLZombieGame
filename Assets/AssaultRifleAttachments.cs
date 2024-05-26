@@ -50,6 +50,7 @@ public class AssaultRifleAttachments : Attachments
         
         newAttachment.transform.localRotation = Quaternion.Euler(0,0,0);
         barrelAttachment = newAttachment;
+        InventoryManager.Instance.attachmentsList.Remove(button);
         Destroy(button);
     }
 
@@ -66,6 +67,7 @@ public class AssaultRifleAttachments : Attachments
             ironSights[0].SetActive(false);
             ironSights[1].transform.localRotation = Quaternion.Euler(90, 0, 0);
         }
+        InventoryManager.Instance.attachmentsList.Remove(button);
         Destroy(button);
     }
 
@@ -88,6 +90,7 @@ public class AssaultRifleAttachments : Attachments
 
         shootScript.recoil.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
         shootScript.recoil.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
+        InventoryManager.Instance.attachmentsList.Remove(button);
         Destroy(button);
     }
 
