@@ -163,40 +163,46 @@ public class InventoryManager : MonoBehaviour
 
     public void OnPickUpItem(GameObject attachment, GameObject currentActiveGun)
     {
+        List<GameObject> attachments = new List<GameObject>();
         GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
+        attachments.Add(attachmentUI);
         activeGun = currentActiveGun;
-        switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
+        Debug.Log(currentActiveGun);
+        if(currentActiveGun != null)
         {
-            case AttachmentSlotType.AttachmentType.SIGHT:
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
+            switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
+            {
+                case AttachmentSlotType.AttachmentType.SIGHT:
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                    });
 
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    OnOpenInventory();
-                });
-                break;
-            case AttachmentSlotType.AttachmentType.BARREL:
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+                case AttachmentSlotType.AttachmentType.BARREL:
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                    });
 
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    OnOpenInventory();
-                });
-                break;
-            case AttachmentSlotType.AttachmentType.UNDERBARREL:
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+                case AttachmentSlotType.AttachmentType.UNDERBARREL:
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
+                    });
 
-
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
-
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    OnOpenInventory();
-                });
-                break;
+                    attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
+                        OnOpenInventory();
+                    });
+                    break;
+            }
+            
         }
+
 
         Destroy(attachment);
     }

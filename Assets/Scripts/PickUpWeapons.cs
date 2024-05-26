@@ -9,7 +9,15 @@ public class PickUpWeapons : MonoBehaviour
     public Transform weaponPos;
     List<GameObject> guns = new List<GameObject>();
     GameObject currentActiveGun;
+    public GameObject startGun;
 
+
+    private void Start()
+    {
+        GameObject startWeapon = Instantiate(startGun);
+
+        PickUpGun(startWeapon);
+    }
     // Update is called once per frame
     void Update()
     {
