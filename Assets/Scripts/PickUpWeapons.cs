@@ -60,6 +60,7 @@ public class PickUpWeapons : MonoBehaviour
                     {
                         gun.SetActive(true);
                         currentActiveGun = gun;
+                        InventoryManager.Instance.activeGun = gun;
                     }
                 }
 
@@ -71,28 +72,7 @@ public class PickUpWeapons : MonoBehaviour
 
     void PickUpAttachment(GameObject attachment)
     {
-        GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
-        Debug.Log(currentActiveGun.transform.GetChild(0));
-        switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
-        {
-            case AttachmentSlotType.AttachmentType.SIGHT:
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
-                break;
-            case AttachmentSlotType.AttachmentType.BARREL:
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
-                break;
-            case AttachmentSlotType.AttachmentType.UNDERBARREL:
-                attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
-                    currentActiveGun.transform.GetChild(0).GetComponent<Attachments>().AttachUnderBarrel(attachmentUI.GetComponent<AttachmentItem>().item, attachmentUI);
-                });
-                break;
-        }
-
-        Destroy(attachment);
+        InventoryManager.Instance.OnPickUpItem(attachment, currentActiveGun);
     }
 
     void PickUpMag(GameObject mag)
@@ -157,6 +137,7 @@ public class PickUpWeapons : MonoBehaviour
             {
                 weaponPos.GetChild(0).gameObject.SetActive(true);
                 currentActiveGun = weaponPos.GetChild(0).gameObject;
+                InventoryManager.Instance.activeGun = currentActiveGun;
                 if (weaponPos.childCount > 1)
                 {
                     weaponPos.GetChild(1).gameObject.SetActive(false);

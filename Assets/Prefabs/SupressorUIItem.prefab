@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 4197802569311686999, guid: 105bb08c7f8f3074c9b70842bcaeb041, type: 3}
+  attachmentType: 1
 --- !u!1 &1092964067439265711
 GameObject:
   m_ObjectHideFlags: 0

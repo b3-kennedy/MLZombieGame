@@ -96,4 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90806e03907b2249a576b54e42c943d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachmentUI: {fileID: 411028760406493008, guid: 46395d8ae79ef4d4ba55dc500dc6aa94, type: 3}
   M4Position: {x: 0, y: 0, z: 0}
+  glockPosition: {x: 0, y: 0, z: 0}

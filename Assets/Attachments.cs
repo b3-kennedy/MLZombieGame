@@ -11,4 +11,10 @@ public class Attachments : MonoBehaviour
 
     public virtual void AttachUnderBarrel(GameObject attachment, GameObject button) { }
 
+    public virtual void UnequipSight() { }
+
+    public virtual void UnequipBarrel() { }
+
+    public virtual void UnequipUnderBarrel() { }
+
 }

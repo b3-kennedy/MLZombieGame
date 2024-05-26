@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Attachment : MonoBehaviour
 {
+
+    public GameObject attachmentUI;
+
     // Start is called before the first frame update
     void Start()
     {

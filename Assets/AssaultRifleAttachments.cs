@@ -91,4 +91,13 @@ public class AssaultRifleAttachments : Attachments
         Destroy(button);
     }
 
+    public override void UnequipSight()
+    {
+        if (ironSights.Length > 0)
+        {
+            ironSights[0].SetActive(true);
+            ironSights[1].transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
 }

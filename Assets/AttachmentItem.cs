@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttachmentItem : MonoBehaviour
 {
     public GameObject item;
+    public AttachmentSlotType.AttachmentType attachmentType;
 
     public void Destroy()
     {
