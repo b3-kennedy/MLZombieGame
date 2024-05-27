@@ -103,7 +103,7 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!InventoryManager.Instance.inventory.activeSelf)
+        if (!InventoryManager.Instance.inventory.activeSelf && !reload)
         {
             if (currentAmmo > 0)
             {
@@ -147,6 +147,7 @@ public class Shoot : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.PISTOL && ammoHolder.pistolMags > 0)
         {
+            anim.SetBool("reload", true);
             reload = true;
         }
 
@@ -163,6 +164,7 @@ public class Shoot : MonoBehaviour
                 currentAmmo = maxAmmo;
                 reloadTimer = 0;
                 reload = false;
+                anim.SetBool("reload", false);
                 switch (gunType)
                 {
                     case GunType.PISTOL:
