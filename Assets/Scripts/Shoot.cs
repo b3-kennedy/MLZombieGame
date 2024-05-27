@@ -35,7 +35,8 @@ public class Shoot : MonoBehaviour
     public bool reload;
     float reloadTimer;
 
-
+    public float damage;
+    public float headshotDamage;
     
     
 
@@ -68,6 +69,8 @@ public class Shoot : MonoBehaviour
         anim = transform.parent.parent.GetComponent<Animator>();
 
         recoil = transform.parent.parent.parent.parent.parent.gameObject.GetComponent<Recoil>();
+
+        Debug.Log(recoil);
 
         recoil.recoilX = recoilX;
         recoil.recoilY = recoilY;
@@ -191,7 +194,18 @@ public class Shoot : MonoBehaviour
         //Debug.Log("shoot");
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
         {
-            Debug.Log(hit.transform);
+            if (hit.collider.transform.root.GetComponent<Health>())
+            {
+                if (hit.collider.CompareTag("Head"))
+                {
+                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage);
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage);
+                }
+            }
+
         }
     }
 }

@@ -18,7 +18,7 @@ public class ViewBobbing : MonoBehaviour
     Vector3 originalOffset;
     float sinTime;
 
-    PlayerMove move;
+    RigidbodyMovement move;
 
     Vector3 originalPos;
 
@@ -27,7 +27,7 @@ public class ViewBobbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        move = transform.parent.parent.parent.parent.parent.parent.GetComponent<PlayerMove>();
+        move = RigidbodyMovement.Instance;
         normalIntensity = intensity;
         normalIntensityX = intensityX;
         follower = GetComponent<PositionFollower>();
@@ -53,7 +53,7 @@ public class ViewBobbing : MonoBehaviour
 
         Vector3 inputVec = new Vector3(Input.GetAxis("Vertical"), 0f, Input.GetAxis("Horizontal"));
 
-        speed = move.currentSpeed;
+        speed = move.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 2;
 
         if(inputVec.magnitude > 0)
         {

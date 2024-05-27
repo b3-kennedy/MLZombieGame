@@ -333,6 +333,8 @@ MonoBehaviour:
   currentMags: 0
   reloadTime: 1
   reload: 0
+  damage: 50
+  headshotDamage: 100
   recoil: {fileID: 0}
   recoilX: -2
   recoilY: 5
@@ -341,7 +343,7 @@ MonoBehaviour:
   normalRecoilY: 0
   normalRecoilZ: 0
   snap: 6
-  returnSpeed: 2
+  returnSpeed: 5
   canShoot: 0
 --- !u!1001 &8060663091424726913
 PrefabInstance:

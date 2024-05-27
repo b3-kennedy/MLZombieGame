@@ -9,6 +9,8 @@ TagManager:
   - Gun
   - Mag
   - Attachment
+  - Head
+  - Body
   layers:
   - Default
   - TransparentFX
