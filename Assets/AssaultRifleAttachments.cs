@@ -40,19 +40,23 @@ public class AssaultRifleAttachments : Attachments
 
     public override void AttachBarrel(GameObject attachment, GameObject button)
     {
-        Destroy(barrelAttachment);
-        GameObject newAttachment = Instantiate(attachment, barrelAttachmentPos);
-        switch (gun)
+        if(barrelAttachment == null)
         {
-            case Gun.M4:
-                newAttachment.transform.localPosition = attachment.GetComponent<BarrelAttachment>().M4Position;
-                break;
+            Destroy(barrelAttachment);
+            GameObject newAttachment = Instantiate(attachment, barrelAttachmentPos);
+            switch (gun)
+            {
+                case Gun.M4:
+                    newAttachment.transform.localPosition = attachment.GetComponent<BarrelAttachment>().M4Position;
+                    break;
+            }
+
+            newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            barrelAttachment = newAttachment;
+            InventoryManager.Instance.attachmentsList.Remove(button);
+            Destroy(button);
         }
-        
-        newAttachment.transform.localRotation = Quaternion.Euler(0,0,0);
-        barrelAttachment = newAttachment;
-        InventoryManager.Instance.attachmentsList.Remove(button);
-        Destroy(button);
+
     }
 
     public override void AttachSight(GameObject attachment, GameObject button)
@@ -78,25 +82,29 @@ public class AssaultRifleAttachments : Attachments
 
     public override void AttachUnderBarrel(GameObject attachment, GameObject button)
     {
-        shootScript.recoilY = shootScript.normalRecoilY;
-        shootScript.recoilX = shootScript.normalRecoilX;
+        if(underbarrelAttachment == null)
+        {
+            shootScript.recoilY = shootScript.normalRecoilY;
+            shootScript.recoilX = shootScript.normalRecoilX;
 
-        shootScript.recoil.recoilY = shootScript.normalRecoilY;
-        shootScript.recoil.recoilX = shootScript.normalRecoilX;
+            shootScript.recoil.recoilY = shootScript.normalRecoilY;
+            shootScript.recoil.recoilX = shootScript.normalRecoilX;
 
-        Destroy(underbarrelAttachment);
-        GameObject newAttachment = Instantiate(attachment, underbarrelAttachmentPos);
-        newAttachment.transform.localPosition = attachment.GetComponent<UnderbarrelAttachment>().M4Position;
-        newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        underbarrelAttachment = newAttachment;
+            Destroy(underbarrelAttachment);
+            GameObject newAttachment = Instantiate(attachment, underbarrelAttachmentPos);
+            newAttachment.transform.localPosition = attachment.GetComponent<UnderbarrelAttachment>().M4Position;
+            newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            underbarrelAttachment = newAttachment;
 
-        shootScript.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
-        shootScript.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
+            shootScript.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
+            shootScript.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
 
-        shootScript.recoil.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
-        shootScript.recoil.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
-        InventoryManager.Instance.attachmentsList.Remove(button);
-        Destroy(button);
+            shootScript.recoil.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
+            shootScript.recoil.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
+            InventoryManager.Instance.attachmentsList.Remove(button);
+            Destroy(button);
+        }
+
     }
 
     public override void UnequipSight()
