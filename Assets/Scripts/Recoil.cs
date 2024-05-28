@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Recoil : MonoBehaviour
 {
+
+    public static Recoil Instance;
+
     Vector3 currentRot;
     Vector3 targetRot;
 
-    [HideInInspector] public float recoilX;
-    [HideInInspector] public float recoilY;
-    [HideInInspector] public float recoilZ;
+    public float recoilX;
+    public float recoilY;
+    public float recoilZ;
 
     [HideInInspector] public float snap;
     [HideInInspector] public float returnSpeed;
+
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

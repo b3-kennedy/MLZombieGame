@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3015592314790031695}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AudioSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4038911609605476238}
   - component: {fileID: 551185489388428809}
   - component: {fileID: 3455675514912555984}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GlockParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 4504487847767543678}
   - component: {fileID: 387369439482598609}
   - component: {fileID: 2219797314909754031}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,6 +244,26 @@ PrefabInstance:
     - target: {fileID: 1306841505430626, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
       propertyPath: m_Name
       value: Glock_17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306841505430626, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329529563943138, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398037711950318, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827983960322378, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893395271549744, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4939271602576736, guid: 47ee121af4f825f44831f81a06a6526a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -361,9 +381,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.2101
       objectReference: {fileID: 0}
+    - target: {fileID: 411691135162660785, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1722533157349769079, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
       propertyPath: m_Name
       value: AttachmentSlots
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722533157349769079, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5080968053817209895, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
       propertyPath: m_LocalScale.x

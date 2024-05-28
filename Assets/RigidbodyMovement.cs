@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class RigidbodyMovement : MonoBehaviour
 {
@@ -32,6 +33,14 @@ public class RigidbodyMovement : MonoBehaviour
     bool isCrouched;
 
     float timer;
+
+    public float jumpForce;
+    public float airDrag;
+
+    [Header("Lean Settings")]
+    public float leanAmount;
+    public Transform hip;
+    public Transform camRot;
 
     [Header("Crouch Settings")]
     public Transform crouchCamPos;
@@ -79,6 +88,8 @@ public class RigidbodyMovement : MonoBehaviour
         Move();
         SpeedControl();
         Crouch();
+        Jump();
+        Lean();
 
         if (Input.GetKey(KeyCode.LeftShift) && !objectAbove)
         {
@@ -100,13 +111,42 @@ public class RigidbodyMovement : MonoBehaviour
         }
     }
 
+    void Lean()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            hip.transform.localRotation = Quaternion.Slerp(hip.transform.localRotation, Quaternion.Euler(0, 0, leanAmount), Time.deltaTime * 5);
+            camRot.transform.localRotation = Quaternion.Slerp(camRot.transform.localRotation, Quaternion.Euler(0, 0, leanAmount), Time.deltaTime * 5);
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            hip.transform.localRotation = Quaternion.Slerp(hip.transform.localRotation, Quaternion.Euler(0, 0, -leanAmount), Time.deltaTime * 5);
+            camRot.transform.localRotation = Quaternion.Slerp(camRot.transform.localRotation, Quaternion.Euler(0, 0, -leanAmount), Time.deltaTime * 5);
+        }
+        else
+        {
+            hip.transform.localRotation = Quaternion.Slerp(hip.transform.localRotation, Quaternion.Euler(0,0,0), Time.deltaTime * 5);
+            camRot.transform.localRotation = Quaternion.Slerp(camRot.transform.localRotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5);
+        }
+    }
+
 
     void ForceUncrouch()
     {
-        if (!isCrouched && !objectAbove)
+        if (isCrouched && !objectAbove)
         {
             isCrouched = false;
             Debug.Log("uncrouch");
+        }
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            ForceUncrouch();
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -155,22 +195,30 @@ public class RigidbodyMovement : MonoBehaviour
     private void Move()
     {
         moveDir = orientation.forward * vertical + orientation.right * horizontal;
-        switch (playerState)
+        if (IsGrounded())
         {
-            case (PlayerState.NORMAL):
-                rb.AddForce(moveDir * normalSpeed * 10, ForceMode.Force);
-                currentSpeed = normalSpeed;
-                break;
-            case (PlayerState.CROUCH):
-                rb.AddForce(moveDir * crouchSpeed * 10, ForceMode.Force);
-                currentSpeed = crouchSpeed;
-                break;
-            case (PlayerState.SPRINT):
-                rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
-                currentSpeed = sprintSpeed;
-                break;
+            switch (playerState)
+            {
+                case (PlayerState.NORMAL):
+                    rb.AddForce(moveDir * normalSpeed * 10, ForceMode.Force);
+                    currentSpeed = normalSpeed;
+                    break;
+                case (PlayerState.CROUCH):
+                    rb.AddForce(moveDir * crouchSpeed * 10, ForceMode.Force);
+                    currentSpeed = crouchSpeed;
+                    break;
+                case (PlayerState.SPRINT):
+                    rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
+                    currentSpeed = sprintSpeed;
+                    break;
 
+            }
         }
+        else
+        {
+            rb.AddForce(moveDir * normalSpeed * 10 * airDrag, ForceMode.Force);
+        }
+
        
     }
 

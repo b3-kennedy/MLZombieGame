@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1004043580342008713}
   - component: {fileID: 994386927491018129}
   - component: {fileID: 5678091356102182313}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MK17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 159739356054586275}
   - component: {fileID: 6493734967164801745}
   - component: {fileID: 2449250588340954729}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

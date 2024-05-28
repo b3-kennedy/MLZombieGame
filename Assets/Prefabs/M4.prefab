@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335926056024825668}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AudioSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6513559758512476453}
   - component: {fileID: 9177353448195973738}
   - component: {fileID: 2122851461922126810}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 4481304131720668698}
   - component: {fileID: 5585221803391493699}
   - component: {fileID: 6246752037595108507}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M4Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,13 +235,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7007042929590055997}
     m_Modifications:
+    - target: {fileID: 1180489903425170, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538785838763222, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695641313418792, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1695641313418792, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1710723801973314, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877185133056466, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1889367776384038, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
       propertyPath: m_Name
       value: M4_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889367776384038, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905431840038674, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4986156666290084, guid: aaf2dee8227d3a447ac6dbc56d5666cd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -339,7 +367,7 @@ MonoBehaviour:
   maxAmmo: 30
   currentAmmo: 0
   currentMags: 0
-  reloadTime: 2
+  reloadTime: 1.5
   reload: 0
   damage: 50
   headshotDamage: 100
@@ -361,9 +389,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 229644596017512709}
     m_Modifications:
+    - target: {fileID: 411691135162660785, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1722533157349769079, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
       propertyPath: m_Name
       value: AttachmentSlots
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722533157349769079, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920055827015936799, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810969336314462303, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5080968053817209895, guid: c92d96b5e7b84f04c98fe3ffad63f680, type: 3}
       propertyPath: m_LocalPosition.x

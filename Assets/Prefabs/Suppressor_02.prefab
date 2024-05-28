@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4193254052879800787}
   - component: {fileID: 4184903632654194579}
   - component: {fileID: 5852510947878334529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Suppressor_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

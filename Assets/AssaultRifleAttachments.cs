@@ -63,6 +63,7 @@ public class AssaultRifleAttachments : Attachments
     {
         if (sightAttachment == null) 
         {
+            
             Destroy(sightAttachment);
             GameObject newAttachment = Instantiate(attachment, sightAttachmentPos);
             newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().M4position;
@@ -101,6 +102,7 @@ public class AssaultRifleAttachments : Attachments
 
             shootScript.recoil.recoilY *= attachment.GetComponent<UnderbarrelAttachment>().verticalRecoilReduction;
             shootScript.recoil.recoilX *= attachment.GetComponent<UnderbarrelAttachment>().horizontalRecoilReduction;
+
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }

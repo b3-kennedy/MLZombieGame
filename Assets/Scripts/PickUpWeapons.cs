@@ -66,6 +66,8 @@ public class PickUpWeapons : MonoBehaviour
                         gun.SetActive(true);
                         currentActiveGun = gun;
                         InventoryManager.Instance.activeGun = gun;
+                        UpdateRecoilScript();
+
                     }
                 }
 
@@ -73,6 +75,13 @@ public class PickUpWeapons : MonoBehaviour
             }
         }
 
+    }
+
+    void UpdateRecoilScript()
+    {
+        Recoil.Instance.recoilX = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().recoilX;
+        Recoil.Instance.recoilY = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().recoilY;
+        Recoil.Instance.recoilZ = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().recoilZ;
     }
 
     void PickUpAttachment(GameObject attachment)
@@ -150,7 +159,7 @@ public class PickUpWeapons : MonoBehaviour
                 
             }
 
-            
+            UpdateRecoilScript();
             Destroy(gun);
             InventoryManager.Instance.OnPickUpWeapon(newGun);
         }

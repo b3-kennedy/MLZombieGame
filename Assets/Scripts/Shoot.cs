@@ -84,6 +84,7 @@ public class Shoot : MonoBehaviour
         normalRecoilZ = recoilZ;
 
 
+
     }
 
     public void UpdateMagCount()
@@ -140,10 +141,10 @@ public class Shoot : MonoBehaviour
             }
         }
 
-
-        if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.ASSAULT_RIFLE && ammoHolder.arMags > 0)
+        if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.ASSAULT_RIFLE && ammoHolder.arMags > 0)
         {
             reload = true;
+            anim.SetBool("reload", true);
         }
         else if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.PISTOL && ammoHolder.pistolMags > 0)
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2393616887809986028}
   - component: {fileID: 5360165056001908689}
   - component: {fileID: 825232312565418437}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ACOG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 666728749454437967}
   - component: {fileID: 3947245878352903402}
   - component: {fileID: 578453654801839121}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 4011688792080471723}
   - component: {fileID: 2396852208088096004}
   - component: {fileID: 1028736102645578597}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2920377676940662368}
   - component: {fileID: 5653706691746988785}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ScopeCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
