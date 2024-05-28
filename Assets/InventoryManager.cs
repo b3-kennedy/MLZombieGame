@@ -26,6 +26,10 @@ public class InventoryManager : MonoBehaviour
 
     List<GameObject> createdSlots = new List<GameObject>();
 
+    public GameObject sight;
+    public GameObject barrel;
+    public GameObject underbarrel;
+
     private void Awake()
     {
         Instance = this;
@@ -71,7 +75,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.SIGHT)
             {
-                GameObject sight = Instantiate(sightSlot, attachmesntSlotSpawns[slotNumber].transform);
+                sight = Instantiate(sightSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(sight);
                 if (slot.transform.childCount > 0)
                 {
@@ -84,7 +88,7 @@ public class InventoryManager : MonoBehaviour
             }
             else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.BARREL)
             {
-                GameObject barrel = Instantiate(barrelSlot, attachmesntSlotSpawns[slotNumber].transform);
+                barrel = Instantiate(barrelSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(barrel);
                 if (slot.transform.childCount > 0)
                 {
@@ -95,7 +99,7 @@ public class InventoryManager : MonoBehaviour
             }
             else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
             {
-                GameObject underbarrel = Instantiate(underbarrelSlot, attachmesntSlotSpawns[slotNumber].transform);
+                underbarrel = Instantiate(underbarrelSlot, attachmesntSlotSpawns[slotNumber].transform);
                 createdSlots.Add(underbarrel);
                 if (slot.transform.childCount > 0)
                 {
@@ -108,6 +112,7 @@ public class InventoryManager : MonoBehaviour
         List<GameObject> tempList = attachmentsList;
         foreach (var attachment in tempList)
         {
+            attachment.GetComponent<Button>().onClick.RemoveAllListeners();
             switch (attachment.GetComponent<AttachmentItem>().attachmentType)
             {
                 case AttachmentSlotType.AttachmentType.SIGHT:
@@ -201,9 +206,19 @@ public class InventoryManager : MonoBehaviour
 
     public void OnPickUpItem(GameObject attachment, GameObject currentActiveGun)
     {
-        GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
-        attachmentsList.Add(attachmentUI);
-        activeGun = currentActiveGun;
+        if (attachment.GetComponent<ItemPickupObject>())
+        {
+            GameObject attachmentUI = Instantiate(attachment.GetComponent<ItemPickupObject>().UIElement, InventoryManager.Instance.itemParent);
+            attachmentsList.Add(attachmentUI);
+            activeGun = currentActiveGun;
+        }
+        else if (attachment.GetComponent<Attachment>())
+        {
+            GameObject attachmentUI = Instantiate(attachment.GetComponent<Attachment>().attachmentUI, InventoryManager.Instance.itemParent);
+            attachmentsList.Add(attachmentUI);
+            activeGun = currentActiveGun;
+        }
+
         Debug.Log(currentActiveGun);
         //if(currentActiveGun != null)
         //{

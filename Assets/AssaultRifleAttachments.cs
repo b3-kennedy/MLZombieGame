@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AssaultRifleAttachments : Attachments
 {
@@ -56,19 +57,23 @@ public class AssaultRifleAttachments : Attachments
 
     public override void AttachSight(GameObject attachment, GameObject button)
     {
-        Destroy(sightAttachment);
-        GameObject newAttachment = Instantiate(attachment, sightAttachmentPos);
-        newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().M4position;
-        newAttachment.transform.rotation = sightAttachmentPos.rotation;
-        sightAttachment = newAttachment;
-
-        if(ironSights.Length > 0)
+        if (sightAttachment == null) 
         {
-            ironSights[0].SetActive(false);
-            ironSights[1].transform.localRotation = Quaternion.Euler(90, 0, 0);
+            Destroy(sightAttachment);
+            GameObject newAttachment = Instantiate(attachment, sightAttachmentPos);
+            newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().M4position;
+            newAttachment.transform.rotation = sightAttachmentPos.rotation;
+            sightAttachment = newAttachment;
+
+            if (ironSights.Length > 0)
+            {
+                ironSights[0].SetActive(false);
+                ironSights[1].transform.localRotation = Quaternion.Euler(90, 0, 0);
+            }
+            InventoryManager.Instance.attachmentsList.Remove(button);
+            Destroy(button);
         }
-        InventoryManager.Instance.attachmentsList.Remove(button);
-        Destroy(button);
+
     }
 
     public override void AttachUnderBarrel(GameObject attachment, GameObject button)
