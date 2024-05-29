@@ -127,6 +127,29 @@ public class PickUpWeapons : MonoBehaviour
                     if (weaponPos.GetChild(i).gameObject.activeSelf)
                     {
                         GameObject currentGun = weaponPos.GetChild(i).gameObject;
+                        Transform attachmentParent = currentGun.transform.GetChild(0).GetChild(0).GetChild(0);
+
+                        if(attachmentParent.GetChild(0).childCount > 0)
+                        {
+                            InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(0).GetChild(0).gameObject, currentGun);
+                        }
+                        if(attachmentParent.childCount > 1)
+                        {
+                            if (attachmentParent.GetChild(1).childCount > 0)
+                            {
+                                InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(1).GetChild(0).gameObject, currentGun);
+                            }
+                        }
+                        if(attachmentParent.childCount > 2)
+                        {
+                            if (attachmentParent.GetChild(1).childCount > 0)
+                            {
+                                InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(2).GetChild(0).gameObject, currentGun);
+                            }
+                        }
+
+
+
                         GameObject droppedGun = Instantiate(currentGun.GetComponent<WeaponDropObject>().gunObject, gun.transform.position, gun.transform.rotation);
                         droppedGun.GetComponent<WeaponPickupObject>().currentAmmo = currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().currentAmmo;
                         Destroy(currentGun);

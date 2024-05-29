@@ -25,6 +25,12 @@ public class ADS : MonoBehaviour
 
     void Update()
     {
+
+        if (transform.GetChild(0).GetComponent<Shoot>().reload)
+        {
+            isAiming = false;
+        }
+
         if (Input.GetMouseButtonDown(1))  
         {
             transform.localPosition = Vector3.zero;

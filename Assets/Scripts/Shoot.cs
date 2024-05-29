@@ -70,8 +70,6 @@ public class Shoot : MonoBehaviour
 
         recoil = transform.parent.parent.parent.parent.parent.gameObject.GetComponent<Recoil>();
 
-        Debug.Log(recoil);
-
         recoil.recoilX = recoilX;
         recoil.recoilY = recoilY;
         recoil.recoilZ = recoilZ;
