@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class OnDeath : MonoBehaviour
 {
+
+    bool isQuitting;
+
+    private void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
     private void OnDestroy()
     {
-        SpawnDummy.Instance.Spawn();
+        if (!isQuitting)
+        {
+            SpawnDummy.Instance.Spawn();
+        }
+        
     }
 }
