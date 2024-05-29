@@ -6,6 +6,6 @@ public class WeaponPickupObject : MonoBehaviour
 {
 
     public GameObject gunObject;
-    public float currentAmmo;
+    public int currentAmmo;
 
 }

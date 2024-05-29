@@ -365,6 +365,7 @@ MonoBehaviour:
   snap: 6
   returnSpeed: 5
   canShoot: 0
+  gunName: Glock
 --- !u!1001 &8060663091424726913
 PrefabInstance:
   m_ObjectHideFlags: 0

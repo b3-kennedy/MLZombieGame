@@ -25,10 +25,10 @@ public class Shoot : MonoBehaviour
     float nextFire = 0f;
 
     [Header("Ammo and Reload Settings")]
-    public float maxAmmo;
+    public int maxAmmo;
 
-    public float currentAmmo;
-    public float currentMags;
+    public int currentAmmo;
+    public int currentMags;
 
     public float reloadTime;
 
@@ -57,6 +57,8 @@ public class Shoot : MonoBehaviour
     AmmoHolder ammoHolder;
 
     public bool canShoot;
+
+    public string gunName;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +99,8 @@ public class Shoot : MonoBehaviour
                 break;
 
         }
+
+        
     }
 
     // Update is called once per frame
@@ -175,6 +179,7 @@ public class Shoot : MonoBehaviour
 
                 }
                 UpdateMagCount();
+                HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
             }
         }
     }
@@ -187,6 +192,7 @@ public class Shoot : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
         currentAmmo -= 1;
+        HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
         if(currentAmmo <= 0) 
         {
             AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);

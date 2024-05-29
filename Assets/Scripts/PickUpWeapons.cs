@@ -66,6 +66,7 @@ public class PickUpWeapons : MonoBehaviour
                         gun.SetActive(true);
                         currentActiveGun = gun;
                         InventoryManager.Instance.activeGun = gun;
+                        UpdateHud();
                         UpdateRecoilScript();
 
                     }
@@ -75,6 +76,20 @@ public class PickUpWeapons : MonoBehaviour
             }
         }
 
+    }
+
+    void UpdateHud()
+    {
+        Shoot shootScript = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>();
+        if (shootScript.gunType == Shoot.GunType.ASSAULT_RIFLE)
+        {
+            GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().arMags);
+        }
+        else if (shootScript.gunType == Shoot.GunType.PISTOL)
+        {
+            GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().pistolMags);
+        }
+        GetComponent<HUDManager>().UpdateGunText(shootScript.gunName);
     }
 
     void UpdateRecoilScript()
@@ -106,6 +121,7 @@ public class PickUpWeapons : MonoBehaviour
         {
             GameObject currentGun = weaponPos.GetChild(0).gameObject;
             currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().UpdateMagCount();
+            UpdateHud();
         }
         
         Destroy(mag);
@@ -183,6 +199,8 @@ public class PickUpWeapons : MonoBehaviour
             }
 
             UpdateRecoilScript();
+            UpdateHud();
+
             Destroy(gun);
             InventoryManager.Instance.OnPickUpWeapon(newGun);
         }

@@ -79,7 +79,6 @@ public class InventoryManager : MonoBehaviour
                 createdSlots.Add(sight);
                 if (slot.transform.childCount > 0)
                 {
-                    Debug.Log(slot.transform.GetChild(0).gameObject);
                     sight.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
                     sight.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
                     sight.GetComponent<Image>().color = Color.green;
@@ -219,7 +218,8 @@ public class InventoryManager : MonoBehaviour
             activeGun = currentActiveGun;
         }
 
-        Debug.Log(currentActiveGun);
+        
+
         //if(currentActiveGun != null)
         //{
         //    switch (attachment.GetComponent<ItemPickupObject>().attachmentType)
@@ -278,7 +278,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (weaponPos.GetChild(i).gameObject.activeSelf)
             {
-                gun1Slot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = weaponPos.GetChild(i).gameObject.name;
+                gun1Slot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = activeGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().gunName;
                 GunInventoryUI(weaponPos.GetChild(i).gameObject, 0);
             }
         }
