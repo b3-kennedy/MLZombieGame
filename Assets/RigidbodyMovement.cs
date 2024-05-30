@@ -30,7 +30,7 @@ public class RigidbodyMovement : MonoBehaviour
 
     public float groundDrag;
 
-    bool isCrouched;
+    [HideInInspector] public bool isCrouched;
 
     float timer;
 
