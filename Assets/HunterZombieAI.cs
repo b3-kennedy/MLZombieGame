@@ -11,12 +11,14 @@ public class HunterZombieAI : MonoBehaviour
     NavMeshAgent agent;
     public float targetDecayTime;
     float decayTimer;
+    Animator anim;
 
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,12 +27,14 @@ public class HunterZombieAI : MonoBehaviour
         if(playerPos != null)
         {
             agent.SetDestination(playerPos.position);
+            anim.SetBool("player", true);
             decayTimer += Time.deltaTime;
             if(decayTimer > targetDecayTime)
             {
                 playerPos = null;
                 decayTimer = 0;
                 agent.SetDestination(home.position);
+                anim.SetBool("player", false);
             }
         }
     }

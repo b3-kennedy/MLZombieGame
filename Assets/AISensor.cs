@@ -56,7 +56,15 @@ public class AISensor : MonoBehaviour
             if (IsInSight(obj))
             {
                 objects.Add(obj);
-                GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
+                if (GetComponent<ZombiePatrolAI>())
+                {
+                    GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
+                }
+                else if (GetComponent<EnforcerZombieAI>())
+                {
+                    GetComponent<EnforcerZombieAI>().SpottedPlayer(obj.transform);
+                }
+                
             }
         }
 

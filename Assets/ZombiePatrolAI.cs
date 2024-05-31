@@ -13,10 +13,12 @@ public class ZombiePatrolAI : MonoBehaviour
     float timer;
     NavMeshAgent agent;
     Vector3 destPoint;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         GenerateNewPoint();
@@ -27,12 +29,17 @@ public class ZombiePatrolAI : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, destPoint) < 1f)
         {
+            anim.SetBool("moving", false);
             timer += Time.deltaTime;
             if (timer > positionChangeInterval)
             {
                 GenerateNewPoint();
                 timer = 0;
             }
+        }
+        else
+        {
+            anim.SetBool("moving", true);
         }
 
     }
