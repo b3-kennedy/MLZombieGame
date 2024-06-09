@@ -12,6 +12,8 @@ public class HunterZombieAI : MonoBehaviour
     public float targetDecayTime;
     float decayTimer;
     Animator anim;
+    public float runSpeed;
+    public float walkSpeed;
 
 
     // Start is called before the first frame update
@@ -27,11 +29,13 @@ public class HunterZombieAI : MonoBehaviour
         if(playerPos != null)
         {
             agent.SetDestination(playerPos.position);
+            agent.speed = runSpeed;
             anim.SetBool("player", true);
             decayTimer += Time.deltaTime;
             if(decayTimer > targetDecayTime)
             {
                 playerPos = null;
+                agent.speed = walkSpeed;
                 decayTimer = 0;
                 agent.SetDestination(home.position);
                 anim.SetBool("player", false);

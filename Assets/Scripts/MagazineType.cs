@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class MagazineType : MonoBehaviour
 {
-    public enum MagType {ASSAULT_RIFLE, PISTOL};
+    public enum MagType {ASSAULT_RIFLE, PISTOL, SHOTGUN, SMG};
     public MagType magType;
 }

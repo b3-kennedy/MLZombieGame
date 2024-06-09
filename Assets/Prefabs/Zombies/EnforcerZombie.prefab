@@ -1593,6 +1593,8 @@ MonoBehaviour:
   patrolPoint: {fileID: 0}
   radius: 20
   positionChangeInterval: 5
+  walkSpeed: 2
+  runSpeed: 4.5
 --- !u!1 &3692074434872915994
 GameObject:
   m_ObjectHideFlags: 0

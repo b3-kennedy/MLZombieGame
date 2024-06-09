@@ -13,6 +13,8 @@ public class EnforcerZombieAI : MonoBehaviour
     Vector3 destPoint;
     Transform player;
     Animator anim;
+    public float walkSpeed;
+    public float runSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +42,10 @@ public class EnforcerZombieAI : MonoBehaviour
     void Patrol()
     {
         anim.SetBool("patrolling", true);
+        agent.speed = walkSpeed;
         if (Vector3.Distance(transform.position, destPoint) < 1f)
         {
+            
             anim.SetBool("patrolling", false);
             timer += Time.deltaTime;
             if (timer > positionChangeInterval)
@@ -55,6 +59,7 @@ public class EnforcerZombieAI : MonoBehaviour
 
     void Attack()
     {
+        agent.speed = runSpeed;
         anim.SetBool("patrolling", false);
         anim.SetBool("attacking", true);
         agent.SetDestination(player.position);

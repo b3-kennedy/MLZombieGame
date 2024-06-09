@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Shoot : MonoBehaviour
 {
     
     public enum ShootType {SINGLE, AUTO};
-    public enum GunType {PISTOL, ASSAULT_RIFLE};
+    public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG};
 
     public GameObject muzzleFlashSpawner;
 
@@ -37,8 +38,12 @@ public class Shoot : MonoBehaviour
 
     public float damage;
     public float headshotDamage;
-    
-    
+
+    [Header("Shotgun Settings")]
+    public float pelletsPerShot;
+    public float spreadAngle;
+    public float range;
+    public float verticalSpreadMultiplier;
 
     [HideInInspector] public Recoil recoil;
 
@@ -59,6 +64,10 @@ public class Shoot : MonoBehaviour
     public bool canShoot;
 
     public string gunName;
+
+    public GameObject testSphere;
+
+    List<Vector3> shotgunHits = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +106,12 @@ public class Shoot : MonoBehaviour
             case GunType.ASSAULT_RIFLE:
                 currentMags = ammoHolder.arMags;
                 break;
+            case GunType.SHOTGUN:
+                currentMags = ammoHolder.shotgunShells;
+                break;
+            case GunType.SMG:
+                currentMags = ammoHolder.smgMags;
+                break;
 
         }
 
@@ -110,28 +125,61 @@ public class Shoot : MonoBehaviour
         {
             if (currentAmmo > 0)
             {
-                if (shootType == ShootType.AUTO)
+                if(gunType != GunType.SHOTGUN)
                 {
-                    if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                    if (shootType == ShootType.AUTO)
                     {
-                        nextFire = Time.time + 1f / fireRate;
-                        Fire();
-                        recoil.RecoilFire();
+                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            Fire();
+                            recoil.RecoilFire();
+                        }
+                        else if (Input.GetButtonUp("Fire1"))
+                        {
+                            anim.SetBool("shoot", false);
+                        }
                     }
-                    else if (Input.GetButtonUp("Fire1"))
+                    else if (shootType == ShootType.SINGLE)
                     {
-                        anim.SetBool("shoot", false);
+                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            Fire();
+                            recoil.RecoilFire();
+                        }
                     }
                 }
-                else if (shootType == ShootType.SINGLE)
+                else
                 {
-                    if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                    if (shootType == ShootType.AUTO)
                     {
-                        nextFire = Time.time + 1f / fireRate;
-                        Fire();
-                        recoil.RecoilFire();
+                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            FireShotgun();
+                            recoil.RecoilFire();
+                            shotgunHits.Clear();
+                        }
+                        else if (Input.GetButtonUp("Fire1"))
+                        {
+                            anim.SetBool("shoot", false);
+                        }
                     }
+                    else if (shootType == ShootType.SINGLE)
+                    {
+                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            FireShotgun();
+                            recoil.RecoilFire();
+                            shotgunHits.Clear();
+                        }
+                    }
+                    
                 }
+
+                
             }
             else
             {
@@ -149,6 +197,16 @@ public class Shoot : MonoBehaviour
             anim.SetBool("reload", true);
         }
         else if(Input.GetKeyDown(KeyCode.R) && gunType == GunType.PISTOL && ammoHolder.pistolMags > 0)
+        {
+            anim.SetBool("reload", true);
+            reload = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.SHOTGUN && ammoHolder.shotgunShells > 0)
+        {
+            anim.SetBool("reload", true);
+            reload = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.SMG && ammoHolder.smgMags > 0)
         {
             anim.SetBool("reload", true);
             reload = true;
@@ -176,12 +234,71 @@ public class Shoot : MonoBehaviour
                     case GunType.ASSAULT_RIFLE:
                         ammoHolder.arMags -= 1;
                         break;
+                    case GunType.SHOTGUN:
+                        ammoHolder.shotgunShells -= 1;
+                        break;
+                    case GunType.SMG:
+                        ammoHolder.smgMags -= 1;
+                        break;
 
                 }
                 UpdateMagCount();
                 HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
             }
         }
+    }
+
+
+    void FireShotgun()
+    {
+        GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
+        muzzleFlash.transform.SetParent(audioSpawn.transform);
+
+        AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
+        currentAmmo -= 1;
+        HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
+        if (currentAmmo <= 0)
+        {
+            AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
+        }
+        anim.SetBool("shoot", true);
+
+        Vector3 baseDirection = Camera.main.transform.forward;
+
+        for (int i = 0; i < pelletsPerShot; i++)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, CalculateShootingDir(), out hit))
+            {
+                if (hit.collider.transform.root.GetComponent<Health>())
+                {
+                    if (hit.collider.CompareTag("Head"))
+                    {
+                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage);
+                    }
+                    else if (hit.collider.CompareTag("Body"))
+                    {
+                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage);
+                    }
+                }
+            }
+
+
+            //Instantiate(testSphere, hit.point, Quaternion.identity);
+
+        }
+
+        //Debug.Log("shoot");
+
+    }
+
+    Vector3 CalculateShootingDir()
+    {
+        Vector3 targetPos = Camera.main.transform.position + Camera.main.transform.forward * range;
+        targetPos = new Vector3(targetPos.x + Random.Range(-spreadAngle, spreadAngle), targetPos.y + Random.Range(-spreadAngle, spreadAngle), targetPos.z + Random.Range(-spreadAngle, spreadAngle));
+
+        Vector3 direction = targetPos - Camera.main.transform.position;
+        return direction.normalized;
     }
 
     void Fire()
@@ -214,5 +331,15 @@ public class Shoot : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach (var point in shotgunHits)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(point, 0.2f);
+        }
+        
     }
 }
