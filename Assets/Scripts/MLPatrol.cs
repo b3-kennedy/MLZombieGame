@@ -4,7 +4,6 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Grpc.Core;
 
 [System.Serializable]
 public class ZombiePatrolGroup
@@ -24,6 +23,8 @@ public class MLPatrol : Agent
 
     public float patrolTime;
     float timer;
+
+    Vector2 pos;
 
 
     private void Awake()
@@ -46,13 +47,13 @@ public class MLPatrol : Agent
 
     public void TakeAction()
     {
-        Debug.Log("action");
-        RequestAction();
+        RequestDecision();
     }
 
     public override void OnEpisodeBegin()
     {
-        //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+        player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+        TakeAction();
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -60,38 +61,56 @@ public class MLPatrol : Agent
         int posX = actions.DiscreteActions[0] * 8;
         int posY = actions.DiscreteActions[1] * 8;
 
-        Vector2 pos = new Vector2(posX, posY);
+        float combinedDistance = 0;
+
+        pos = new Vector2(posX, posY);
 
         Debug.Log(pos);
-
-        if(Physics.Raycast(new Vector3(pos.x, 10, pos.y), -Vector3.up, out RaycastHit hit, 100, sphereLayer))
+        RandomPatrol(pos);
+        if(player != null)
         {
-            if (hit.collider)
+            for (int i = 0;i < groups.Count;i++)
             {
-                AddReward(-0.01f);
-                Debug.Log("hit: " + hit.collider.name);
-            }
+                if (Vector3.Distance(player.transform.position, groups[i].patrolPoint.position) < 50)
+                {
+                    AddReward(1);
+                    Debug.Log("Found Player");
+                    EndEpisode();
+                }
+                else
+                {
+                    AddReward(-0.1f);
+                }
 
-        }
-        else
-        {
-            Debug.Log("not hit");
-            int randomNum = Random.Range(0, groups.Count);
-            groups[randomNum].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
-            foreach (var zombie in groups[randomNum].zombies)
-            {
-                zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
+                combinedDistance += Vector3.Distance(player.transform.position, groups[i].patrolPoint.position);
             }
-            if (Vector3.Distance(groups[randomNum].patrolPoint.position, player.transform.position) < 25)
+            
+            if(combinedDistance < 50 * 5)
             {
-                AddReward(2f);
+                AddReward(3);
                 EndEpisode();
             }
-            AddReward(1f);
-            EndEpisode();
         }
+        
+        
 
 
+    }
+
+    void TargetedPatrol()
+    {
+
+    }
+
+    void RandomPatrol(Vector2 pos)
+    {
+        int randomNum = Random.Range(0, groups.Count);
+        groups[randomNum].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
+        foreach (var zombie in groups[randomNum].zombies)
+        {
+            zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
+        }
+        //AddReward(1f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -103,17 +122,17 @@ public class MLPatrol : Agent
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeAction();
         }
-        //timer += Time.deltaTime;
-        //if(timer >= patrolTime)
-        //{
-        //    TakeAction();
-        //    timer = 0;
-        //}
+        timer += Time.deltaTime;
+        if (timer >= patrolTime)
+        {
+            TakeAction();
+            timer = 0;
+        }
     }
 }

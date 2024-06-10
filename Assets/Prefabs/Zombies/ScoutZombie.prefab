@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35ddb0213d2ac542a3016773632e5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7.25
+  distance: 25
   angle: 34.7
   height: 2
   rayStartHeight: 1.5

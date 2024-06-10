@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PatrolTest.unity
+    guid: e296a7e863aa8744bba5b78e9e0e4cbc
   m_configObjects: {}
