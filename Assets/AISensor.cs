@@ -86,15 +86,18 @@ public class AISensor : MonoBehaviour
         {
             return false;
         }
+        if(RigidbodyMovement.Instance != null)
+        {
+            if (RigidbodyMovement.Instance.isCrouched)
+            {
+                rayStartHeight = normalRayStartHeight * 2;
+            }
+            else
+            {
+                rayStartHeight = normalRayStartHeight;
+            }
+        }
 
-        if (RigidbodyMovement.Instance.isCrouched)
-        {
-            rayStartHeight = normalRayStartHeight * 2;
-        }
-        else
-        {
-            rayStartHeight = normalRayStartHeight;
-        }
 
         origin.y += height / rayStartHeight;
         dest.y = origin.y;

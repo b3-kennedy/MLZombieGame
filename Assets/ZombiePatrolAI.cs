@@ -53,7 +53,8 @@ public class ZombiePatrolAI : MonoBehaviour
 
     public void AlertBrain(Transform pos)
     {
-        TestZombieBrain2.Instance.Hunt(pos);
+        //TestZombieBrain2.Instance.Hunt(pos);
+        MLPatrol.Instance.TakeAction();
     }
 
     private void OnDrawGizmos()
