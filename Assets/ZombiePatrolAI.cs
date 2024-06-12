@@ -44,7 +44,7 @@ public class ZombiePatrolAI : MonoBehaviour
 
     }
 
-    void GenerateNewPoint()
+    public void GenerateNewPoint()
     {
         Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
         destPoint = new Vector3(point.x, 0, point.z);

@@ -15,6 +15,8 @@ public class RigidbodyMovement : MonoBehaviour
     public float crouchSpeed;
     public float sprintSpeed;
 
+    public GameObject mlIdentifier;
+
     float currentSpeed;
 
     public Transform orientation;

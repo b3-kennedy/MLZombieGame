@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class ZombiePatrolGroup
@@ -54,7 +55,7 @@ public class MLPatrol : Agent
     {
         if(player != null)
         {
-            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+            //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
         }
         
         //TakeAction();
@@ -77,19 +78,33 @@ public class MLPatrol : Agent
             points.Add(new Vector3(point.x, 0, point.z));
         }
 
-        if(player != null)
+        if(player.gameObject.activeSelf)
         {
             for (int i = 0;i < groups.Count;i++)
             {
                 groups[i].patrolPoint.position = points[i];
+                foreach (var zombie in groups[i].zombies)
+                {
+                    zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
+                }
                 combinedDistance += Vector3.Distance(player.transform.position, groups[i].patrolPoint.position);
             }
             
             if(combinedDistance < 75 * 5)
             {
+                player.gameObject.SetActive(false);
                 Debug.Log("Player Targeted");
+
+                for (int i = 0; i < groups.Count; i++)
+                {
+                    foreach (var zombie in groups[i].zombies)
+                    {
+                        zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
+                    }
+                }
+
                 AddReward(1f);
-                EndEpisode();
+                //EndEpisode();
             }
             else
             {
@@ -144,6 +159,11 @@ public class MLPatrol : Agent
             TakeAction();
         }
 
+        if (player.gameObject.activeSelf)
+        {
+            timer = patrolTime;
+            
+        }
 
         timer += Time.deltaTime;
         if (timer >= patrolTime)

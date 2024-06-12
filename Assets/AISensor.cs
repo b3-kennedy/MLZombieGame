@@ -59,6 +59,10 @@ public class AISensor : MonoBehaviour
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
+                    if (obj.GetComponent<RigidbodyMovement>())
+                    {
+                        obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
+                    }
                 }
                 else if (GetComponent<EnforcerZombieAI>())
                 {
