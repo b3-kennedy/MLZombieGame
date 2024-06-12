@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -239,6 +243,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7247807624722643777, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: radius
@@ -383,6 +391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -443,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -505,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -565,6 +585,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -658,6 +682,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -678,6 +706,10 @@ PrefabInstance:
     - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6687604615673928667, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -912,6 +948,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6687604615673928667, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_LocalPosition.x
       value: 200
@@ -1022,6 +1062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1103,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1163,6 +1211,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7247807624722643777, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: patrolPoint
@@ -1234,6 +1286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1294,6 +1350,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1414,6 +1474,10 @@ PrefabInstance:
     - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6687604615673928667, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1683,6 +1747,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutZombie (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1708,6 +1776,10 @@ PrefabInstance:
     - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162081067984205178, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6687604615673928667, guid: af8506e83ce67874d8b0a5286e936796, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1848,7 +1920,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   player: {fileID: 2119895853}
-  patrolTime: 5
+  patrolTime: 0
 --- !u!114 &1973325805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,7 +1943,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 497cbed7def446446805ee8032204bbc, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Patrol
@@ -1959,6 +2031,10 @@ PrefabInstance:
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2064,7 +2140,7 @@ Transform:
   m_GameObject: {fileID: 2119895849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 106.1, y: 0, z: 109.7}
+  m_LocalPosition: {x: 106.1, y: 0, z: 211}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []

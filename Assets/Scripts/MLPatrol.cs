@@ -52,8 +52,12 @@ public class MLPatrol : Agent
 
     public override void OnEpisodeBegin()
     {
-        player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
-        TakeAction();
+        if(player != null)
+        {
+            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+        }
+        
+        //TakeAction();
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -65,31 +69,38 @@ public class MLPatrol : Agent
 
         pos = new Vector2(posX, posY);
 
-        Debug.Log(pos);
-        RandomPatrol(pos);
+        List<Vector3> points = new List<Vector3>();
+
+        for (int i = 0; i < groups.Count; i++)
+        {
+            Vector3 point = new Vector3(pos.x, 0, pos.y) + Random.insideUnitSphere * 50;
+            points.Add(new Vector3(point.x, 0, point.z));
+        }
+
         if(player != null)
         {
             for (int i = 0;i < groups.Count;i++)
             {
-                if (Vector3.Distance(player.transform.position, groups[i].patrolPoint.position) < 50)
-                {
-                    AddReward(1);
-                    Debug.Log("Found Player");
-                    EndEpisode();
-                }
-                else
-                {
-                    AddReward(-0.1f);
-                }
-
+                groups[i].patrolPoint.position = points[i];
                 combinedDistance += Vector3.Distance(player.transform.position, groups[i].patrolPoint.position);
             }
             
-            if(combinedDistance < 50 * 5)
+            if(combinedDistance < 75 * 5)
             {
-                AddReward(3);
+                Debug.Log("Player Targeted");
+                AddReward(1f);
                 EndEpisode();
             }
+            else
+            {
+                AddReward(-0.01f);
+            }
+            
+
+        }
+        else
+        {
+            RandomPatrol(pos);
         }
         
         
@@ -106,10 +117,14 @@ public class MLPatrol : Agent
     {
         int randomNum = Random.Range(0, groups.Count);
         groups[randomNum].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
+
+
         foreach (var zombie in groups[randomNum].zombies)
         {
             zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
         }
+        
+
         //AddReward(1f);
     }
 
@@ -128,6 +143,8 @@ public class MLPatrol : Agent
         {
             TakeAction();
         }
+
+
         timer += Time.deltaTime;
         if (timer >= patrolTime)
         {
