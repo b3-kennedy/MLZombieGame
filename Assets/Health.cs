@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float maxHealth;
-    float health;
+    public float health;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
         health -= dmg;
         if(health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

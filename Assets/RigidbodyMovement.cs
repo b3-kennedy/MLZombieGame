@@ -84,6 +84,7 @@ public class RigidbodyMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
 
+
         Vector2 moveVec = new Vector2(horizontal, vertical);
 
 

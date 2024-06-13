@@ -993,6 +993,7 @@ MonoBehaviour:
   patrolPoint: {fileID: 0}
   radius: 20
   positionChangeInterval: 5
+  spotCd: 20
 --- !u!114 &1462109206706641569
 MonoBehaviour:
   m_ObjectHideFlags: 0

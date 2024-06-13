@@ -14,6 +14,9 @@ public class ZombiePatrolAI : MonoBehaviour
     NavMeshAgent agent;
     Vector3 destPoint;
     Animator anim;
+    bool canSpawn;
+    public float spotCd;
+    float spotTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -42,19 +45,36 @@ public class ZombiePatrolAI : MonoBehaviour
             anim.SetBool("moving", true);
         }
 
+        spotTimer += Time.deltaTime;
+        if(spotTimer >= spotCd)
+        {
+            canSpawn = true;
+            spotTimer = 0;
+        }
+
     }
 
     public void GenerateNewPoint()
     {
         Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
         destPoint = new Vector3(point.x, 0, point.z);
-        agent.SetDestination(destPoint);
+        if (gameObject.activeSelf)
+        {
+            agent.SetDestination(destPoint);
+        }
+        
     }
 
     public void AlertBrain(Transform pos)
     {
         //TestZombieBrain2.Instance.Hunt(pos);
         //MLPatrol.Instance.TakeAction();
+        if (canSpawn)
+        {
+            MLSpawn.Instance.SpawnHunter();
+            canSpawn = false;
+        }
+        
     }
 
     private void OnDrawGizmos()

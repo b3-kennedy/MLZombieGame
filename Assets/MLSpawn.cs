@@ -14,9 +14,17 @@ public class MLSpawn : Agent
     public Transform brainPos;
     public float threatValue;
     public float minThreat;
-    public float mediumThreat;
     public float maxThreat;
-    public enum ThreatState {MIN, MEDIUM, MAX};
+
+    public int hunterCount;
+
+    public GameObject scout;
+    public GameObject hunter;
+    public GameObject enforcer;
+
+    public Transform hunterSpawn;
+
+    public enum ThreatState {MIN, MAX};
     public ThreatState threatState;
 
 
@@ -36,8 +44,8 @@ public class MLSpawn : Agent
         if (player != null)
         {
             
-            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
-            threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position) / 2);
+            //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+            //threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position) / 2);
         }
 
         //TakeAction();
@@ -53,7 +61,7 @@ public class MLSpawn : Agent
     {
         if (player != null)
         {
-            threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position) / 2);
+            threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position)/ 315.5935f) * 100;
         }
         
 
@@ -61,17 +69,25 @@ public class MLSpawn : Agent
         {
             threatState = ThreatState.MIN;
         }
-        else if(threatValue > minThreat && threatValue < mediumThreat)
-        {
-            threatState = ThreatState.MEDIUM;
-        }
-        else if(threatValue < maxThreat && threatValue > mediumThreat)
+        else if(threatValue < minThreat)
         {
             threatState = ThreatState.MAX;
         }
 
         RequestDecision();
 
+    }
+
+    public void SpawnHunter()
+    {
+        for (int i = 0; i < hunterCount; i++)
+        {
+            GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
+            hunterZombie.GetComponent<HunterZombieAI>().playerPos = player;
+            hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+        }
+
+        
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -83,7 +99,9 @@ public class MLSpawn : Agent
 
     void Spawn(int action)
     {
-        if(action == 0)
+
+        //Debug.Log(action);
+        if (action == 0)
         {
             if(threatState == ThreatState.MIN)
             {
@@ -93,22 +111,11 @@ public class MLSpawn : Agent
             {
                 AddReward(-0.01f);
             }
-            Debug.Log("spawn patrol");
+            //Debug.Log("spawn patrol");
         }
         else if(action == 1)
         {
-            if (threatState == ThreatState.MEDIUM)
-            {
-                AddReward(1);
-            }
-            else
-            {
-                AddReward(-0.01f);
-            }
-            Debug.Log("spawn hunter");
-        }
-        else if(action == 2)
-        {
+            
             if (threatState == ThreatState.MAX)
             {
                 AddReward(1);
@@ -117,7 +124,7 @@ public class MLSpawn : Agent
             {
                 AddReward(-0.01f);
             }
-            Debug.Log("spawn enforcer");
+            //Debug.Log("spawn enforcer");
         }
         End();
     }

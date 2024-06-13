@@ -22,6 +22,9 @@ public class MLPatrol : Agent
     public LayerMask sphereLayer;
     public Transform player;
 
+    public float randomPatrolTime;
+    float randomPatrolTimer;
+
     public float patrolTime;
     float timer;
 
@@ -55,7 +58,7 @@ public class MLPatrol : Agent
     {
         if(player != null)
         {
-            //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
         }
         
         //TakeAction();
@@ -72,14 +75,17 @@ public class MLPatrol : Agent
 
         List<Vector3> points = new List<Vector3>();
 
-        for (int i = 0; i < groups.Count; i++)
-        {
-            Vector3 point = new Vector3(pos.x, 0, pos.y) + Random.insideUnitSphere * 50;
-            points.Add(new Vector3(point.x, 0, point.z));
-        }
+
 
         if(player.gameObject.activeSelf)
         {
+
+            for (int i = 0; i < groups.Count; i++)
+            {
+                Vector3 point = new Vector3(pos.x, 0, pos.y) + Random.insideUnitSphere * 50;
+                points.Add(new Vector3(point.x, 0, point.z));
+            }
+
             for (int i = 0;i < groups.Count;i++)
             {
                 groups[i].patrolPoint.position = points[i];
@@ -92,7 +98,7 @@ public class MLPatrol : Agent
             
             if(combinedDistance < 75 * 5)
             {
-                player.gameObject.SetActive(false);
+                //player.gameObject.SetActive(false);
                 Debug.Log("Player Targeted");
 
                 for (int i = 0; i < groups.Count; i++)
@@ -102,13 +108,16 @@ public class MLPatrol : Agent
                         zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
                     }
                 }
+                player.gameObject.SetActive(false);
 
                 AddReward(1f);
-                //EndEpisode();
+                EndEpisode();
             }
             else
             {
-                AddReward(-0.01f);
+                Debug.Log("missed");
+                AddReward(-0.5f);
+                EndEpisode();
             }
             
 
@@ -130,14 +139,24 @@ public class MLPatrol : Agent
 
     void RandomPatrol(Vector2 pos)
     {
-        int randomNum = Random.Range(0, groups.Count);
-        groups[randomNum].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
-
-
-        foreach (var zombie in groups[randomNum].zombies)
+        randomPatrolTimer += Time.deltaTime;
+        if(randomPatrolTimer >= randomPatrolTime)
         {
-            zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
+            int randomNum = Random.Range(0, groups.Count);
+
+            int randomX = Random.Range(0, 25) * 8;
+            int randomY = Random.Range(0, 25) * 8;
+
+            groups[randomNum].patrolPoint.position = new Vector3(randomX, 0, randomY);
+
+
+            foreach (var zombie in groups[randomNum].zombies)
+            {
+                zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
+            }
+            randomPatrolTimer = 0;
         }
+
         
 
         //AddReward(1f);
@@ -159,11 +178,11 @@ public class MLPatrol : Agent
             TakeAction();
         }
 
-        if (player.gameObject.activeSelf)
-        {
-            timer = patrolTime;
+        //if (player.gameObject.activeSelf)
+        //{
+        //    timer = patrolTime;
             
-        }
+        //}
 
         timer += Time.deltaTime;
         if (timer >= patrolTime)

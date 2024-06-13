@@ -318,11 +318,13 @@ public class Shoot : MonoBehaviour
         //Debug.Log("shoot");
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
         {
+            
             if (hit.collider.transform.root.GetComponent<Health>())
             {
                 if (hit.collider.CompareTag("Head"))
                 {
                     hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage);
+                   
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {

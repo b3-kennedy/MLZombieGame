@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   home: {fileID: 0}
-  targetDecayTime: 30
+  targetDecayTime: 60
   runSpeed: 5
   walkSpeed: 3.5
 --- !u!1 &7110451238052221175
