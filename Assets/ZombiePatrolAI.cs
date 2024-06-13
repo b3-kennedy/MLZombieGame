@@ -33,6 +33,7 @@ public class ZombiePatrolAI : MonoBehaviour
         if(Vector3.Distance(transform.position, destPoint) < 1f)
         {
             anim.SetBool("moving", false);
+            anim.SetBool("run", false);
             timer += Time.deltaTime;
             if (timer > positionChangeInterval)
             {
@@ -40,8 +41,16 @@ public class ZombiePatrolAI : MonoBehaviour
                 timer = 0;
             }
         }
-        else
+        else if(Vector3.Distance(transform.position, destPoint) > 25f)
         {
+            agent.speed = 5;
+            anim.SetBool("moving", false);
+            anim.SetBool("run", true);
+        }
+        else if(Vector3.Distance(transform.position, destPoint) < 25f)
+        {
+            agent.speed = 1;
+            anim.SetBool("run", false);
             anim.SetBool("moving", true);
         }
 
@@ -60,7 +69,16 @@ public class ZombiePatrolAI : MonoBehaviour
         destPoint = new Vector3(point.x, 0, point.z);
         if (gameObject.activeSelf)
         {
-            agent.SetDestination(destPoint);
+            NavMeshPath newPath = new NavMeshPath();
+            if(agent.CalculatePath(destPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
+            {
+                agent.SetDestination(destPoint);
+            }
+            else
+            {
+                GenerateNewPoint();
+            }
+            
         }
         
     }
