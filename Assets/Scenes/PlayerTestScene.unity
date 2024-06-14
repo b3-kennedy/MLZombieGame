@@ -6724,6 +6724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HunterZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 7097556183795137075, guid: 67f6b8adf9e600b47b01b135f1d98d35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7557060711290777265, guid: 67f6b8adf9e600b47b01b135f1d98d35, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4369924
@@ -6892,6 +6896,10 @@ PrefabInstance:
       propertyPath: home
       value: 
       objectReference: {fileID: 826994299}
+    - target: {fileID: 8985734664299624950, guid: 67f6b8adf9e600b47b01b135f1d98d35, type: 3}
+      propertyPath: playerPos
+      value: 
+      objectReference: {fileID: 631763620869476480}
     - target: {fileID: 8999347502569170964, guid: 67f6b8adf9e600b47b01b135f1d98d35, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.050257787

@@ -48,6 +48,12 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (GameManager.Instance != null && GameManager.Instance.gameOver)
+        {
+            return;
+        }
+
         turnVec.x += Input.GetAxisRaw("Mouse X") * sensitivity;
         turnVec.y += Input.GetAxisRaw("Mouse Y") * sensitivity;
         cam.localRotation = Quaternion.Euler(-turnVec.y, 0, 0);

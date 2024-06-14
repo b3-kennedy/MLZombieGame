@@ -2353,6 +2353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  health: 0
 --- !u!114 &8985734664299624950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,6 +2371,8 @@ MonoBehaviour:
   targetDecayTime: 60
   runSpeed: 5
   walkSpeed: 3.5
+  attackRate: 1
+  damage: 20
 --- !u!1 &7110451238052221175
 GameObject:
   m_ObjectHideFlags: 0

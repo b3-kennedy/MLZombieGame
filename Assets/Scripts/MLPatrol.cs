@@ -29,6 +29,8 @@ public class MLPatrol : Agent
     float timer;
 
     Vector2 pos;
+    float posTimer;
+    bool NewPosSet;
 
 
     private void Awake()
@@ -58,7 +60,7 @@ public class MLPatrol : Agent
     {
         if(player != null)
         {
-            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+            //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
         }
         
         //TakeAction();
@@ -77,7 +79,7 @@ public class MLPatrol : Agent
 
 
 
-        if(player.gameObject.activeSelf)
+        if(player.gameObject.activeSelf && !NewPosSet)
         {
 
             for (int i = 0; i < groups.Count; i++)
@@ -89,33 +91,30 @@ public class MLPatrol : Agent
             for (int i = 0;i < groups.Count;i++)
             {
                 groups[i].patrolPoint.position = points[i];
-                foreach (var zombie in groups[i].zombies)
-                {
-                    zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
-                }
+                //foreach (var zombie in groups[i].zombies)
+                //{
+                //    zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
+                //}
                 combinedDistance += Vector3.Distance(player.transform.position, groups[i].patrolPoint.position);
             }
             
             if(combinedDistance < 75 * 5)
             {
                 //player.gameObject.SetActive(false);
-                Debug.Log("Player Targeted");
+                //Debug.Log("Player Targeted");
 
-                for (int i = 0; i < groups.Count; i++)
-                {
-                    foreach (var zombie in groups[i].zombies)
-                    {
-                        zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
-                    }
-                }
-                player.gameObject.SetActive(false);
+                StartCoroutine(SetNewPoint());
+                
 
                 AddReward(1f);
+                NewPosSet = true;
+                player.gameObject.SetActive(false);
                 EndEpisode();
+                
             }
             else
             {
-                Debug.Log("missed");
+                //Debug.Log("missed");
                 AddReward(-0.5f);
                 EndEpisode();
             }
@@ -130,6 +129,19 @@ public class MLPatrol : Agent
         
 
 
+    }
+
+    IEnumerator SetNewPoint()
+    {
+        for (int i = 0; i < groups.Count; i++)
+        {
+            foreach (var zombie in groups[i].zombies)
+            {
+                zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
+                Debug.Log("spawn");
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
     }
 
     void TargetedPatrol()
@@ -189,6 +201,19 @@ public class MLPatrol : Agent
         {
             TakeAction();
             timer = 0;
+        }
+    }
+
+    private void Update()
+    {
+        if (NewPosSet)
+        {
+            posTimer += Time.deltaTime;
+            if(posTimer > 5f)
+            {
+                NewPosSet = false;
+                posTimer = 0;
+            }
         }
     }
 }

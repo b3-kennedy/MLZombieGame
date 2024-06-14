@@ -59,9 +59,13 @@ public class AISensor : MonoBehaviour
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
-                    if (obj.GetComponent<RigidbodyMovement>())
+                    if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
                     {
                         obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
+                    }
+                    if(MLPatrol2.Instance != null)
+                    {
+                        MLPatrol2.Instance.TakeAction();
                     }
                 }
                 else if (GetComponent<EnforcerZombieAI>())
@@ -70,7 +74,17 @@ public class AISensor : MonoBehaviour
                 }
                 
             }
+
+            if (!IsInSight(obj))
+            {
+                if (GetComponent<ZombiePatrolAI>())
+                {
+                    GetComponent<ZombiePatrolAI>().playerSpotted = false;
+                }
+            }
         }
+
+
 
     }
 

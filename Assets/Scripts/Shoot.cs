@@ -121,6 +121,12 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(GameManager.Instance != null && GameManager.Instance.gameOver)
+        {
+            return;
+        }
+
         if (!InventoryManager.Instance.inventory.activeSelf && !reload)
         {
             if (currentAmmo > 0)

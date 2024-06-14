@@ -288,6 +288,12 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (GameManager.Instance != null && GameManager.Instance.gameOver)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab) && !inventory.activeSelf)
         {
             inventory.SetActive(true);

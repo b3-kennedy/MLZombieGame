@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 9127159232113125901}
   - component: {fileID: 3829760389937721574}
   - component: {fileID: 1038967765391586223}
+  - component: {fileID: 3571301665161525268}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -842,6 +843,7 @@ MonoBehaviour:
   normalSpeed: 3
   crouchSpeed: 1.5
   sprintSpeed: 5
+  mlIdentifier: {fileID: 0}
   orientation: {fileID: 552998904602594617}
   groundCheckPos: {fileID: 7433280893050754755}
   slowDownMultiplier: 5
@@ -896,6 +898,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoCountText: {fileID: 20824102318976213}
   gunNameText: {fileID: 534122870350245777}
+--- !u!114 &3571301665161525268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514441369872641184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7b04660eb8cf74db8286be4b7bff00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &2783856542759900912
 GameObject:
   m_ObjectHideFlags: 0

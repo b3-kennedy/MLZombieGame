@@ -17,6 +17,8 @@ public class ZombiePatrolAI : MonoBehaviour
     bool canSpawn;
     public float spotCd;
     float spotTimer;
+    [HideInInspector] public bool playerSpotted = false;
+    Transform playerPos;
 
     // Start is called before the first frame update
     void Start()
@@ -30,36 +32,50 @@ public class ZombiePatrolAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, destPoint) < 1f)
+
+        if (!playerSpotted)
         {
-            anim.SetBool("moving", false);
-            anim.SetBool("run", false);
-            timer += Time.deltaTime;
-            if (timer > positionChangeInterval)
+            if (Vector3.Distance(transform.position, destPoint) < 1f)
             {
-                GenerateNewPoint();
-                timer = 0;
+                anim.SetBool("moving", false);
+                anim.SetBool("run", false);
+                timer += Time.deltaTime;
+                if (timer > positionChangeInterval)
+                {
+                    GenerateNewPoint();
+                    timer = 0;
+                }
+            }
+            else if (Vector3.Distance(transform.position, destPoint) > 100f)
+            {
+                agent.speed = 5;
+                anim.SetBool("moving", false);
+                anim.SetBool("run", true);
+            }
+            else if (Vector3.Distance(transform.position, destPoint) < 25f)
+            {
+                agent.speed = 1;
+                anim.SetBool("run", false);
+                anim.SetBool("moving", true);
+            }
+
+            spotTimer += Time.deltaTime;
+            if (spotTimer >= spotCd)
+            {
+                canSpawn = true;
+                spotTimer = 0;
             }
         }
-        else if(Vector3.Distance(transform.position, destPoint) > 25f)
+        else
         {
-            agent.speed = 5;
-            anim.SetBool("moving", false);
-            anim.SetBool("run", true);
-        }
-        else if(Vector3.Distance(transform.position, destPoint) < 25f)
-        {
-            agent.speed = 1;
             anim.SetBool("run", false);
-            anim.SetBool("moving", true);
+            anim.SetBool("moving", false);
+            agent.speed = 0;
+            Vector3 dir = playerPos.position - transform.position;
+            Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Lerp(new Quaternion(0,transform.rotation.y,0,transform.rotation.w), new Quaternion(0,toRot.y,0,toRot.w), 2 * Time.deltaTime);
         }
 
-        spotTimer += Time.deltaTime;
-        if(spotTimer >= spotCd)
-        {
-            canSpawn = true;
-            spotTimer = 0;
-        }
 
     }
 
@@ -85,6 +101,8 @@ public class ZombiePatrolAI : MonoBehaviour
 
     public void AlertBrain(Transform pos)
     {
+        playerSpotted = true;
+        playerPos = pos;
         //TestZombieBrain2.Instance.Hunt(pos);
         //MLPatrol.Instance.TakeAction();
         if (canSpawn)
