@@ -9,11 +9,25 @@ public class HUDManager : MonoBehaviour
     public static HUDManager Instance;
     public TextMeshProUGUI ammoCountText;
     public TextMeshProUGUI gunNameText;
+    public GameObject spottedText;
+    public GameObject mlIdentifier;
 
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (mlIdentifier.activeSelf)
+        {
+            spottedText.SetActive(true);
+        }
+        else
+        {
+            spottedText.SetActive(false);
+        }
     }
 
     private void Start()
