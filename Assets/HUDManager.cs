@@ -20,14 +20,18 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        if (mlIdentifier.activeSelf)
+        if(mlIdentifier != null)
         {
-            spottedText.SetActive(true);
+            if (mlIdentifier.activeSelf)
+            {
+                spottedText.SetActive(true);
+            }
+            else
+            {
+                spottedText.SetActive(false);
+            }
         }
-        else
-        {
-            spottedText.SetActive(false);
-        }
+
     }
 
     private void Start()

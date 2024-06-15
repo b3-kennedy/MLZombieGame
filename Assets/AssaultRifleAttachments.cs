@@ -53,6 +53,8 @@ public class AssaultRifleAttachments : Attachments
 
             newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
             barrelAttachment = newAttachment;
+            Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+            currentGun.audioRange /= 2;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -107,6 +109,12 @@ public class AssaultRifleAttachments : Attachments
             Destroy(button);
         }
 
+    }
+
+    public override void UnequipBarrel()
+    {
+        Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        currentGun.audioRange *= 2;
     }
 
     public override void UnequipSight()

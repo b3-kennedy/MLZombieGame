@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 
 public class ZombiePatrolAI : MonoBehaviour
 {
-
+    public enum ZombieState {NORMAL, HEARD_SOUND}
+    public ZombieState state;
     public Transform patrolPoint;
     public float radius;
     public float positionChangeInterval;
@@ -19,6 +21,10 @@ public class ZombiePatrolAI : MonoBehaviour
     float spotTimer;
     [HideInInspector] public bool playerSpotted = false;
     Transform playerPos;
+    bool audioHeard;
+    Vector3 audioPos;
+    public float maxAudioTime;
+    float audioTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,51 +38,76 @@ public class ZombiePatrolAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!playerSpotted)
+        if(state == ZombieState.NORMAL)
         {
-            if (Vector3.Distance(transform.position, destPoint) < 1f)
+            if (!playerSpotted)
             {
-                anim.SetBool("moving", false);
-                anim.SetBool("run", false);
-                timer += Time.deltaTime;
-                if (timer > positionChangeInterval)
+                if (Vector3.Distance(transform.position, destPoint) < 1f)
                 {
-                    GenerateNewPoint();
-                    timer = 0;
+                    anim.SetBool("moving", false);
+                    anim.SetBool("run", false);
+                    timer += Time.deltaTime;
+                    if (timer > positionChangeInterval)
+                    {
+                        GenerateNewPoint();
+                        timer = 0;
+                    }
+                }
+                else if (Vector3.Distance(transform.position, destPoint) > 100f)
+                {
+                    agent.speed = 5;
+                    anim.SetBool("moving", false);
+                    anim.SetBool("run", true);
+                }
+                else if (Vector3.Distance(transform.position, destPoint) < 25f)
+                {
+                    agent.speed = 1;
+                    anim.SetBool("run", false);
+                    anim.SetBool("moving", true);
+                }
+
+                spotTimer += Time.deltaTime;
+                if (spotTimer >= spotCd)
+                {
+                    canSpawn = true;
+                    spotTimer = 0;
                 }
             }
-            else if (Vector3.Distance(transform.position, destPoint) > 100f)
+            else
             {
-                agent.speed = 5;
-                anim.SetBool("moving", false);
-                anim.SetBool("run", true);
-            }
-            else if (Vector3.Distance(transform.position, destPoint) < 25f)
-            {
-                agent.speed = 1;
-                anim.SetBool("run", false);
-                anim.SetBool("moving", true);
-            }
-
-            spotTimer += Time.deltaTime;
-            if (spotTimer >= spotCd)
-            {
-                canSpawn = true;
-                spotTimer = 0;
+                LookAtPoint(playerPos.position);
             }
         }
-        else
+        else if(state == ZombieState.HEARD_SOUND)
         {
-            anim.SetBool("run", false);
-            anim.SetBool("moving", false);
-            agent.speed = 0;
-            Vector3 dir = playerPos.position - transform.position;
-            Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Lerp(new Quaternion(0,transform.rotation.y,0,transform.rotation.w), new Quaternion(0,toRot.y,0,toRot.w), 2 * Time.deltaTime);
+            LookAtPoint(audioPos);
+            if (playerSpotted)
+            {
+                state = ZombieState.NORMAL;
+            }
+            else
+            {
+                audioTimer += Time.deltaTime;
+                if(audioTimer >= maxAudioTime)
+                {
+                    state = ZombieState.NORMAL;
+                    audioTimer = 0;
+                }
+            }
         }
 
 
+
+    }
+
+    void LookAtPoint(Vector3 pos)
+    {
+        anim.SetBool("run", false);
+        anim.SetBool("moving", false);
+        agent.speed = 0;
+        Vector3 dir = pos - transform.position;
+        Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 2 * Time.deltaTime);
     }
 
     public void GenerateNewPoint()
@@ -97,6 +128,12 @@ public class ZombiePatrolAI : MonoBehaviour
             
         }
         
+    }
+
+    public void HeardSound(Vector3 pos)
+    {
+        state = ZombieState.HEARD_SOUND;
+        audioPos = pos;
     }
 
     public void AlertBrain(Transform pos)

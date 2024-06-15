@@ -39,6 +39,10 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     PickUpAttachment(hit.collider.gameObject);
                 }
+                else if (hit.collider.CompareTag("LootBox"))
+                {
+                    hit.collider.GetComponent<LootBox>().Open();
+                }
             }
 
         }

@@ -80,7 +80,7 @@ public class AISensor : MonoBehaviour
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().playerSpotted = false;
-                    if (obj.GetComponent<RigidbodyMovement>())
+                    if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
                     {
                         obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(false);
                     }

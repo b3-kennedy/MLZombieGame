@@ -39,6 +39,9 @@ public class RigidbodyMovement : MonoBehaviour
     public float jumpForce;
     public float airDrag;
 
+    public float audioRange;
+    public LayerMask zombieLayer;
+
     [Header("Lean Settings")]
     public float leanAmount;
     public Transform hip;
@@ -77,6 +80,24 @@ public class RigidbodyMovement : MonoBehaviour
         playerState = PlayerState.NORMAL;
     }
 
+    void CheckAudioRange(Vector3 footStepPos)
+    {
+        if (!isCrouched)
+        {
+            Collider[] cols = Physics.OverlapSphere(transform.position, audioRange, zombieLayer);
+
+            foreach (var col in cols)
+            {
+                if (col.GetComponent<ZombiePatrolAI>())
+                {
+                    col.GetComponent<ZombiePatrolAI>().HeardSound(footStepPos);
+                }
+
+            }
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -94,6 +115,7 @@ public class RigidbodyMovement : MonoBehaviour
         Crouch();
         Jump();
         Lean();
+        CheckAudioRange(transform.position);
 
         if (Input.GetKey(KeyCode.LeftShift) && !objectAbove)
         {

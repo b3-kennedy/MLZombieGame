@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Shoot : MonoBehaviour
@@ -15,6 +16,8 @@ public class Shoot : MonoBehaviour
     public AudioClip shotSound;
     public AudioClip emptySound;
     public Transform audioSpawn;
+    public float audioRange;
+    public LayerMask zombieLayer;
 
     [Header("Gun Settings")]
     public ShootType shootType;
@@ -261,6 +264,7 @@ public class Shoot : MonoBehaviour
         muzzleFlash.transform.SetParent(audioSpawn.transform);
 
         AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
+        Vector3 shotPos = audioSpawn.position;
         currentAmmo -= 1;
         HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
         if (currentAmmo <= 0)
@@ -294,6 +298,7 @@ public class Shoot : MonoBehaviour
 
         }
 
+        CheckAudioRange(shotPos);
         //Debug.Log("shoot");
 
     }
@@ -314,6 +319,7 @@ public class Shoot : MonoBehaviour
         muzzleFlash.transform.SetParent(audioSpawn.transform);
 
         AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
+        Vector3 shotPos = audioSpawn.position;
         currentAmmo -= 1;
         HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
         if(currentAmmo <= 0) 
@@ -339,15 +345,28 @@ public class Shoot : MonoBehaviour
             }
 
         }
+
+        CheckAudioRange(shotPos);
+    }
+
+    void CheckAudioRange(Vector3 shotPos)
+    {
+        Collider[] cols = Physics.OverlapSphere(audioSpawn.position, audioRange, zombieLayer);
+
+        foreach (var col in cols)
+        {
+            if (col.GetComponent<ZombiePatrolAI>())
+            {
+                col.GetComponent<ZombiePatrolAI>().HeardSound(shotPos);
+            }
+            
+        }
     }
 
     private void OnDrawGizmos()
     {
-        foreach (var point in shotgunHits)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(point, 0.2f);
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(audioSpawn.position, audioRange);
         
     }
 }

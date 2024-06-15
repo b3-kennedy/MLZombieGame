@@ -11,6 +11,7 @@ TagManager:
   - Attachment
   - Head
   - Body
+  - LootBox
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Player
   - VisionCamera
   - MLTest
-  - 
+  - ScoutZombie
   - 
   - 
   - 

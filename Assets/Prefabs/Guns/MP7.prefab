@@ -346,6 +346,10 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 3687622380752559388}
+  audioRange: 15
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   shootType: 1
   gunType: 3
   fireRate: 20

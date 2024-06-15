@@ -345,6 +345,10 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 3015592314790031695}
+  audioRange: 10
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   shootType: 0
   gunType: 0
   fireRate: 3
@@ -355,6 +359,10 @@ MonoBehaviour:
   reload: 0
   damage: 50
   headshotDamage: 100
+  pelletsPerShot: 0
+  spreadAngle: 0
+  range: 0
+  verticalSpreadMultiplier: 0
   recoil: {fileID: 0}
   recoilX: -2
   recoilY: 5
@@ -366,6 +374,7 @@ MonoBehaviour:
   returnSpeed: 5
   canShoot: 0
   gunName: Glock
+  testSphere: {fileID: 0}
 --- !u!1001 &8060663091424726913
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -442,6 +442,10 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 1335926056024825668}
+  audioRange: 20
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   shootType: 1
   gunType: 1
   fireRate: 14
@@ -455,6 +459,7 @@ MonoBehaviour:
   pelletsPerShot: 0
   spreadAngle: 0
   range: 0
+  verticalSpreadMultiplier: 0
   recoil: {fileID: 0}
   recoilX: -1
   recoilY: 2
@@ -466,6 +471,7 @@ MonoBehaviour:
   returnSpeed: 2
   canShoot: 0
   gunName: M4
+  testSphere: {fileID: 0}
 --- !u!1001 &1096669740652786404
 PrefabInstance:
   m_ObjectHideFlags: 0

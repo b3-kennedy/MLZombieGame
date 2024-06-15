@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 122789519878858604}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AudioSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2896783017195621784}
   - component: {fileID: 8347358192471083411}
   - component: {fileID: 7989456518567030918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2339476714725887852}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttachmentSlots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7898909093163896051}
   - component: {fileID: 6571940616465290373}
   - component: {fileID: 5771542272174160250}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ShotgunParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70296768f4b397c429ffff753cef4af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalPosition: {x: -0.109, y: -0.13, z: -0.292}
-  adsPosition: {x: 0, y: -0.03, z: -0.18}
+  normalPosition: {x: -0.109, y: -0.13, z: -0.336}
+  adsPosition: {x: 0, y: -0.03, z: -0.208}
   adsSpeed: 5
   isAiming: 0
 --- !u!1001 &6731415863680832224
@@ -256,9 +256,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8390990853420524981}
     m_Modifications:
+    - target: {fileID: 1053017048957282, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258200878480970, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292227524842076, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1686927749536120, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
       propertyPath: m_Name
       value: Bennelli_M4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686927749536120, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4971776644955190, guid: 3a9eb2721702a374a956ef3c7e0dac80, type: 3}
       propertyPath: m_LocalPosition.x
@@ -335,6 +351,10 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 122789519878858604}
+  audioRange: 25
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   shootType: 0
   gunType: 2
   fireRate: 3
