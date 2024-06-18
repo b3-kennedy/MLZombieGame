@@ -9,11 +9,13 @@ public class PickUpWeapons : MonoBehaviour
     public Transform weaponPos;
     List<GameObject> guns = new List<GameObject>();
     GameObject currentActiveGun;
-
+    ThrowableSlot throwableSlot;
+    public Transform throwPoint;
+    public float throwForce = 10;
 
     private void Start()
     {
-
+        throwableSlot = InventoryManager.Instance.throwableSlot.GetComponent<ThrowableSlot>();
     }
     // Update is called once per frame
     void Update()
@@ -43,6 +45,10 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     hit.collider.GetComponent<LootBox>().Open();
                 }
+                else if (hit.collider.CompareTag("Throwable"))
+                {
+                    PickUpThrowable(hit.collider.gameObject);
+                }
             }
 
         }
@@ -51,6 +57,11 @@ public class PickUpWeapons : MonoBehaviour
 
     }
 
+    void PickUpThrowable(GameObject obj)
+    {
+        InventoryManager.Instance.PickUpThrowable(obj);
+        Destroy(obj);
+    }
 
     void SwitchWeapon()
     {
@@ -78,6 +89,21 @@ public class PickUpWeapons : MonoBehaviour
 
                 InventoryManager.Instance.OnOpenInventory();
             }
+        }
+
+        if(Input.GetKeyUp(KeyCode.G) && throwableSlot.item != null)
+        {
+            GameObject throwableItem = Instantiate(throwableSlot.item, throwPoint.position, Quaternion.identity);
+            if (throwableItem.GetComponent<Rotate>())
+            {
+                throwableItem.GetComponent<Rotate>().enabled = true;
+            }
+            if(throwableItem.GetComponent<Bottle>())
+            {
+                throwableItem.GetComponent<Bottle>().enabled = true;
+            }
+            throwableItem.GetComponent<Rigidbody>().AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+            throwableSlot.ItemThrown();
         }
 
     }

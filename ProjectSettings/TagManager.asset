@@ -12,6 +12,7 @@ TagManager:
   - Head
   - Body
   - LootBox
+  - Throwable
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject barrel;
     public GameObject underbarrel;
 
+    public Image throwableSlot;
     private void Awake()
     {
         Instance = this;
@@ -202,6 +203,25 @@ public class InventoryManager : MonoBehaviour
         }
         
         slot.color = Color.white;
+    }
+
+    public void PickUpThrowable(GameObject throwable)
+    {
+        if (throwable.GetComponent<Throwable>())
+        {
+            GameObject ui = Instantiate(throwable.GetComponent<Throwable>().uiElement, itemParent);
+            ui.GetComponent<Button>().onClick.AddListener(delegate { EquipThrowable(ui); });
+            ui.GetComponent<Button>().onClick.AddListener(delegate { OnOpenInventory(); });
+
+        }
+    }
+
+    public void EquipThrowable(GameObject ui)
+    {
+
+        Destroy(ui);
+        throwableSlot.color = Color.green;
+        throwableSlot.GetComponent<ThrowableSlot>().item = ui.GetComponent<BottleItem>().bottle;
     }
 
     public void OnPickUpItem(GameObject attachment, GameObject currentActiveGun)

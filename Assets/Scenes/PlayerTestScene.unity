@@ -2083,6 +2083,11 @@ Transform:
   - {fileID: 744439888}
   m_Father: {fileID: 615120192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &782872053 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2036889714327213324, guid: ebcf6ae81c910294ba0891ff2c6b4129, type: 3}
+  m_PrefabInstance: {fileID: 7464324799594550800}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &826994298
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3121,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5997673427405138198, guid: 74316c0ef402dbb4fa00657cab1ea626, type: 3}
   m_PrefabInstance: {fileID: 1167172484}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1180785738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 329342547376761894, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_Name
+      value: Bottle 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089023728476235639, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: glassSmash
+      value: 
+      objectReference: {fileID: 8300000, guid: 0881426af7c45de43bb1c5ef165f8a7b, type: 3}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.972659
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1159453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578210361835475735, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c05e13f2f111419bca87ecea99891, type: 3}
 --- !u!1001 &1187809054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7967,6 +8033,14 @@ PrefabInstance:
       propertyPath: weaponPos
       value: 
       objectReference: {fileID: 578671099407426771}
+    - target: {fileID: 50825658189920943, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: throwForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 50825658189920943, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: throwPoint
+      value: 
+      objectReference: {fileID: 782872053}
     - target: {fileID: 2416271409863669464, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
       propertyPath: weaponPos
       value: 
@@ -10021,3 +10095,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 615120192}
+  - {fileID: 1180785738}

@@ -343,6 +343,10 @@ public class Shoot : MonoBehaviour
                     hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage);
                 }
             }
+            else if (hit.collider.GetComponent<Bottle>())
+            {
+                hit.collider.GetComponent<Bottle>().Explode();
+            }
 
         }
 
