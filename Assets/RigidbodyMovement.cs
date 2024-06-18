@@ -39,7 +39,7 @@ public class RigidbodyMovement : MonoBehaviour
     public float jumpForce;
     public float airDrag;
 
-    public float audioRange;
+    public float audioRange = 5f;
     public LayerMask zombieLayer;
 
     [Header("Lean Settings")]
@@ -98,6 +98,11 @@ public class RigidbodyMovement : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -110,7 +115,7 @@ public class RigidbodyMovement : MonoBehaviour
         Vector2 moveVec = new Vector2(horizontal, vertical);
 
 
-        Move();
+        
         SpeedControl();
         Crouch();
         Jump();

@@ -43,12 +43,12 @@ public class ADS : MonoBehaviour
 
         if (isAiming)
         {
-            PlayerUI.Instance.crosshair.SetActive(false);
+            //PlayerUI.Instance.crosshair.SetActive(false);
             aimProgress += Time.deltaTime * adsSpeed;
         }
         else
         {
-            PlayerUI.Instance.crosshair.SetActive(true);
+            //PlayerUI.Instance.crosshair.SetActive(true);
             aimProgress -= Time.deltaTime * adsSpeed;
         }
 

@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
+    public enum InteractionType {GRAB, BREAK};
+    public InteractionType type;
 
     public static HUDManager Instance;
     public TextMeshProUGUI ammoCountText;
     public TextMeshProUGUI gunNameText;
     public GameObject spottedText;
     public GameObject mlIdentifier;
+
+    public GameObject interactPrompt;
+    public Image interactIcon;
+
+    public Sprite grabIcon;
+    public Sprite breakIcon;
 
 
     private void Awake()
@@ -48,6 +57,22 @@ public class HUDManager : MonoBehaviour
     public void UpdateGunText(string name)
     {
         gunNameText.text = name;
+    }
+
+    public void UpdateInteractPrompt(string text)
+    {
+        interactPrompt.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+
+    }
+
+    public void ShowInteractPrompt()
+    {
+        interactPrompt.SetActive(true);  
+    }
+
+    public void HideInteractPrompt()
+    {
+        interactPrompt.SetActive(false);
     }
 
 }

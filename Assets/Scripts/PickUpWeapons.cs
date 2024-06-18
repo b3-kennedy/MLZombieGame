@@ -20,37 +20,66 @@ public class PickUpWeapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 10))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (hit.collider.CompareTag("Gun"))
             {
-                if (hit.collider.CompareTag("Gun"))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-
                     PickUpGun(hit.collider.gameObject);
-                    
                 }
-                else if (hit.collider.CompareTag("Mag"))
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.ShowInteractPrompt();
+            }
+            else if (hit.collider.CompareTag("Mag"))
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-
                     PickUpMag(hit.collider.gameObject);
-                    
-
                 }
-                else if (hit.collider.CompareTag("Attachment"))
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.ShowInteractPrompt();
+            }
+            else if (hit.collider.CompareTag("Attachment"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     PickUpAttachment(hit.collider.gameObject);
                 }
-                else if (hit.collider.CompareTag("LootBox"))
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.ShowInteractPrompt();
+
+            }
+            else if (hit.collider.CompareTag("LootBox"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     hit.collider.GetComponent<LootBox>().Open();
                 }
-                else if (hit.collider.CompareTag("Throwable"))
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to open");
+                HUDManager.Instance.ShowInteractPrompt();
+
+            }
+            else if (hit.collider.CompareTag("Throwable"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     PickUpThrowable(hit.collider.gameObject);
                 }
-            }
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.ShowInteractPrompt();
 
+            }
+            else
+            {
+                HUDManager.Instance.HideInteractPrompt();
+                
+            }
+        }
+        else
+        {
+            HUDManager.Instance.HideInteractPrompt();
         }
 
         SwitchWeapon();
@@ -195,25 +224,28 @@ public class PickUpWeapons : MonoBehaviour
                     {
                         GameObject currentGun = weaponPos.GetChild(i).gameObject;
                         Transform attachmentParent = currentGun.transform.GetChild(0).GetChild(0).GetChild(0);
+                        if(attachmentParent.childCount > 0)
+                        {
+                            if (attachmentParent.GetChild(0).childCount > 0)
+                            {
+                                InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(0).GetChild(0).gameObject, currentGun);
+                            }
+                            if (attachmentParent.childCount > 1)
+                            {
+                                if (attachmentParent.GetChild(1).childCount > 0)
+                                {
+                                    InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(1).GetChild(0).gameObject, currentGun);
+                                }
+                            }
+                            if (attachmentParent.childCount > 2)
+                            {
+                                if (attachmentParent.GetChild(1).childCount > 0)
+                                {
+                                    InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(2).GetChild(0).gameObject, currentGun);
+                                }
+                            }
+                        }
 
-                        if(attachmentParent.GetChild(0).childCount > 0)
-                        {
-                            InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(0).GetChild(0).gameObject, currentGun);
-                        }
-                        if(attachmentParent.childCount > 1)
-                        {
-                            if (attachmentParent.GetChild(1).childCount > 0)
-                            {
-                                InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(1).GetChild(0).gameObject, currentGun);
-                            }
-                        }
-                        if(attachmentParent.childCount > 2)
-                        {
-                            if (attachmentParent.GetChild(1).childCount > 0)
-                            {
-                                InventoryManager.Instance.OnPickUpItem(attachmentParent.GetChild(2).GetChild(0).gameObject, currentGun);
-                            }
-                        }
 
 
 
