@@ -8,6 +8,7 @@ public class AmmoHolder : MonoBehaviour
     public int arMags;
     public int shotgunShells;
     public int smgMags;
+    public int lmgMags;
 
     // Start is called before the first frame update
     void Start()

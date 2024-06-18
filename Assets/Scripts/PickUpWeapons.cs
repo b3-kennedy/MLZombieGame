@@ -127,6 +127,10 @@ public class PickUpWeapons : MonoBehaviour
         {
             GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().smgMags);
         }
+        else if(shootScript.gunType == Shoot.GunType.LMG)
+        {
+            GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().lmgMags);
+        }
         GetComponent<HUDManager>().UpdateGunText(shootScript.gunName);
     }
 
@@ -158,6 +162,9 @@ public class PickUpWeapons : MonoBehaviour
                 break;
             case (MagazineType.MagType.SMG):
                 weaponPos.GetComponent<AmmoHolder>().smgMags++;
+                break;
+            case (MagazineType.MagType.LMG):
+                weaponPos.GetComponent<AmmoHolder>().lmgMags++;
                 break;
         }
 

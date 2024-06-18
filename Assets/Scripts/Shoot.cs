@@ -8,7 +8,7 @@ public class Shoot : MonoBehaviour
 {
     
     public enum ShootType {SINGLE, AUTO};
-    public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG};
+    public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG};
 
     public GameObject muzzleFlashSpawner;
 
@@ -115,6 +115,9 @@ public class Shoot : MonoBehaviour
             case GunType.SMG:
                 currentMags = ammoHolder.smgMags;
                 break;
+            case GunType.LMG:
+                currentMags = ammoHolder.lmgMags;
+                break;
 
         }
 
@@ -216,6 +219,11 @@ public class Shoot : MonoBehaviour
             reload = true;
         }
         else if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.SMG && ammoHolder.smgMags > 0)
+        {
+            anim.SetBool("reload", true);
+            reload = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.LMG && ammoHolder.lmgMags > 0)
         {
             anim.SetBool("reload", true);
             reload = true;
