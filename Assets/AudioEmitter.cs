@@ -17,6 +17,10 @@ public class AudioEmitter : MonoBehaviour
             {
                 col.GetComponent<ZombiePatrolAI>().HeardSound(transform.position);
             }
+            else if (col.GetComponent<EnforcerZombieAI>())
+            {
+                col.GetComponent<EnforcerZombieAI>().HeardSound(transform.position);
+            }
             
         }
     }

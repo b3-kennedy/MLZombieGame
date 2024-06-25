@@ -335,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4364290306637912215}
   - component: {fileID: 7738485468275087240}
-  - component: {fileID: 8424298992053718241}
+  - component: {fileID: -3042784190407944190}
   - component: {fileID: 2213784189213892225}
   m_Layer: 0
   m_Name: MaleDummy
@@ -353,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 1858763794120987029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 25.66, y: 0.09267366, z: 5.033328}
+  m_LocalPosition: {x: 35.290707, y: 0, z: -2.4038546}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -382,7 +382,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8424298992053718241
+--- !u!114 &-3042784190407944190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,10 +391,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1858763794120987029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8eb660e647b4448955a4cd10ff3fea, type: 3}
+  m_Script: {fileID: 11500000, guid: dd4e2096999d21c45938b4a0aa42eb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &2213784189213892225
 MonoBehaviour:
   m_ObjectHideFlags: 0

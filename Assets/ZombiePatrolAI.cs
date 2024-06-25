@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
-
 public class ZombiePatrolAI : MonoBehaviour
 {
     public enum ZombieState {NORMAL, HEARD_SOUND}
@@ -25,24 +23,38 @@ public class ZombiePatrolAI : MonoBehaviour
     Vector3 audioPos;
     public float maxAudioTime;
     float audioTimer;
+    public float normalSpeed;
+    public float sprintSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-
+        spotTimer = spotCd;
         GenerateNewPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(agent.velocity != Vector3.zero && !anim.GetBool("run"))
+        {
+            anim.SetBool("moving", true);
+        }
+
         if(state == ZombieState.NORMAL)
         {
             if (!playerSpotted)
             {
-                if (Vector3.Distance(transform.position, destPoint) < 1f)
+                //if (Vector3.Distance(transform.position, destPoint) < 25f && Vector3.Distance(transform.position, destPoint) >= 0.5f)
+                //{
+                //    agent.speed = normalSpeed;
+                //    anim.SetBool("run", false);
+                //    anim.SetBool("moving", true);
+                //    Debug.Log("move");
+                //}
+                if (Vector3.Distance(transform.position, agent.destination) < 0.2f)
                 {
                     anim.SetBool("moving", false);
                     anim.SetBool("run", false);
@@ -53,25 +65,19 @@ public class ZombiePatrolAI : MonoBehaviour
                         timer = 0;
                     }
                 }
-                else if (Vector3.Distance(transform.position, destPoint) > 100f)
+                else if (Vector3.Distance(transform.position, agent.destination) > 100f)
                 {
-                    agent.speed = 5;
+                    agent.speed = sprintSpeed;
                     anim.SetBool("moving", false);
                     anim.SetBool("run", true);
                 }
-                else if (Vector3.Distance(transform.position, destPoint) < 25f)
+                else if(Vector3.Distance(transform.position, agent.destination) > 0.3f && Vector3.Distance(transform.position, destPoint) < 100f)
                 {
-                    agent.speed = 1;
+                    agent.speed = normalSpeed;
                     anim.SetBool("run", false);
                     anim.SetBool("moving", true);
                 }
 
-                spotTimer += Time.deltaTime;
-                if (spotTimer >= spotCd)
-                {
-                    canSpawn = true;
-                    spotTimer = 0;
-                }
             }
             else
             {
@@ -96,6 +102,12 @@ public class ZombiePatrolAI : MonoBehaviour
             }
         }
 
+        spotTimer += Time.deltaTime;
+        if (spotTimer >= spotCd)
+        {
+            canSpawn = true;
+            spotTimer = 0;
+        }
 
 
     }
@@ -113,27 +125,28 @@ public class ZombiePatrolAI : MonoBehaviour
     public void GenerateNewPoint()
     {
         Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
-        destPoint = new Vector3(point.x, 0, point.z);
+        Vector3 newDestPoint = new Vector3(point.x, 0, point.z);
         if (gameObject.activeSelf)
         {
             NavMeshPath newPath = new NavMeshPath();
-            if(agent.CalculatePath(destPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
+            if (agent.CalculatePath(newDestPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
             {
-                agent.SetDestination(destPoint);
+                agent.SetDestination(newDestPoint);
             }
             else
             {
-                GenerateNewPoint();
+                agent.SetDestination(transform.position);
             }
-            
+
         }
-        
+
     }
 
     public void HeardSound(Vector3 pos)
     {
         state = ZombieState.HEARD_SOUND;
         audioPos = pos;
+        audioHeard = true;
     }
 
     public void AlertBrain(Transform pos)
@@ -142,9 +155,22 @@ public class ZombiePatrolAI : MonoBehaviour
         playerPos = pos;
         //TestZombieBrain2.Instance.Hunt(pos);
         //MLPatrol.Instance.TakeAction();
+        
+
         if (canSpawn)
         {
-            MLSpawn.Instance.SpawnHunter();
+            //MLSpawn.Instance.SpawnHunter();
+            if(MLPatrol2.Instance != null)
+            {
+                MLPatrol2.Instance.GainReward(1f);
+                MLPatrol2.Instance.RequestAction();
+            }
+
+            if(GameManager.Instance != null)
+            {
+                GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(10f);
+            }
+            
             canSpawn = false;
         }
         

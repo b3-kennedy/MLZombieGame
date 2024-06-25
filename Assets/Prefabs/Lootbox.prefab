@@ -213,10 +213,10 @@ MonoBehaviour:
   chances:
   - itemName: Gun
     type: 0
-    chance: 20
+    chance: 50
   - itemName: Ammo
     type: 1
-    chance: 50
+    chance: 70
   - itemName: Attachment
     type: 2
     chance: 30

@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentType: 1
+  itemName: Supressor
   UIElement: {fileID: 411028760406493008, guid: 46395d8ae79ef4d4ba55dc500dc6aa94, type: 3}

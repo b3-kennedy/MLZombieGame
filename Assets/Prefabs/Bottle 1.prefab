@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiElement: {fileID: 411028760406493008, guid: dbf77607720e78a4fa23c14134e373bd, type: 3}
+  itemName: Glass Bottle
 --- !u!65 &1704827215569722018
 BoxCollider:
   m_ObjectHideFlags: 0

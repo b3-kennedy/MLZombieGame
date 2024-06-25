@@ -28,7 +28,7 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     PickUpGun(hit.collider.gameObject);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up " + hit.collider.GetComponent<WeaponPickupObject>().gunObject.name);
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("Mag"))
@@ -38,7 +38,26 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     PickUpMag(hit.collider.gameObject);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                MagazineType type = hit.collider.GetComponent<MagazineType>();
+                switch (type.magType)
+                {
+                    case (MagazineType.MagType.PISTOL):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up pistol magazine");
+                        break;
+                    case (MagazineType.MagType.ASSAULT_RIFLE):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up assault rifle magazine");
+                        break;
+                    case (MagazineType.MagType.SMG):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up sub machine gun magazine");
+                        break;
+                    case (MagazineType.MagType.LMG):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up light machine gun magazine");
+                        break;
+                    case (MagazineType.MagType.SHOTGUN):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up shotgun shells");
+                        break;
+                }
+                
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("Attachment"))
@@ -47,7 +66,7 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     PickUpAttachment(hit.collider.gameObject);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up " + hit.collider.GetComponent<ItemPickupObject>().itemName);
                 HUDManager.Instance.ShowInteractPrompt();
 
             }
@@ -67,7 +86,7 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     PickUpThrowable(hit.collider.gameObject);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up " + hit.collider.GetComponent<Throwable>().itemName);
                 HUDManager.Instance.ShowInteractPrompt();
 
             }

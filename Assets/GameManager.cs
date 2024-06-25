@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject winScreen;
     public GameObject loseScreen;
+    public GameObject player;
     public bool gameOver;
 
     private void Awake()
@@ -18,9 +19,9 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        gameOver = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        winScreen.SetActive(true);
+        //gameOver = true;
+        //Cursor.lockState = CursorLockMode.Confined;
+        //winScreen.SetActive(true);
     }
 
     private void Update()
@@ -33,9 +34,9 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
-        gameOver = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        loseScreen.SetActive(true);
+        //gameOver = true;
+        //Cursor.lockState = CursorLockMode.Confined;
+        //loseScreen.SetActive(true);
     }
 
     public void Restart()

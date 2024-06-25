@@ -12,6 +12,7 @@ public class SpawnDummy : MonoBehaviour
     public Transform bottomRight;
 
     public GameObject dummy;
+    GameObject newDummy;
 
 
     private void Awake()
@@ -27,7 +28,23 @@ public class SpawnDummy : MonoBehaviour
 
     public void Spawn()
     {
-        GameObject newDummy = Instantiate(dummy, new Vector3(Random.Range(topLeft.position.x, bottomLeft.position.x), 0 ,Random.Range(topLeft.position.z, topRight.position.z)), Quaternion.Euler(0,-90,0));
+        //if(newDummy == null)
+        //{
+        //    newDummy = Instantiate(dummy, new Vector3(Random.Range(topLeft.position.x, bottomLeft.position.x), 0, Random.Range(topLeft.position.z, topRight.position.z)), Quaternion.Euler(0, -90, 0));
+        //}
+        //else
+        //{
+        //    newDummy.transform.position = new Vector3(Random.Range(topLeft.position.x, bottomLeft.position.x), 0, Random.Range(topLeft.position.z, topRight.position.z));
+        //    newDummy.GetComponent<Health>().health = 100;
+            
+        //}
+
+        //if (!newDummy.activeSelf)
+        //{
+        //    newDummy.SetActive(true);
+        //}
+        
+
     }
 
     // Update is called once per frame

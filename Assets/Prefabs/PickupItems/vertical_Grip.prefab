@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentType: 2
+  itemName: Vertical Grip
   UIElement: {fileID: 411028760406493008, guid: 6a2a799b136029f42813276b2a7ed760, type: 3}

@@ -63,10 +63,10 @@ public class AISensor : MonoBehaviour
                     {
                         obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
                     }
-                    if(MLPatrol2.Instance != null)
-                    {
-                        MLPatrol2.Instance.TakeAction();
-                    }
+                    //if(MLPatrol2.Instance != null)
+                    //{
+                    //    MLPatrol2.Instance.TakeAction();
+                    //}
                 }
                 else if (GetComponent<EnforcerZombieAI>())
                 {

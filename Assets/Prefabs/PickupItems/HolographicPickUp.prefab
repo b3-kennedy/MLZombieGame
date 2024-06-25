@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentType: 0
+  itemName: Holographic
   UIElement: {fileID: 411028760406493008, guid: 2d8aa234cc2b18348a4925d83ab6d698, type: 3}

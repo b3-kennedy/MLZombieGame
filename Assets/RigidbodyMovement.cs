@@ -92,6 +92,10 @@ public class RigidbodyMovement : MonoBehaviour
                 {
                     col.GetComponent<ZombiePatrolAI>().HeardSound(footStepPos);
                 }
+                else if (col.GetComponent<EnforcerZombieAI>())
+                {
+                    col.GetComponent<EnforcerZombieAI>().HeardSound(footStepPos);
+                }
 
             }
         }

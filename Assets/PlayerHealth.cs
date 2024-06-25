@@ -24,9 +24,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if(currentHealth - dmg <= 0)
         {
-            GameManager.Instance.Lose();
-            gameObject.SetActive(false);
             currentHealth = 0;
+            GameManager.Instance.Lose();
+            MLPatrol2.Instance.AddReward(2f);
+            MLPatrol2.Instance.End();
+            //gameObject.SetActive(false);
+            
         }
         else
         {

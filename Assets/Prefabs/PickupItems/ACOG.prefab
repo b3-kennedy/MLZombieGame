@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentType: 0
+  itemName: ACOG
   UIElement: {fileID: 411028760406493008, guid: a641980a4b42972478eaed9d9fd9dd90, type: 3}

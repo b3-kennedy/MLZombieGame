@@ -15,8 +15,14 @@ public class OnDeath : MonoBehaviour
     {
         if (!isQuitting)
         {
-            SpawnDummy.Instance.Spawn();
+            //SpawnDummy.Instance.Spawn();
         }
         
+    }
+
+    void OnDisable()
+    {
+        //Debug.Log("disabled");
+        //SpawnDummy.Instance.Spawn();
     }
 }

@@ -11,11 +11,11 @@ public class MLPatrol2 : Agent
 {
 
     public static MLPatrol2 Instance;
-
+    public Transform[] playerSpawns;
     public List<ZombiePatrolGroup> groups;
     public LayerMask sphereLayer;
     public Transform player;
-
+    PlayerHealth playerHealth;
     public float randomPatrolTime;
     float randomPatrolTimer;
 
@@ -33,6 +33,8 @@ public class MLPatrol2 : Agent
             foreach (var zombie in groups[i].zombies)
             {
                 zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[i].patrolPoint;
+                Vector3 randomPos = Random.insideUnitSphere * 75;
+                zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x,0,randomPos.z);
             }
         }
     }
@@ -40,7 +42,7 @@ public class MLPatrol2 : Agent
     // Start is called before the first frame update
     void Start()
     {
-
+        playerHealth = player.parent.GetComponent<PlayerHealth>();
     }
 
     public void TakeAction()
@@ -48,11 +50,24 @@ public class MLPatrol2 : Agent
         RequestDecision();
     }
 
+    public void ResetPosition()
+    {
+        int randomNum = Random.Range(0, playerSpawns.Length);
+        playerHealth.currentHealth = 100;
+        Debug.Log(randomNum);
+        player.parent.GetComponent<NavMeshAgent>().Warp(playerSpawns[randomNum].position);
+        player.parent.GetComponent<NavMeshAgent>().SetDestination(player.parent.GetComponent<PlayerAIMove>().target.position);
+    }
+
     public override void OnEpisodeBegin()
     {
-        if (player != null)
+        if (player.parent != null)
         {
-            player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+            //ResetPosition();
+            
+            player.gameObject.SetActive(false);
+            ResetPosition();
+            //player.parent.GetComponent<NavMeshAgent>().SetDestination(player.parent.GetComponent<PlayerAIMove>().target.position);
         }
 
         //TakeAction();
@@ -62,14 +77,23 @@ public class MLPatrol2 : Agent
     {
         int posX = actions.DiscreteActions[0] * 8;
         int posY = actions.DiscreteActions[1] * 8;
+        int groupNum = actions.DiscreteActions[2];
+        int boolVal = actions.DiscreteActions[3];
 
         float combinedDistance = 0;
 
         pos = new Vector2(posX, posY);
 
         List<Vector3> points = new List<Vector3>();
-
-        RandomPatrol(pos);
+        if(boolVal == 1)
+        {
+            RandomPatrol(pos, groupNum);
+        }
+        else
+        {
+            return;
+        }
+        
 
         //if (player.gameObject.activeSelf)
         //{
@@ -127,22 +151,16 @@ public class MLPatrol2 : Agent
 
     }
 
-    void RandomPatrol(Vector2 pos)
+    void RandomPatrol(Vector2 pos, int group)
     {
-        randomPatrolTimer += Time.deltaTime;
-        if (randomPatrolTimer >= randomPatrolTime)
+
+        groups[group].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
+
+
+        foreach (var zombie in groups[group].zombies)
         {
-            int randomNum = Random.Range(0, groups.Count);
-
-            groups[randomNum].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
-
-
-            foreach (var zombie in groups[randomNum].zombies)
-            {
-                zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[randomNum].patrolPoint;
-                zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
-            }
-            randomPatrolTimer = 0;
+            zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[group].patrolPoint;
+            zombie.GetComponent<ZombiePatrolAI>().GenerateNewPoint();
         }
 
 
@@ -155,12 +173,32 @@ public class MLPatrol2 : Agent
         ActionSegment<int> discreteAction = actionsOut.DiscreteActions;
         discreteAction[0] = Random.Range(0, 24);
         discreteAction[1] = Random.Range(0, 24);
+        discreteAction[2] = Random.Range(0, 10);
+        discreteAction[3] = Random.Range(0, 2);
 
     }
 
     public void GainReward(float points)
     {
-        GainReward(points);
+        AddReward(points);
+    }
+
+    public void End()
+    {
+        Debug.Log("end");
+        //ResetPosition();
+
+        EndEpisode();
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= randomPatrolTime)
+        {
+            TakeAction();
+            timer = 0;
+        }
     }
 
     // Update is called once per frame
@@ -176,12 +214,5 @@ public class MLPatrol2 : Agent
         //    timer = patrolTime;
 
         //}
-
-        timer += Time.deltaTime;
-        if (timer >= patrolTime)
-        {
-            TakeAction();
-            timer = 0;
-        }
     }
 }
