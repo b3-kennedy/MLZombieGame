@@ -57,8 +57,18 @@ public class RigidbodyMovement : MonoBehaviour
     Collider normalCol;
     bool objectAbove;
 
+    [Header("Audio Settings")]
+    public float walkFootstepInterval;
+    public float sprintFootstepInterval;
+    public float crouchFootstepInterval;
+    public float crouchVolume;
+    public float normalVolume;
+    float footstepTimer;
+    PlayerAudioManager pam;
+
     private void Awake()
     {
+        pam = GetComponent<PlayerAudioManager>();
         Instance = this;
         rb = GetComponent<Rigidbody>();
     }
@@ -227,6 +237,46 @@ public class RigidbodyMovement : MonoBehaviour
 
     }
 
+
+
+    void FootstepAudio(float intervalMax)
+    {
+        Vector3 inputVec = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (inputVec != Vector3.zero)
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= intervalMax)
+            {
+                FootStepSelect();
+                footstepTimer = 0;
+            }
+        }
+    }
+
+
+    void FootStepSelect()
+    {
+        if (Physics.Raycast(groundCheckPos.position, -Vector3.up, out RaycastHit hit, 0.2f))
+        {
+            if (hit.collider.GetComponent<Material>())
+            {
+                Material mat = hit.collider.GetComponent<Material>();
+                switch (mat.matType)
+                {
+                    case Material.MaterialType.GRASS:
+                        pam.PlayFootstep(pam.grassStepsWalk);
+                        break;
+                    case Material.MaterialType.CONCRETE:
+                        pam.PlayFootstep(pam.concreteStepsWalk);
+                        break;
+                    default:
+                        pam.PlayFootstep(pam.grassStepsWalk);
+                        break;
+                }
+            }
+        }
+    }
+
     private void Move()
     {
         moveDir = orientation.forward * vertical + orientation.right * horizontal;
@@ -236,14 +286,21 @@ public class RigidbodyMovement : MonoBehaviour
             {
                 case (PlayerState.NORMAL):
                     rb.AddForce(moveDir * normalSpeed * 10, ForceMode.Force);
+                    pam.footstepSource.volume = normalVolume;
+                    FootstepAudio(walkFootstepInterval);
                     currentSpeed = normalSpeed;
+
                     break;
                 case (PlayerState.CROUCH):
                     rb.AddForce(moveDir * crouchSpeed * 10, ForceMode.Force);
+                    pam.footstepSource.volume = crouchVolume;
+                    FootstepAudio(crouchFootstepInterval);
                     currentSpeed = crouchSpeed;
                     break;
                 case (PlayerState.SPRINT):
                     rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
+                    pam.footstepSource.volume = normalVolume;
+                    FootstepAudio(sprintFootstepInterval);
                     currentSpeed = sprintSpeed;
                     break;
 

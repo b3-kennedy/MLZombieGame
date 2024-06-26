@@ -54,8 +54,10 @@ public class MouseLook : MonoBehaviour
             return;
         }
 
+
         turnVec.x += Input.GetAxisRaw("Mouse X") * sensitivity;
         turnVec.y += Input.GetAxisRaw("Mouse Y") * sensitivity;
+        turnVec.y = Mathf.Clamp(turnVec.y, -90, 90);
         cam.localRotation = Quaternion.Euler(-turnVec.y, 0, 0);
         
         orientation.rotation = Quaternion.Euler(transform.localEulerAngles.x, turnVec.x, transform.localEulerAngles.z);

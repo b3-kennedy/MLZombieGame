@@ -7,12 +7,20 @@ using Unity.MLAgents.Sensors;
 using UnityEngine.AI;
 
 
+[System.Serializable]
+public class EnforcerPatrol
+{
+    public Transform patrolPoint;
+    public GameObject enforcerZombie;
+}
+
 public class MLPatrol2 : Agent
 {
 
     public static MLPatrol2 Instance;
     public Transform[] playerSpawns;
     public List<ZombiePatrolGroup> groups;
+    public List<EnforcerPatrol> enforcerZombies;
     public LayerMask sphereLayer;
     public Transform player;
     PlayerHealth playerHealth;
@@ -37,6 +45,11 @@ public class MLPatrol2 : Agent
                 zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x,0,randomPos.z);
             }
         }
+
+        //for (int i = 0; i < enforcerZombies.Count; i++)
+        //{
+        //    enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().patrolPoint = enforcerZombies[i].patrolPoint;
+        //}
     }
 
     // Start is called before the first frame update
@@ -55,8 +68,10 @@ public class MLPatrol2 : Agent
         int randomNum = Random.Range(0, playerSpawns.Length);
         playerHealth.currentHealth = 100;
         Debug.Log(randomNum);
+        player.parent.GetComponent<PlayerAIMove>().index = Random.Range(0, player.parent.GetComponent<PlayerAIMove>().positions.Count);
         player.parent.GetComponent<NavMeshAgent>().Warp(playerSpawns[randomNum].position);
-        player.parent.GetComponent<NavMeshAgent>().SetDestination(player.parent.GetComponent<PlayerAIMove>().target.position);
+        player.parent.GetComponent<PlayerAIMove>().PickPos();
+        player.parent.GetComponent<PlayerAIMove>().OnReset();
     }
 
     public override void OnEpisodeBegin()
@@ -79,12 +94,19 @@ public class MLPatrol2 : Agent
         int posY = actions.DiscreteActions[1] * 8;
         int groupNum = actions.DiscreteActions[2];
         int boolVal = actions.DiscreteActions[3];
+        int enforcerNum = actions.DiscreteActions[4];
+        int enforcerBoolVal = actions.DiscreteActions[5];
 
-        float combinedDistance = 0;
 
         pos = new Vector2(posX, posY);
 
         List<Vector3> points = new List<Vector3>();
+
+        if(enforcerBoolVal == 1)
+        {
+            RandomEnforcerPatrol(pos, enforcerNum);
+        }
+
         if(boolVal == 1)
         {
             RandomPatrol(pos, groupNum);
@@ -151,6 +173,18 @@ public class MLPatrol2 : Agent
 
     }
 
+    void RandomEnforcerPatrol(Vector2 pos, int group)
+    {
+        enforcerZombies[group].patrolPoint.position = new Vector3(pos.x, 0, pos.y);
+
+
+        for (int i = 0; i < enforcerZombies.Count; i++)
+        {
+            enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().patrolPoint = enforcerZombies[group].patrolPoint;
+            enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().GenerateNewPoint();
+        }
+    }
+
     void RandomPatrol(Vector2 pos, int group)
     {
 
@@ -175,6 +209,8 @@ public class MLPatrol2 : Agent
         discreteAction[1] = Random.Range(0, 24);
         discreteAction[2] = Random.Range(0, 10);
         discreteAction[3] = Random.Range(0, 2);
+        discreteAction[4] = Random.Range(0, 10);
+        discreteAction[5] = Random.Range(0, 2);
 
     }
 

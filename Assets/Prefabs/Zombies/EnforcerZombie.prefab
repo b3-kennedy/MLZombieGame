@@ -868,7 +868,7 @@ MonoBehaviour:
   positionChangeInterval: 5
   destPoint: {x: 0, y: 0, z: 0}
   walkSpeed: 2.5
-  runSpeed: 3.5
+  runSpeed: 5
   maxAudioTime: 5
 --- !u!114 &8078461906859159865
 MonoBehaviour:

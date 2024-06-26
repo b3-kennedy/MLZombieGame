@@ -85,6 +85,12 @@ public class EnforcerZombieAI : MonoBehaviour
         if(Vector3.Distance(transform.position, player.position) < 1.5f)
         {
             Debug.Log("attack");
+            if (MLPatrol2.Instance != null)
+            {
+                MLPatrol2.Instance.AddReward(5f);
+            }
+            player.GetComponent<PlayerHealth>().TakeDamage(10f);
+            Destroy(gameObject);
         }
     }
 
@@ -105,7 +111,7 @@ public class EnforcerZombieAI : MonoBehaviour
         transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 2 * Time.deltaTime);
     }
 
-    void GenerateNewPoint()
+    public void GenerateNewPoint()
     {
         Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
         Vector3 newDestPoint = new Vector3(point.x, 0, point.z);

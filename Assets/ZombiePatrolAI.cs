@@ -25,6 +25,9 @@ public class ZombiePatrolAI : MonoBehaviour
     float audioTimer;
     public float normalSpeed;
     public float sprintSpeed;
+    public AudioSource alertedSource;
+    bool playAlertSound = true;
+    float alertSoundTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +112,16 @@ public class ZombiePatrolAI : MonoBehaviour
             spotTimer = 0;
         }
 
+        if (!playAlertSound)
+        {
+            alertSoundTimer += Time.deltaTime;
+            if(alertSoundTimer >= 5f)
+            {
+                playAlertSound = true;
+                alertSoundTimer = 0;
+                
+            }
+        }
 
     }
 
@@ -153,14 +166,25 @@ public class ZombiePatrolAI : MonoBehaviour
     {
         playerSpotted = true;
         playerPos = pos;
+
+
         //TestZombieBrain2.Instance.Hunt(pos);
         //MLPatrol.Instance.TakeAction();
+
         
+        if (playAlertSound)
+        {
+            alertedSource.pitch = Random.Range(0.5f, 1f);
+            alertedSource.Play();
+            playAlertSound = false;
+        }
+
 
         if (canSpawn)
         {
+
             //MLSpawn.Instance.SpawnHunter();
-            if(MLPatrol2.Instance != null)
+            if (MLPatrol2.Instance != null)
             {
                 MLPatrol2.Instance.GainReward(1f);
                 MLPatrol2.Instance.RequestAction();
@@ -168,7 +192,7 @@ public class ZombiePatrolAI : MonoBehaviour
 
             if(GameManager.Instance != null)
             {
-                GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(10f);
+                GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
             }
             
             canSpawn = false;
