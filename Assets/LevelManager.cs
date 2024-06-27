@@ -1,3 +1,4 @@
+using Assets.SimpleSpinner;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject loadScreen;
     public GameObject loadingBar;
+    public SimpleSpinner spinner;
 
     float loadingbarScale;
 
@@ -41,11 +43,12 @@ public class LevelManager : MonoBehaviour
     IEnumerator SwitchToSceneAsync(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-        while (!operation.isDone) 
+        while (!operation.isDone)
         {
             Debug.Log(operation.progress);
             var rect = loadingBar.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2((0.9f * operation.progress) * 100, rect.sizeDelta.y);
+            spinner.Spin();
             //loadingBar.GetComponent<Image>().color = new Color(operation.progress * 255, 0, 0);
             yield return null;
         }

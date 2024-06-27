@@ -318,6 +318,7 @@ public class InventoryManager : MonoBehaviour
         {
             inventory.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             OnOpenInventory();
 
         }

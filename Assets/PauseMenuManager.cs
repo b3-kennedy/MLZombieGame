@@ -29,12 +29,15 @@ public class PauseMenuManager : MonoBehaviour
         {
             Time.timeScale = 0.0001f;
             pauseCanvas.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             isPaused = true;
         }
         else
         {
             Time.timeScale = 1f;
             pauseCanvas.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
             isPaused = false;
         }
     }
@@ -48,7 +51,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         OnPause();
         Destroy(gameObject);
-        LevelManager.Instance.SwitchToScene(1);
+        LevelManager.Instance.SwitchToScene(0);
     }
 
     public void Settings()
