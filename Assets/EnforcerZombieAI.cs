@@ -13,7 +13,7 @@ public class EnforcerZombieAI : MonoBehaviour
     float timer;
     NavMeshAgent agent;
     public Vector3 destPoint;
-    Transform player;
+    [HideInInspector] public Transform player;
     Animator anim;
     public float walkSpeed;
     public float runSpeed;

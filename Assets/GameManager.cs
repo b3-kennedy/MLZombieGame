@@ -30,6 +30,19 @@ public class GameManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
+
+        if (PauseMenuManager.Instance != null)
+        {
+            if (PauseMenuManager.Instance.isPaused)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
     }
 
     public void Lose()

@@ -67,7 +67,7 @@ public class PlayerAIMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(activePositions.Count > 0)
+        if(positions.Count > 0)
         {
             if (Vector3.Distance(transform.position, positions[index].position) < 2f)
             {

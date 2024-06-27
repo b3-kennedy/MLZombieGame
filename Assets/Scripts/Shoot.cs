@@ -133,75 +133,80 @@ public class Shoot : MonoBehaviour
             return;
         }
 
-        if (!InventoryManager.Instance.inventory.activeSelf && !reload)
+        if (!PauseMenuManager.Instance.isPaused)
         {
-            if (currentAmmo > 0)
+            if (!InventoryManager.Instance.inventory.activeSelf && !reload)
             {
-                if(gunType != GunType.SHOTGUN)
+                if (currentAmmo > 0)
                 {
-                    if (shootType == ShootType.AUTO)
+                    if (gunType != GunType.SHOTGUN)
                     {
-                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        if (shootType == ShootType.AUTO)
                         {
-                            nextFire = Time.time + 1f / fireRate;
-                            Fire();
-                            recoil.RecoilFire();
+                            if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                            {
+                                nextFire = Time.time + 1f / fireRate;
+                                Fire();
+                                recoil.RecoilFire();
+                            }
+                            else if (Input.GetButtonUp("Fire1"))
+                            {
+                                anim.SetBool("shoot", false);
+                            }
                         }
-                        else if (Input.GetButtonUp("Fire1"))
+                        else if (shootType == ShootType.SINGLE)
                         {
-                            anim.SetBool("shoot", false);
+                            if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                            {
+                                nextFire = Time.time + 1f / fireRate;
+                                Fire();
+                                recoil.RecoilFire();
+                            }
                         }
                     }
-                    else if (shootType == ShootType.SINGLE)
+                    else
                     {
-                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        if (shootType == ShootType.AUTO)
                         {
-                            nextFire = Time.time + 1f / fireRate;
-                            Fire();
-                            recoil.RecoilFire();
+                            if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                            {
+                                nextFire = Time.time + 1f / fireRate;
+                                FireShotgun();
+                                recoil.RecoilFire();
+                                shotgunHits.Clear();
+                            }
+                            else if (Input.GetButtonUp("Fire1"))
+                            {
+                                anim.SetBool("shoot", false);
+                            }
                         }
+                        else if (shootType == ShootType.SINGLE)
+                        {
+                            if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                            {
+                                nextFire = Time.time + 1f / fireRate;
+                                FireShotgun();
+                                recoil.RecoilFire();
+                                shotgunHits.Clear();
+                            }
+                        }
+
                     }
+
+
                 }
                 else
                 {
-                    if (shootType == ShootType.AUTO)
+                    if (Input.GetButtonDown("Fire1"))
                     {
-                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
-                        {
-                            nextFire = Time.time + 1f / fireRate;
-                            FireShotgun();
-                            recoil.RecoilFire();
-                            shotgunHits.Clear();
-                        }
-                        else if (Input.GetButtonUp("Fire1"))
-                        {
-                            anim.SetBool("shoot", false);
-                        }
+                        AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
                     }
-                    else if (shootType == ShootType.SINGLE)
-                    {
-                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
-                        {
-                            nextFire = Time.time + 1f / fireRate;
-                            FireShotgun();
-                            recoil.RecoilFire();
-                            shotgunHits.Clear();
-                        }
-                    }
-                    
+                    anim.SetBool("shoot", false);
                 }
-
-                
-            }
-            else
-            {
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
-                }
-                anim.SetBool("shoot", false);
             }
         }
+
+
 
         if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.ASSAULT_RIFLE && ammoHolder.arMags > 0)
         {

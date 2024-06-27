@@ -32,19 +32,26 @@ public class MLPatrol2 : Agent
 
     Vector2 pos;
 
+    public List<Vector3> scoutZombieStartingPatrolPos;
+    public List<Vector3> enforcerZombieStartingPatrolPos;
+
 
     private void Awake()
     {
         Instance = this;
+
         for (int i = 0; i < groups.Count; i++)
         {
             foreach (var zombie in groups[i].zombies)
             {
                 zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[i].patrolPoint;
                 Vector3 randomPos = Random.insideUnitSphere * 75;
-                zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x,0,randomPos.z);
+                zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x, 0, randomPos.z);
             }
         }
+        //ResetZombiePositions();
+
+
 
         //for (int i = 0; i < enforcerZombies.Count; i++)
         //{
@@ -52,10 +59,46 @@ public class MLPatrol2 : Agent
         //}
     }
 
+    void ResetZombiePositions()
+    {
+        for (int i = 0; i < groups.Count; i++)
+        {
+            groups[i].patrolPoint.position = scoutZombieStartingPatrolPos[i];
+            foreach (var zombie in groups[i].zombies)
+            {
+                zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[i].patrolPoint;
+                Vector3 randomPos = Random.insideUnitSphere * 75;
+                zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x, 0, randomPos.z);
+                zombie.GetComponent<NavMeshAgent>().ResetPath();
+            }
+            
+        }
+
+        for (int i = 0;i < enforcerZombies.Count; i++)
+        {
+            enforcerZombies[i].patrolPoint.position = enforcerZombieStartingPatrolPos[i];
+            enforcerZombies[i].enforcerZombie.transform.position = enforcerZombieStartingPatrolPos[i];
+            enforcerZombies[i].enforcerZombie.GetComponent<NavMeshAgent>().ResetPath();
+        }
+
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         playerHealth = player.parent.GetComponent<PlayerHealth>();
+        foreach (var patrol in groups)
+        {
+            scoutZombieStartingPatrolPos.Add(patrol.patrolPoint.position);
+        }
+
+        foreach (var enforcer in enforcerZombies)
+        {
+            enforcerZombieStartingPatrolPos.Add(enforcer.patrolPoint.position);
+        }
+
+        ResetZombiePositions();
     }
 
     public void TakeAction()
@@ -68,10 +111,14 @@ public class MLPatrol2 : Agent
         int randomNum = Random.Range(0, playerSpawns.Length);
         playerHealth.currentHealth = 100;
         Debug.Log(randomNum);
+
+        ResetZombiePositions();
+
         player.parent.GetComponent<PlayerAIMove>().index = Random.Range(0, player.parent.GetComponent<PlayerAIMove>().positions.Count);
         player.parent.GetComponent<NavMeshAgent>().Warp(playerSpawns[randomNum].position);
-        player.parent.GetComponent<PlayerAIMove>().PickPos();
+        
         player.parent.GetComponent<PlayerAIMove>().OnReset();
+        player.parent.GetComponent<PlayerAIMove>().PickPos();
     }
 
     public override void OnEpisodeBegin()

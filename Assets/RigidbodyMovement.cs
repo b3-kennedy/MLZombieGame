@@ -298,6 +298,7 @@ public class RigidbodyMovement : MonoBehaviour
                     currentSpeed = crouchSpeed;
                     break;
                 case (PlayerState.SPRINT):
+                    UnAim();
                     rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
                     pam.footstepSource.volume = normalVolume;
                     FootstepAudio(sprintFootstepInterval);
@@ -312,6 +313,16 @@ public class RigidbodyMovement : MonoBehaviour
         }
 
        
+    }
+
+    void UnAim()
+    {
+        ADS adsScript;
+        if (GetComponent<PickUpWeapons>().weaponPos.childCount > 0)
+        {
+            adsScript = GetComponent<PickUpWeapons>().weaponPos.GetChild(0).GetChild(0).GetComponent<ADS>();
+            adsScript.isAiming = false;
+        }
     }
 
     void SpeedControl()
