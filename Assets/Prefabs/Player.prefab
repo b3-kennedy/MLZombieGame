@@ -839,6 +839,7 @@ MonoBehaviour:
   weaponPos: {fileID: 0}
   throwPoint: {fileID: 0}
   throwForce: 10
+  openBox: {fileID: 8300000, guid: 14ad445bb0e8d564a9b94a642c659ecf, type: 3}
 --- !u!114 &2416271409863669464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,8 +951,8 @@ MonoBehaviour:
   walkFootstepInterval: 0.5
   sprintFootstepInterval: 0.3
   crouchFootstepInterval: 0.7
-  crouchVolume: 0.15
-  normalVolume: 0.5
+  crouchVolume: 0.05
+  normalVolume: 0.25
 --- !u!136 &3829760389937721574
 CapsuleCollider:
   m_ObjectHideFlags: 0

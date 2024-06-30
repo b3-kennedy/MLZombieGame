@@ -124,15 +124,8 @@ public class Shoot : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void WithPauseMenu()
     {
-
-        if(GameManager.Instance != null && GameManager.Instance.gameOver)
-        {
-            return;
-        }
-
         if (!PauseMenuManager.Instance.isPaused)
         {
             if (!InventoryManager.Instance.inventory.activeSelf && !reload)
@@ -205,6 +198,100 @@ public class Shoot : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    void WithoutPauseMenu()
+    {
+        if (!InventoryManager.Instance.inventory.activeSelf && !reload)
+        {
+            if (currentAmmo > 0)
+            {
+                if (gunType != GunType.SHOTGUN)
+                {
+                    if (shootType == ShootType.AUTO)
+                    {
+                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            Fire();
+                            recoil.RecoilFire();
+                        }
+                        else if (Input.GetButtonUp("Fire1"))
+                        {
+                            anim.SetBool("shoot", false);
+                        }
+                    }
+                    else if (shootType == ShootType.SINGLE)
+                    {
+                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            Fire();
+                            recoil.RecoilFire();
+                        }
+                    }
+                }
+                else
+                {
+                    if (shootType == ShootType.AUTO)
+                    {
+                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            FireShotgun();
+                            recoil.RecoilFire();
+                            shotgunHits.Clear();
+                        }
+                        else if (Input.GetButtonUp("Fire1"))
+                        {
+                            anim.SetBool("shoot", false);
+                        }
+                    }
+                    else if (shootType == ShootType.SINGLE)
+                    {
+                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        {
+                            nextFire = Time.time + 1f / fireRate;
+                            FireShotgun();
+                            recoil.RecoilFire();
+                            shotgunHits.Clear();
+                        }
+                    }
+
+                }
+
+
+            }
+            else
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    AudioSource.PlayClipAtPoint(emptySound, audioSpawn.position);
+                }
+                anim.SetBool("shoot", false);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if(GameManager.Instance != null && GameManager.Instance.gameOver)
+        {
+            return;
+        }
+
+        if(PauseMenuManager.Instance != null)
+        {
+            WithPauseMenu();
+        }
+        else
+        {
+            WithoutPauseMenu();
+        }
+       
 
 
 

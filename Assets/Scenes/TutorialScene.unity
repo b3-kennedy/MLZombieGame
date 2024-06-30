@@ -4078,6 +4078,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnforcerZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 1297729422764105343, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.653606
@@ -16435,6 +16439,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615120192}
     m_Modifications:
+    - target: {fileID: 50825658189920943, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: openBox
+      value: 
+      objectReference: {fileID: 8300000, guid: 14ad445bb0e8d564a9b94a642c659ecf, type: 3}
     - target: {fileID: 50825658189920943, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
       propertyPath: weaponPos
       value: 

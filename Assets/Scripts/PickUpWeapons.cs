@@ -12,6 +12,7 @@ public class PickUpWeapons : MonoBehaviour
     ThrowableSlot throwableSlot;
     public Transform throwPoint;
     public float throwForce = 10;
+    public AudioClip openBox;
 
     private void Start()
     {
@@ -74,10 +75,12 @@ public class PickUpWeapons : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                    AudioSource.PlayClipAtPoint(openBox, hit.collider.transform.position);
                     hit.collider.GetComponent<LootBox>().Open();
                 }
                 HUDManager.Instance.UpdateInteractPrompt("Press 'F' to open");
                 HUDManager.Instance.ShowInteractPrompt();
+                
 
             }
             else if (hit.collider.CompareTag("Throwable"))
