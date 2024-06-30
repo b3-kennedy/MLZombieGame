@@ -3566,13 +3566,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2925305079085432503, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
+      propertyPath: m_Volume
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3440254437268310939, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: m_Name
       value: ScoutZombie (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7247807624722643777, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: radius
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7247807624722643777, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
       propertyPath: patrolPoint
@@ -4062,6 +4066,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579966428}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &589894447
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1297729422764105343, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_Name
+      value: EnforcerZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.653606
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.680786
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822170748909585605, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763142573035790092, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322160252149605191, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
+      propertyPath: patrolPoint
+      value: 
+      objectReference: {fileID: 2012470135}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
 --- !u!1 &590584774
 GameObject:
   m_ObjectHideFlags: 0
@@ -6944,7 +7013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba03c4582457404ea11ac5723125eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matType: 0
+  matType: 1
 --- !u!1 &873235413
 GameObject:
   m_ObjectHideFlags: 0
@@ -18581,3 +18650,4 @@ SceneRoots:
   - {fileID: 461479213}
   - {fileID: 82496816}
   - {fileID: 519049563}
+  - {fileID: 589894447}
