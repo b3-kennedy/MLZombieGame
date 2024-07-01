@@ -218,8 +218,11 @@ public class ZombiePatrolAI : MonoBehaviour
 
         if (canSpawn)
         {
-
-            //MLSpawn.Instance.SpawnHunter();
+            if(MLSpawn.Instance != null)
+            {
+                MLSpawn.Instance.SpawnHunter();
+            }
+            
             if (MLPatrol2.Instance != null)
             {
                 MLPatrol2.Instance.GainReward(1f);

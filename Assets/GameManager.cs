@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject loseScreen;
     public GameObject player;
     public bool gameOver;
+    public bool hasRedKey;
+    public bool hasGreenKey;
+    public bool hasBlueKey;
 
     private void Awake()
     {

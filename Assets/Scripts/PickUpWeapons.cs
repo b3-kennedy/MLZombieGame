@@ -93,6 +93,53 @@ public class PickUpWeapons : MonoBehaviour
                 HUDManager.Instance.ShowInteractPrompt();
 
             }
+            else if (hit.collider.CompareTag("RedKey"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GameManager.Instance.hasRedKey = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up red key");
+                HUDManager.Instance.ShowInteractPrompt();
+            }
+            else if (hit.collider.CompareTag("BlueKey"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GameManager.Instance.hasBlueKey = true;
+                    Destroy(hit.collider.gameObject);
+                }
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up blue key");
+                HUDManager.Instance.ShowInteractPrompt();
+            }
+            else if (hit.collider.CompareTag("GreenKey"))
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GameManager.Instance.hasGreenKey = true;
+                    Destroy (hit.collider.gameObject);
+                }
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up green key");
+                HUDManager.Instance.ShowInteractPrompt();
+            }
+            else if (hit.collider.CompareTag("KeyWall"))
+            {
+                if(GameManager.Instance.hasRedKey && GameManager.Instance.hasBlueKey && GameManager.Instance.hasGreenKey)
+                {
+                    HUDManager.Instance.UpdateInteractPrompt("Press 'F' to open door");
+                    HUDManager.Instance.ShowInteractPrompt();
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        hit.collider.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    HUDManager.Instance.UpdateInteractPrompt("Find all keys to open door");
+                    HUDManager.Instance.ShowInteractPrompt();
+                }
+            }
             else
             {
                 HUDManager.Instance.HideInteractPrompt();
@@ -145,6 +192,10 @@ public class PickUpWeapons : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.G) && throwableSlot.item != null)
         {
             GameObject throwableItem = Instantiate(throwableSlot.item, throwPoint.position, Quaternion.identity);
+            if (throwableItem.GetComponent<SmokeGrenade>())
+            {
+                throwableItem.GetComponent<SmokeGrenade>().isActive = true;
+            }
             if (throwableItem.GetComponent<Rotate>())
             {
                 throwableItem.GetComponent<Rotate>().enabled = true;

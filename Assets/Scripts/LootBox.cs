@@ -24,13 +24,14 @@ public class LootList
     public List<Loot> gunList;
     public List<Loot> ammoList;
     public List<Loot> attachmentList;
+    public List<Loot> otherList;
 }
 
 [System.Serializable]
 public class ItemChance
 {
     public string itemName;
-    public enum ItemType {GUN, AMMO, ATTACHMENT};
+    public enum ItemType {GUN, AMMO, ATTACHMENT, OTHER};
     public ItemType type;
     public int chance;
 }
@@ -52,6 +53,20 @@ public class LootBox : MonoBehaviour
     void Update()
     {
         
+    }
+
+    Loot AddOther()
+    {
+        int randomNum = Random.Range(1, 101);
+        List<Loot> randomList = ListShuffle.Execute(loot.otherList);
+        foreach (var item in randomList)
+        {
+            if (randomNum <= item.dropChance)
+            {
+                return item;
+            }
+        }
+        return AddOther();
     }
 
     Loot AddGun()
@@ -114,6 +129,10 @@ public class LootBox : MonoBehaviour
                 else if (item.type == ItemChance.ItemType.ATTACHMENT && items.Count < numberOfItems)
                 {
                     items.Add(AddAttachment());
+                }
+                else if (item.type == ItemChance.ItemType.OTHER && items.Count < numberOfItems)
+                {
+                    items.Add(AddOther());
                 }
             }
         }

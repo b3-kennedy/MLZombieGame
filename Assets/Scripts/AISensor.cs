@@ -16,6 +16,7 @@ public class AISensor : MonoBehaviour
     public int scanFrequency;
     public LayerMask layers;
     public LayerMask occlusionLayers;
+    bool isInSmoke;
 
     public List<GameObject> objects = new List<GameObject>();
 
@@ -47,42 +48,45 @@ public class AISensor : MonoBehaviour
 
     void Scan()
     {
-        count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers, QueryTriggerInteraction.Collide);
-
-        objects.Clear();
-        for (int i = 0; i < count; i++)
+        if (!isInSmoke)
         {
-            GameObject obj = colliders[i].gameObject;
-            if (IsInSight(obj))
-            {
-                objects.Add(obj);
-                if (GetComponent<ZombiePatrolAI>())
-                {
-                    GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
-                    if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
-                    {
-                        obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
-                    }
-                    //if(MLPatrol2.Instance != null)
-                    //{
-                    //    MLPatrol2.Instance.TakeAction();
-                    //}
-                }
-                else if (GetComponent<EnforcerZombieAI>())
-                {
-                    GetComponent<EnforcerZombieAI>().SpottedPlayer(obj.transform);
-                }
-                
-            }
+            count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers, QueryTriggerInteraction.Collide);
 
-            if (!IsInSight(obj))
+            objects.Clear();
+            for (int i = 0; i < count; i++)
             {
-                if (GetComponent<ZombiePatrolAI>())
+                GameObject obj = colliders[i].gameObject;
+                if (IsInSight(obj))
                 {
-                    GetComponent<ZombiePatrolAI>().playerSpotted = false;
-                    if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
+                    objects.Add(obj);
+                    if (GetComponent<ZombiePatrolAI>())
                     {
-                        obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(false);
+                        GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
+                        if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
+                        {
+                            obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
+                        }
+                        //if(MLPatrol2.Instance != null)
+                        //{
+                        //    MLPatrol2.Instance.TakeAction();
+                        //}
+                    }
+                    else if (GetComponent<EnforcerZombieAI>())
+                    {
+                        GetComponent<EnforcerZombieAI>().SpottedPlayer(obj.transform);
+                    }
+
+                }
+
+                if (!IsInSight(obj))
+                {
+                    if (GetComponent<ZombiePatrolAI>())
+                    {
+                        GetComponent<ZombiePatrolAI>().playerSpotted = false;
+                        if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
+                        {
+                            obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(false);
+                        }
                     }
                 }
             }
@@ -90,10 +94,34 @@ public class AISensor : MonoBehaviour
 
 
 
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("smoke"))
+        {
+            isInSmoke = true;
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("smoke"))
+        {
+            isInSmoke = false;
+        }
     }
 
     public bool IsInSight(GameObject obj)
     {
+
+        if (isInSmoke)
+        {
+            return false;
+        }
+
         Vector3 origin = transform.position;
         Vector3 dest = obj.transform.position;
         Vector3 dir = dest - origin;

@@ -218,10 +218,13 @@ public class InventoryManager : MonoBehaviour
 
     public void EquipThrowable(GameObject ui)
     {
+        if(throwableSlot.GetComponent<ThrowableSlot>().item == null)
+        {
+            Destroy(ui);
+            throwableSlot.color = Color.green;
+            throwableSlot.GetComponent<ThrowableSlot>().item = ui.GetComponent<BottleItem>().bottle;
+        }
 
-        Destroy(ui);
-        throwableSlot.color = Color.green;
-        throwableSlot.GetComponent<ThrowableSlot>().item = ui.GetComponent<BottleItem>().bottle;
     }
 
     public void OnPickUpItem(GameObject attachment, GameObject currentActiveGun)

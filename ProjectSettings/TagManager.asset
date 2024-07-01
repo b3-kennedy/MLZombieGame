@@ -13,6 +13,11 @@ TagManager:
   - Body
   - LootBox
   - Throwable
+  - KeyWall
+  - RedKey
+  - BlueKey
+  - GreenKey
+  - smoke
   layers:
   - Default
   - TransparentFX

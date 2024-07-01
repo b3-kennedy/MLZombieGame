@@ -200,16 +200,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8f31dad714b6256419c21ef13db47900, type: 2}
     - {fileID: 11400000, guid: 4a959af8de02b23409448753c9aa9cfa, type: 2}
     - {fileID: 11400000, guid: c58c8d3c24e939f49ae0a9c7848f31d7, type: 2}
+    - {fileID: 11400000, guid: 9a6f7cd098ff74443aff7ea0152ea061, type: 2}
     ammoList:
     - {fileID: 11400000, guid: 5d7217100e9fd1b448b62eb2efe66b78, type: 2}
     - {fileID: 11400000, guid: b9243bcdb5519004ea9aa4070b6e9a90, type: 2}
     - {fileID: 11400000, guid: f2c8895997f0b7541b6e11f7da330716, type: 2}
     - {fileID: 11400000, guid: 53f1ca3d139da9b47ab2c430f9d7b554, type: 2}
+    - {fileID: 11400000, guid: c710a4397b4f71546984f6dc19d486c8, type: 2}
     attachmentList:
     - {fileID: 11400000, guid: add3ec33a7e4560448e65a503737b4f7, type: 2}
     - {fileID: 11400000, guid: 6f984579a36e56540908eb94134ca7cb, type: 2}
     - {fileID: 11400000, guid: 9e889bc0571779e4b9e993c52fec7cdc, type: 2}
     - {fileID: 11400000, guid: 26c93ed8e26933f449826b64407e40f3, type: 2}
+    otherList:
+    - {fileID: 11400000, guid: 02819fff9f06326439149be1d10fab07, type: 2}
   chances:
   - itemName: Gun
     type: 0
@@ -220,7 +224,10 @@ MonoBehaviour:
   - itemName: Attachment
     type: 2
     chance: 30
-  numberOfItems: 3
+  - itemName: Other
+    type: 3
+    chance: 30
+  numberOfItems: 5
   items: []
 --- !u!65 &1320451472473504949
 BoxCollider:

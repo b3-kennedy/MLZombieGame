@@ -39,44 +39,44 @@ public class MLSpawn : Agent
         
     }
 
-    public override void OnEpisodeBegin()
-    {
-        if (player != null)
-        {
+    //public override void OnEpisodeBegin()
+    //{
+    //    if (player != null)
+    //    {
             
-            //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
-            //threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position) / 2);
-        }
+    //        //player.transform.position = new Vector3(Random.Range(0, 200), 0, Random.Range(0, 200));
+    //        //threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position) / 2);
+    //    }
 
-        //TakeAction();
-    }
+    //    //TakeAction();
+    //}
 
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        sensor.AddObservation(threatValue);
-    }
+    //public override void CollectObservations(VectorSensor sensor)
+    //{
+    //    sensor.AddObservation(threatValue);
+    //}
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (player != null)
-        {
-            threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position)/ 315.5935f) * 100;
-        }
+    //void FixedUpdate()
+    //{
+    //    if (player != null)
+    //    {
+    //        threatValue = 100 - (Vector3.Distance(brainPos.position, player.transform.position)/ 315.5935f) * 100;
+    //    }
         
 
-        if(threatValue < minThreat)
-        {
-            threatState = ThreatState.MIN;
-        }
-        else if(threatValue < minThreat)
-        {
-            threatState = ThreatState.MAX;
-        }
+    //    if(threatValue < minThreat)
+    //    {
+    //        threatState = ThreatState.MIN;
+    //    }
+    //    else if(threatValue < minThreat)
+    //    {
+    //        threatState = ThreatState.MAX;
+    //    }
 
-        RequestDecision();
+    //    RequestDecision();
 
-    }
+    //}
 
     public void SpawnHunter()
     {
@@ -90,49 +90,49 @@ public class MLSpawn : Agent
         
     }
 
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        int action = actions.DiscreteActions[0];
+    //public override void OnActionReceived(ActionBuffers actions)
+    //{
+    //    int action = actions.DiscreteActions[0];
 
-        Spawn(action);
-    }
+    //    Spawn(action);
+    //}
 
-    void Spawn(int action)
-    {
+    //void Spawn(int action)
+    //{
 
-        //Debug.Log(action);
-        if (action == 0)
-        {
-            if(threatState == ThreatState.MIN)
-            {
-                AddReward(1);
-            }
-            else
-            {
-                AddReward(-0.01f);
-            }
-            //Debug.Log("spawn patrol");
-        }
-        else if(action == 1)
-        {
+    //    //Debug.Log(action);
+    //    if (action == 0)
+    //    {
+    //        if(threatState == ThreatState.MIN)
+    //        {
+    //            AddReward(1);
+    //        }
+    //        else
+    //        {
+    //            AddReward(-0.01f);
+    //        }
+    //        //Debug.Log("spawn patrol");
+    //    }
+    //    else if(action == 1)
+    //    {
             
-            if (threatState == ThreatState.MAX)
-            {
-                AddReward(1);
-            }
-            else
-            {
-                AddReward(-0.01f);
-            }
-            //Debug.Log("spawn enforcer");
-        }
-        End();
-    }
+    //        if (threatState == ThreatState.MAX)
+    //        {
+    //            AddReward(1);
+    //        }
+    //        else
+    //        {
+    //            AddReward(-0.01f);
+    //        }
+    //        //Debug.Log("spawn enforcer");
+    //    }
+    //    End();
+    //}
 
-    public void End()
-    {
-        EndEpisode();
-    }
+    //public void End()
+    //{
+    //    EndEpisode();
+    //}
 
 
 }

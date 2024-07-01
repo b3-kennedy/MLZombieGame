@@ -42,7 +42,6 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         if (Physics.Raycast(groundCheck.position, -Vector3.up, out RaycastHit hit, 1f))
         {
-            Debug.Log("hit");
             if (hit.collider.GetComponent<Material>())
             {
                 

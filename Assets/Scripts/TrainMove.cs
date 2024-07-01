@@ -27,7 +27,7 @@ public class TrainMove : MonoBehaviour
     {
         if(Vector3.Distance(brainPos.position, transform.position) < 1)
         {
-            MLSpawn.Instance.End();
+            //MLSpawn.Instance.End();
         }
     }
 }
