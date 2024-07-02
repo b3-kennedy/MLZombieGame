@@ -126,7 +126,7 @@ public class EnforcerZombieAI : MonoBehaviour
             Debug.Log("attack");
             if (MLPatrol2.Instance != null)
             {
-                MLPatrol2.Instance.AddReward(5f);
+                MLPatrol2.Instance.AddReward(1f);
             }
             if(player != null && player.GetComponent<PlayerHealth>())
             {

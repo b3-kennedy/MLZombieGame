@@ -7,6 +7,11 @@ public class PlayerHealth : MonoBehaviour
 
     public float maxHealth;
     public float currentHealth;
+    public float timeToRegen;
+    public float regenerationRate;
+    float regenTimer;
+    bool hasTakenDamage;
+    bool canRegen;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +22,24 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (hasTakenDamage)
+        {
+            regenTimer += Time.deltaTime;
+            if(regenTimer >= timeToRegen)
+            {
+                canRegen = true;
+                hasTakenDamage = false;
+            }
+        }
+
+        if (canRegen && currentHealth < maxHealth)
+        {
+            currentHealth += Time.deltaTime * regenerationRate;
+        }
+        else
+        {
+            canRegen = false;
+        }
     }
 
     public void TakeDamage(float dmg)
@@ -34,6 +56,9 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             currentHealth -= dmg;
+            hasTakenDamage = true;
+            canRegen = false;
         }
+        
     }
 }

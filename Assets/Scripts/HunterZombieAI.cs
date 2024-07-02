@@ -81,7 +81,8 @@ public class HunterZombieAI : MonoBehaviour
             audioManager.footstepSource.volume = 1f;
             if(Vector3.Distance(playerPos.position, transform.position) < 1.3f && !attacked)
             {
-                playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+                
+                anim.SetBool("attack", true);
                 attacked = true;
             }
 
@@ -95,5 +96,10 @@ public class HunterZombieAI : MonoBehaviour
                 audioManager.footstepSource.volume = 0.5f;
             }
         }
+    }
+
+    public void DealDamage()
+    {
+        playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
     }
 }

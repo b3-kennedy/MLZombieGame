@@ -225,7 +225,7 @@ public class ZombiePatrolAI : MonoBehaviour
             
             if (MLPatrol2.Instance != null)
             {
-                MLPatrol2.Instance.GainReward(1f);
+                MLPatrol2.Instance.GainReward(0.5f);
                 MLPatrol2.Instance.RequestAction();
             }
 

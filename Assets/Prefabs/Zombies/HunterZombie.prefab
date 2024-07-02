@@ -2532,10 +2532,10 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   home: {fileID: 0}
   targetDecayTime: 60
-  runSpeed: 5
+  runSpeed: 7
   walkSpeed: 3.5
   attackRate: 1
-  damage: 20
+  damage: 10
   groundCheck: {fileID: 3669139064918373862}
 --- !u!114 &7860596225667715997
 MonoBehaviour:
