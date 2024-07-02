@@ -13,6 +13,19 @@ public class PlayerHealth : MonoBehaviour
     bool hasTakenDamage;
     bool canRegen;
 
+    [Range(0.0f, 1.0f)]
+    public float vignetteMultiplier;
+
+    public AnimationCurve vignettePulse;
+
+    [Range(0.0f, 0.1f)]
+    public float vigPulseMultiplier;
+    float baseVigValue;
+    float vigTimer;
+    float newVigVal;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +52,22 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             canRegen = false;
+        }
+
+        if(PostProcessingManager.Instance != null)
+        {
+            baseVigValue = ((maxHealth - currentHealth) / 100) * vignetteMultiplier;
+            if(baseVigValue > 0)
+            {
+                vigTimer += Time.deltaTime;
+                newVigVal = baseVigValue + (vignettePulse.Evaluate(vigTimer) * vigPulseMultiplier);
+            }
+            if (vigTimer >= 1)
+            {
+                vigTimer = 0;
+                newVigVal = baseVigValue;
+            }
+            PostProcessingManager.Instance.vignette.intensity.value = newVigVal;
         }
     }
 

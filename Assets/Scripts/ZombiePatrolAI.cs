@@ -33,6 +33,8 @@ public class ZombiePatrolAI : MonoBehaviour
     public float walkingVolume = 0.25f;
     public float runningVolume = 0.5f;
     public Transform groundCheck;
+    GameObject mlIdentifier;
+    float mlIdentifierTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -159,6 +161,16 @@ public class ZombiePatrolAI : MonoBehaviour
             }
         }
 
+        if (playerSpotted)
+        {
+            mlIdentifierTimer += Time.deltaTime;
+            if(mlIdentifierTimer >= 5f)
+            {
+                mlIdentifier.SetActive(false);
+                mlIdentifierTimer = 0;
+            }
+        }
+
     }
 
     void LookAtPoint(Vector3 pos)
@@ -198,10 +210,10 @@ public class ZombiePatrolAI : MonoBehaviour
         audioHeard = true;
     }
 
-    public void AlertBrain(Transform pos)
+    public void AlertBrain(GameObject obj)
     {
         playerSpotted = true;
-        playerPos = pos;
+        playerPos = obj.transform;
 
 
         //TestZombieBrain2.Instance.Hunt(pos);
@@ -212,6 +224,11 @@ public class ZombiePatrolAI : MonoBehaviour
         {
             alertedSource.pitch = Random.Range(0.5f, 1f);
             alertedSource.Play();
+            if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
+            {
+                obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
+                mlIdentifier = obj.GetComponent<RigidbodyMovement>().mlIdentifier;
+            }
             playAlertSound = false;
         }
 

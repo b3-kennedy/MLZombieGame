@@ -61,11 +61,7 @@ public class AISensor : MonoBehaviour
                     objects.Add(obj);
                     if (GetComponent<ZombiePatrolAI>())
                     {
-                        GetComponent<ZombiePatrolAI>().AlertBrain(obj.transform);
-                        if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
-                        {
-                            obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(true);
-                        }
+                        GetComponent<ZombiePatrolAI>().AlertBrain(obj);
                         //if(MLPatrol2.Instance != null)
                         //{
                         //    MLPatrol2.Instance.TakeAction();
@@ -78,17 +74,17 @@ public class AISensor : MonoBehaviour
 
                 }
 
-                if (!IsInSight(obj))
-                {
-                    if (GetComponent<ZombiePatrolAI>())
-                    {
-                        GetComponent<ZombiePatrolAI>().playerSpotted = false;
-                        if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
-                        {
-                            obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(false);
-                        }
-                    }
-                }
+                //if (!IsInSight(obj))
+                //{
+                //    if (GetComponent<ZombiePatrolAI>())
+                //    {
+                //        GetComponent<ZombiePatrolAI>().playerSpotted = false;
+                //        if (obj.GetComponent<RigidbodyMovement>() && obj.GetComponent<RigidbodyMovement>().mlIdentifier != null)
+                //        {
+                //            obj.GetComponent<RigidbodyMovement>().mlIdentifier.SetActive(false);
+                //        }
+                //    }
+                //}
             }
         }
 
