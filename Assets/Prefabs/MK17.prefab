@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachmentUI: {fileID: 411028760406493008, guid: 2d8aa234cc2b18348a4925d83ab6d698, type: 3}
   M4position: {x: 0, y: -0.0055, z: 0}
+  scorpionPosition: {x: 0, y: -0.0055, z: 0}
 --- !u!1 &2074499287685107545
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,8 @@ public class PlayerAIMove : MonoBehaviour
     public Transform key2;
     public Transform key3;
 
-
+    public GameObject mlIdentifier;
+    float mlIdentifierTimer;
     private void Awake()
     {
         activePositions = positions;
@@ -89,7 +90,19 @@ public class PlayerAIMove : MonoBehaviour
             }
         }
 
+        if (mlIdentifier.activeSelf)
+        {
+            mlIdentifierTimer += Time.deltaTime;
+            if (mlIdentifierTimer >= 5f)
+            {
+                if (mlIdentifier != null)
+                {
+                    mlIdentifier.SetActive(false);
+                }
 
+                mlIdentifierTimer = 0;
+            }
+        }
 
     }
 }

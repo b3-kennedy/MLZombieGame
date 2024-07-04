@@ -6,6 +6,7 @@ public class SightAttachment : Attachment
 {
 
     public Vector3 M4position;
+    public Vector3 scorpionPosition;
 
 
 

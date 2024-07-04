@@ -8,7 +8,7 @@ public class PickUpWeapons : MonoBehaviour
 
     public Transform weaponPos;
     List<GameObject> guns = new List<GameObject>();
-    GameObject currentActiveGun;
+    [HideInInspector] public GameObject currentActiveGun;
     ThrowableSlot throwableSlot;
     public Transform throwPoint;
     public float throwForce = 10;

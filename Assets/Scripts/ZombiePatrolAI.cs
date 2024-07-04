@@ -161,15 +161,6 @@ public class ZombiePatrolAI : MonoBehaviour
             }
         }
 
-        if (playerSpotted)
-        {
-            mlIdentifierTimer += Time.deltaTime;
-            if(mlIdentifierTimer >= 5f)
-            {
-                mlIdentifier.SetActive(false);
-                mlIdentifierTimer = 0;
-            }
-        }
 
     }
 

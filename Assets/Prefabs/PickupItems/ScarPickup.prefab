@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunObject: {fileID: 2207874534432571295, guid: 0de1529265b0e654ba6e3242f9adf834, type: 3}
-  currentAmmo: 15
+  currentAmmo: 20
 --- !u!65 &2042926392284004922
 BoxCollider:
   m_ObjectHideFlags: 0

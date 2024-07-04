@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,16 @@ public class RigidbodyMovement : MonoBehaviour
     public float audioRange = 5f;
     public LayerMask zombieLayer;
 
+    [Header("Sprint Settings")]
+    public AudioSource sprintAudioSource;
+    public float maxSprintTime = 5f;
+    public float sprintRecoveryTime;
+    public float sprintTimer;
+    public float recoveryTimer;
+    bool canSprint = true;
+    bool isSprinting;
+
+
     [Header("Lean Settings")]
     public float leanAmount;
     public Transform hip;
@@ -65,6 +76,9 @@ public class RigidbodyMovement : MonoBehaviour
     public float normalVolume;
     float footstepTimer;
     PlayerAudioManager pam;
+
+
+    float mlIdentifierTimer;
 
     private void Awake()
     {
@@ -136,13 +150,14 @@ public class RigidbodyMovement : MonoBehaviour
         Lean();
         CheckAudioRange(transform.position);
 
-        if (Input.GetKey(KeyCode.LeftShift) && !objectAbove)
+        if (Input.GetKey(KeyCode.LeftShift) && !objectAbove && canSprint)
         {
             playerState = PlayerState.SPRINT;
             ForceUncrouch();
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) && !objectAbove)
         {
+            isSprinting = false;
             playerState = PlayerState.NORMAL;
         }
 
@@ -153,6 +168,39 @@ public class RigidbodyMovement : MonoBehaviour
         else
         {
             rb.drag = 0;
+        }
+
+        if (mlIdentifier.activeSelf)
+        {
+            mlIdentifierTimer += Time.deltaTime;
+            if (mlIdentifierTimer >= 5f)
+            {
+                if (mlIdentifier != null)
+                {
+                    mlIdentifier.SetActive(false);
+                }
+
+                mlIdentifierTimer = 0;
+            }
+        }
+
+        if (!canSprint)
+        {
+            recoveryTimer += Time.deltaTime;
+            if (recoveryTimer >= sprintRecoveryTime)
+            {
+                recoveryTimer = 0;
+                canSprint = true;
+            }
+        }
+
+        if(!isSprinting && sprintTimer > 0)
+        {
+            if(sprintTimer > 0)
+            {
+                sprintTimer -= Time.deltaTime;
+            }
+            
         }
     }
 
@@ -299,6 +347,7 @@ public class RigidbodyMovement : MonoBehaviour
                     break;
                 case (PlayerState.SPRINT):
                     UnAim();
+                    Sprint();
                     rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
                     pam.footstepSource.volume = normalVolume;
                     FootstepAudio(sprintFootstepInterval);
@@ -312,7 +361,29 @@ public class RigidbodyMovement : MonoBehaviour
             rb.AddForce(moveDir * normalSpeed * 10 * airDrag, ForceMode.Force);
         }
 
+
        
+    }
+
+    void Sprint()
+    {
+        
+        if(rb.velocity != Vector3.zero)
+        {
+            isSprinting = true;
+            sprintTimer += Time.deltaTime;
+        }
+        
+        if(sprintTimer >= maxSprintTime)
+        {
+            playerState = PlayerState.NORMAL;
+            isSprinting = false;
+            canSprint = false;
+            sprintTimer = 0;
+            sprintAudioSource.Play();
+        }
+
+
     }
 
     void UnAim()
@@ -320,7 +391,7 @@ public class RigidbodyMovement : MonoBehaviour
         ADS adsScript;
         if (GetComponent<PickUpWeapons>().weaponPos.childCount > 0)
         {
-            adsScript = GetComponent<PickUpWeapons>().weaponPos.GetChild(0).GetChild(0).GetComponent<ADS>();
+            adsScript = GetComponent<PickUpWeapons>().currentActiveGun.transform.GetChild(0).GetComponent<ADS>();
             adsScript.isAiming = false;
         }
     }

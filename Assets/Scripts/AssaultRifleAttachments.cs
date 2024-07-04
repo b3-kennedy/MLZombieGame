@@ -68,7 +68,17 @@ public class AssaultRifleAttachments : Attachments
             
             Destroy(sightAttachment);
             GameObject newAttachment = Instantiate(attachment, sightAttachmentPos);
-            newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().M4position;
+            switch (gun)
+            {
+                case Gun.M4:
+                    newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().M4position;
+                    break;
+                case Gun.SCORPION:
+                    newAttachment.transform.localPosition = attachment.GetComponent<SightAttachment>().scorpionPosition;
+                    break;
+
+            }
+            
             newAttachment.transform.rotation = sightAttachmentPos.rotation;
             sightAttachment = newAttachment;
 

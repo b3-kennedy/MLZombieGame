@@ -33,14 +33,11 @@ public class SmokeGrenade : MonoBehaviour
 
     void EmitSmoke()
     {
-        if (GetComponent<Rigidbody>().velocity == Vector3.zero)
-        {
-            Instantiate(smokeGrenadeSmoke, transform.position, Quaternion.identity);
+        Instantiate(smokeGrenadeSmoke, transform.position, Quaternion.identity);
 
-            isActive = false;
-            startFuse = false;
-            Destroy(gameObject);
-        }
+        isActive = false;
+        startFuse = false;
+        Destroy(gameObject);
 
     }
 
