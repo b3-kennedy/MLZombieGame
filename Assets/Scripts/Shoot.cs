@@ -10,6 +10,8 @@ public class Shoot : MonoBehaviour
     public enum ShootType {SINGLE, AUTO};
     public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG};
 
+    public AudioSource gunAudio;
+
     public GameObject muzzleFlashSpawner;
 
     [Header("Audio Settings")]
@@ -18,6 +20,9 @@ public class Shoot : MonoBehaviour
     public Transform audioSpawn;
     public float audioRange;
     public LayerMask zombieLayer;
+    public float pitchMin = 0.95f;
+    public float pitchMax = 1.05f;
+    public float volume = 1f;
 
     [Header("Gun Settings")]
     public ShootType shootType;
@@ -70,6 +75,8 @@ public class Shoot : MonoBehaviour
 
     public GameObject testSphere;
 
+    float timeValue;
+
     List<Vector3> shotgunHits = new List<Vector3>();
 
     // Start is called before the first frame update
@@ -95,8 +102,19 @@ public class Shoot : MonoBehaviour
         normalRecoilY = recoilY;
         normalRecoilZ = recoilZ;
 
+        gunAudio.clip = shotSound;
 
+        if(SettingsMenuManager.Instance != null)
+        {
+            SettingsMenuManager.Instance.updatedGunVolume.AddListener(ChangeVolume);
+            ChangeVolume();
+        }
 
+    }
+
+    public void ChangeVolume()
+    {
+        volume = 1f * (SettingsMenuManager.Instance.gunVolumeValue / 100f);
     }
 
     public void UpdateMagCount()
@@ -136,9 +154,9 @@ public class Shoot : MonoBehaviour
                     {
                         if (shootType == ShootType.AUTO)
                         {
-                            if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                            if (Input.GetButton("Fire1") && timeValue >= nextFire)
                             {
-                                nextFire = Time.time + 1f / fireRate;
+                                nextFire = timeValue + 1f / fireRate;
                                 Fire();
                                 recoil.RecoilFire();
                             }
@@ -149,9 +167,9 @@ public class Shoot : MonoBehaviour
                         }
                         else if (shootType == ShootType.SINGLE)
                         {
-                            if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                            if (Input.GetButtonDown("Fire1") && timeValue >= nextFire)
                             {
-                                nextFire = Time.time + 1f / fireRate;
+                                nextFire = timeValue + 1f / fireRate;
                                 Fire();
                                 recoil.RecoilFire();
                             }
@@ -161,9 +179,9 @@ public class Shoot : MonoBehaviour
                     {
                         if (shootType == ShootType.AUTO)
                         {
-                            if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                            if (Input.GetButton("Fire1") && timeValue >= nextFire)
                             {
-                                nextFire = Time.time + 1f / fireRate;
+                                nextFire = timeValue + 1f / fireRate;
                                 FireShotgun();
                                 recoil.RecoilFire();
                                 shotgunHits.Clear();
@@ -175,9 +193,9 @@ public class Shoot : MonoBehaviour
                         }
                         else if (shootType == ShootType.SINGLE)
                         {
-                            if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                            if (Input.GetButtonDown("Fire1") && timeValue >= nextFire)
                             {
-                                nextFire = Time.time + 1f / fireRate;
+                                nextFire = timeValue + 1f / fireRate;
                                 FireShotgun();
                                 recoil.RecoilFire();
                                 shotgunHits.Clear();
@@ -200,7 +218,6 @@ public class Shoot : MonoBehaviour
         }
     }
 
-
     void WithoutPauseMenu()
     {
         if (!InventoryManager.Instance.inventory.activeSelf && !reload)
@@ -211,9 +228,9 @@ public class Shoot : MonoBehaviour
                 {
                     if (shootType == ShootType.AUTO)
                     {
-                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        if (Input.GetButton("Fire1") && timeValue >= nextFire)
                         {
-                            nextFire = Time.time + 1f / fireRate;
+                            nextFire = timeValue + 1f / fireRate;
                             Fire();
                             recoil.RecoilFire();
                         }
@@ -224,9 +241,9 @@ public class Shoot : MonoBehaviour
                     }
                     else if (shootType == ShootType.SINGLE)
                     {
-                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        if (Input.GetButtonDown("Fire1") && timeValue >= nextFire)
                         {
-                            nextFire = Time.time + 1f / fireRate;
+                            nextFire = timeValue + 1f / fireRate;
                             Fire();
                             recoil.RecoilFire();
                         }
@@ -236,9 +253,9 @@ public class Shoot : MonoBehaviour
                 {
                     if (shootType == ShootType.AUTO)
                     {
-                        if (Input.GetButton("Fire1") && Time.time >= nextFire)
+                        if (Input.GetButton("Fire1") && timeValue >= nextFire)
                         {
-                            nextFire = Time.time + 1f / fireRate;
+                            nextFire = timeValue + 1f / fireRate;
                             FireShotgun();
                             recoil.RecoilFire();
                             shotgunHits.Clear();
@@ -250,9 +267,9 @@ public class Shoot : MonoBehaviour
                     }
                     else if (shootType == ShootType.SINGLE)
                     {
-                        if (Input.GetButtonDown("Fire1") && Time.time >= nextFire)
+                        if (Input.GetButtonDown("Fire1") && timeValue >= nextFire)
                         {
-                            nextFire = Time.time + 1f / fireRate;
+                            nextFire = timeValue + 1f / fireRate;
                             FireShotgun();
                             recoil.RecoilFire();
                             shotgunHits.Clear();
@@ -277,6 +294,8 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        timeValue += Time.deltaTime;
 
         if(GameManager.Instance != null && GameManager.Instance.gameOver)
         {
@@ -362,8 +381,8 @@ public class Shoot : MonoBehaviour
     {
         GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
         muzzleFlash.transform.SetParent(audioSpawn.transform);
-
-        AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
+        AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position, volume);
+        //source.transform.SetParent(audioSpawn.transform);
         Vector3 shotPos = audioSpawn.position;
         currentAmmo -= 1;
         HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
@@ -417,8 +436,8 @@ public class Shoot : MonoBehaviour
 
         GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
         muzzleFlash.transform.SetParent(audioSpawn.transform);
-
-        AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position);
+        SpawnAudioAtPoint(shotSound, audioSpawn.position, Random.Range(pitchMin, pitchMax), volume);
+        //source.transform.SetParent(audioSpawn.transform);
         Vector3 shotPos = audioSpawn.position;
         currentAmmo -= 1;
         HUDManager.Instance.UpdateAmmoText(currentAmmo, currentMags);
@@ -465,8 +484,22 @@ public class Shoot : MonoBehaviour
             }
             
         }
+
     }
 
+    public AudioSource SpawnAudioAtPoint(AudioClip clip, Vector3 pos, float pitch, float volume)
+    {
+        GameObject audio = new GameObject("TempAudio");
+        audio.transform.position = pos;
+        AudioSource source = audio.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.pitch = pitch;
+        source.priority = 0;
+        source.volume = volume;
+        source.Play();
+        Destroy(audio, source.clip.length);
+        return source;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

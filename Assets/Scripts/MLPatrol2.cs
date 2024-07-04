@@ -69,7 +69,11 @@ public class MLPatrol2 : Agent
                 zombie.GetComponent<ZombiePatrolAI>().patrolPoint = groups[i].patrolPoint;
                 Vector3 randomPos = Random.insideUnitSphere * 75;
                 zombie.transform.position = groups[i].patrolPoint.position + new Vector3(randomPos.x, 0, randomPos.z);
-                zombie.GetComponent<NavMeshAgent>().ResetPath();
+                if (zombie.activeSelf)
+                {
+                    zombie.GetComponent<NavMeshAgent>().ResetPath();
+                }
+                
             }
             
         }

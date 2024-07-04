@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunAudio: {fileID: 0}
   muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
@@ -446,6 +447,9 @@ MonoBehaviour:
   zombieLayer:
     serializedVersion: 2
     m_Bits: 1024
+  pitchMin: 1
+  pitchMax: 1
+  volume: 1
   shootType: 1
   gunType: 1
   fireRate: 14

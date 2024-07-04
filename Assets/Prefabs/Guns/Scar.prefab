@@ -75,7 +75,7 @@ Animator:
   m_GameObject: {fileID: 2207874534432571295}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9c5b830ca69f826459ba48c6da04a71d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8238ffb7125ea7c4fbc8995b2da9d30d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunAudio: {fileID: 0}
   muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
@@ -530,6 +531,9 @@ MonoBehaviour:
   zombieLayer:
     serializedVersion: 2
     m_Bits: 1024
+  pitchMin: 0.85
+  pitchMax: 0.95
+  volume: 1
   shootType: 1
   gunType: 1
   fireRate: 10

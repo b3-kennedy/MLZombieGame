@@ -36,6 +36,11 @@ public class ZombiePatrolAI : MonoBehaviour
     GameObject mlIdentifier;
     float mlIdentifierTimer;
 
+    private void Awake()
+    {
+        //gameObject.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +49,7 @@ public class ZombiePatrolAI : MonoBehaviour
         szam = GetComponent<ScoutZombieAudioManager>();
         spotTimer = spotCd;
         GenerateNewPoint();
+        
     }
 
     public void PlayFootsteps()
@@ -77,7 +83,9 @@ public class ZombiePatrolAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agent.velocity != Vector3.zero && !anim.GetBool("run"))
+
+
+        if (agent.velocity != Vector3.zero && !anim.GetBool("run"))
         {
             anim.SetBool("moving", true);
         }

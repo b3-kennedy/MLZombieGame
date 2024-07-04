@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public bool hasGreenKey;
     public bool hasBlueKey;
 
+    public bool activate;
+    public GameObject[] scoutZombies;
+    public float scoutTimer;
+
     private void Awake()
     {
         Instance = this;
@@ -33,6 +37,20 @@ public class GameManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
+
+        //if (!activate)
+        //{
+        //    scoutTimer += Time.deltaTime;
+        //    if (scoutTimer >= 1)
+        //    {
+        //        foreach (var zombie in scoutZombies)
+        //        {
+        //            zombie.SetActive(true);
+        //        }
+        //        activate = true;
+        //    }
+            
+        //}
 
 
     }

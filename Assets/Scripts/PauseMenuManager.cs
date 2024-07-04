@@ -56,7 +56,10 @@ public class PauseMenuManager : MonoBehaviour
 
     public void Settings()
     {
-        Debug.Log("opened settings");
+        if(SettingsMenuManager.Instance != null)
+        {
+            SettingsMenuManager.Instance.OpenSettings();
+        }
     }
 
     // Start is called before the first frame update
