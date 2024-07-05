@@ -1080,6 +1080,7 @@ MonoBehaviour:
   colliders:
   - {fileID: 9172041494396146677}
   - {fileID: 6062706536269452038}
+  - {fileID: 7143543194748616375}
 --- !u!114 &2015122044627322784
 MonoBehaviour:
   m_ObjectHideFlags: 0

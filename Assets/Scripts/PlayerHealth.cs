@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
     public void Flinch()
     {
         Debug.Log("flinch");
-        hurtSource.Play();
+        hurtSource.Play();        
         camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
     }
 

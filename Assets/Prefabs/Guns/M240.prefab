@@ -233,6 +233,7 @@ MonoBehaviour:
   gun: 3
   barrelAttachment: {fileID: 0}
   barrelAttachmentPos: {fileID: 107654978523921697}
+  suppressedShotSound: {fileID: 8300000, guid: d157e812a0aa85e42be5ae2f2ec49c54, type: 3}
 --- !u!1001 &64329484513668044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -445,7 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunAudio: {fileID: 0}
   muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
   shotSound: {fileID: 8300000, guid: 812b50bb38b38c0429403c7a983720e0, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}

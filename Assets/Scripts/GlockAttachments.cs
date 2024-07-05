@@ -9,6 +9,9 @@ public class GlockAttachments : Attachments
     public GameObject barrelAttachment;
     public Transform barrelAttachmentPos;
 
+    AudioClip normalShot;
+    public AudioClip suppressedShotSound;
+
     public override void AttachBarrel(GameObject attachment, GameObject button)
     {
         Destroy(barrelAttachment);
@@ -24,13 +27,16 @@ public class GlockAttachments : Attachments
         barrelAttachment = newAttachment;
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
         currentGun.audioRange /= 2;
+        currentGun.shotSound = suppressedShotSound;
         InventoryManager.Instance.attachmentsList.Remove(button);
         Destroy(button);
     }
 
     public override void UnequipBarrel()
     {
+
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
     }
 }

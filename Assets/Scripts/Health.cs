@@ -28,10 +28,12 @@ public class Health : MonoBehaviour
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().enabled = false;
+                    GetComponent<AISensor>().enabled = false;
                 }
                 else if (GetComponent<EnforcerZombieAI>())
                 {
                     GetComponent<EnforcerZombieAI>().enabled = false;
+                    GetComponent<AISensor>().enabled = false;
                 }
                 else if (GetComponent<HunterZombieAI>())
                 {

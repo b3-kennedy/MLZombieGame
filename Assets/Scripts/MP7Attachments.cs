@@ -16,6 +16,9 @@ public class MP7Attachments : Attachments
 
     Shoot shootScript;
 
+    AudioClip normalShot;
+    public AudioClip suppressedShotSound;
+
     private void Start()
     {
         shootScript = transform.GetChild(0).GetComponent<Shoot>();
@@ -37,6 +40,7 @@ public class MP7Attachments : Attachments
             newAttachment.transform.localRotation = Quaternion.Euler(0, 0, 0);
             barrelAttachment = newAttachment;
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+            currentGun.shotSound = suppressedShotSound;
             currentGun.audioRange /= 2;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
@@ -69,6 +73,7 @@ public class MP7Attachments : Attachments
     public override void UnequipBarrel()
     {
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
     }
 }

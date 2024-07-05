@@ -11,6 +11,8 @@ public class ScarAttachments : Attachments
 
     Shoot shootScript;
 
+    AudioClip normalShot;
+    public AudioClip suppressedShotSound;
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class ScarAttachments : Attachments
             barrelAttachment = newAttachment;
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
             currentGun.audioRange /= 2;
+            currentGun.shotSound = suppressedShotSound;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -43,6 +46,7 @@ public class ScarAttachments : Attachments
     public override void UnequipBarrel()
     {
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
     }
 }

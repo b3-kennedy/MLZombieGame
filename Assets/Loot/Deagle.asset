@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9183fb7c628b9984d9904564c8d10820, type: 3}
   m_Name: Deagle
   m_EditorClassIdentifier: 
-  lootItem: {fileID: 4976085582372680277, guid: 32d6777baa049ca44935d35e6a405527, type: 3}
+  lootItem: {fileID: 1477555378831325812, guid: fd10ce19aff726543be47ade139d382a, type: 3}
   dropChance: 20

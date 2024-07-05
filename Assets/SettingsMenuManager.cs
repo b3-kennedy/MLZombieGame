@@ -26,8 +26,15 @@ public class SettingsMenuManager : MonoBehaviour
     public TextMeshProUGUI gunVolumeSliderText;
     public TMP_InputField gunVolumeInputField;
 
+    [Header("Player Footseps Volume Slider")]
+    public float playerFoostepsVolumeValue;
+    public Slider playerFoostepsVolumeSlider;
+    public TextMeshProUGUI playerFoostepsSliderText;
+    public TMP_InputField playerFoostepsInputField;
+
     [HideInInspector] public UnityEvent updatedSens;
     [HideInInspector] public UnityEvent updatedGunVolume;
+    [HideInInspector] public UnityEvent updatedPlayerFoostepsVolume;
 
     string path = "Assets/Resources/Settings.txt";
 
@@ -67,8 +74,10 @@ public class SettingsMenuManager : MonoBehaviour
             
             mouseSensValue = float.Parse(lines[0]);
             gunVolumeValue = float.Parse(lines[1]);
+            playerFoostepsVolumeValue = float.Parse(lines[2]);
             mouseSensitivitySlider.value = mouseSensValue / 100f;
             gunVolumeSlider.value = gunVolumeValue / 100f;
+            playerFoostepsVolumeSlider.value = playerFoostepsVolumeValue / 100f;
 
         }
     }
@@ -88,6 +97,7 @@ public class SettingsMenuManager : MonoBehaviour
         float val = mouseSensitivitySlider.value * 100;
         mouseSensValue = Mathf.Round(val * 10f)/10f;
 
+        sensInputField.text = mouseSensValue.ToString();
         sliderValueText.text = mouseSensValue.ToString();
         updatedSens.Invoke();
     }
@@ -104,6 +114,7 @@ public class SettingsMenuManager : MonoBehaviour
         float val = gunVolumeSlider.value * 100;
         gunVolumeValue = Mathf.Round(val * 10f) / 10f;
 
+        gunVolumeInputField.text = gunVolumeValue.ToString();
         gunVolumeSliderText.text = gunVolumeValue.ToString();
         updatedGunVolume.Invoke();
     }
@@ -115,11 +126,29 @@ public class SettingsMenuManager : MonoBehaviour
         updatedGunVolume.Invoke();
     }
 
+    public void UpdatePlayerFootstepsVolume()
+    {
+        float val = playerFoostepsVolumeSlider.value * 100;
+        playerFoostepsVolumeValue = Mathf.Round(val * 10f) / 10f;
+
+        playerFoostepsSliderText.text = playerFoostepsVolumeValue.ToString();
+        playerFoostepsInputField.text = playerFoostepsVolumeValue.ToString();
+        updatedPlayerFoostepsVolume.Invoke();
+    }
+
+    public void UpdatePlayerFootstepsVolumeFromInput()
+    {
+        playerFoostepsVolumeValue = float.Parse(playerFoostepsInputField.text);
+        playerFoostepsVolumeSlider.value = playerFoostepsVolumeValue / 100f;
+        updatedPlayerFoostepsVolume.Invoke();
+    }
+
     public void WriteSettingsToFile()
     {
         StreamWriter writer = new StreamWriter(path, false);
         writer.WriteLine(mouseSensValue.ToString());
         writer.WriteLine(gunVolumeValue.ToString());
+        writer.WriteLine(playerFoostepsVolumeValue.ToString());
         writer.Close();
     }
 

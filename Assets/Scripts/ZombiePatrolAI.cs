@@ -247,7 +247,11 @@ public class ZombiePatrolAI : MonoBehaviour
 
             if(GameManager.Instance != null)
             {
-                GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
+                if (GameManager.Instance.player.activeSelf)
+                {
+                    GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
+                }
+                
             }
             
             canSpawn = false;

@@ -726,6 +726,7 @@ RectTransform:
   - {fileID: 1005248778}
   - {fileID: 257752698}
   - {fileID: 1682440614}
+  - {fileID: 404278109}
   m_Father: {fileID: 897188823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1263,6 +1264,213 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334018860}
   m_CullTransparentMesh: 1
+--- !u!1001 &404278107
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 186189938}
+    m_Modifications:
+    - target: {fileID: 496650729583453718, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_Name
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_text
+      value: Player Footstep Volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310786623365977651, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 972618655}
+    - target: {fileID: 1310786623365977651, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePlayerFootstepsVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941119283161831569, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941119283161831569, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941119283161831569, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 972618655}
+    - target: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdatePlayerFootstepsVolumeFromInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022727320237031520, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 662.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022727320237031520, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9.2709
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637909945100088727, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_Name
+      value: PlayerFootstepsVolumeSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057212406799691079, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057212406799691079, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+--- !u!114 &404278108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2456730432072817576, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+  m_PrefabInstance: {fileID: 404278107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &404278109 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+  m_PrefabInstance: {fileID: 404278107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &404278110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7192814854697721585, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+  m_PrefabInstance: {fileID: 404278107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &404278111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1310786623365977651, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+  m_PrefabInstance: {fileID: 404278107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &411490189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1666,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_text
-      value: Gun Volume
+      value: GUN VOLUME
+      objectReference: {fileID: 0}
+    - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 811489986004170527, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 1310786623365977651, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1507,6 +1723,10 @@ PrefabInstance:
     - target: {fileID: 3022727320237031520, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -9.2709
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022727320237031520, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 5637909945100088727, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_Name
@@ -1586,7 +1806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 208
+      value: 188
       objectReference: {fileID: 0}
     - target: {fileID: 7234394800012307561, guid: 4a3cfa6f42509d24d9f07c797ea8db8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2516,10 +2736,17 @@ MonoBehaviour:
   gunVolumeSlider: {fileID: 1404329477}
   gunVolumeSliderText: {fileID: 1448148398}
   gunVolumeInputField: {fileID: 484242353}
+  playerFoostepsVolumeValue: 100
+  playerFoostepsVolumeSlider: {fileID: 404278111}
+  playerFoostepsSliderText: {fileID: 404278110}
+  playerFoostepsInputField: {fileID: 404278108}
   updatedSens:
     m_PersistentCalls:
       m_Calls: []
   updatedGunVolume:
+    m_PersistentCalls:
+      m_Calls: []
+  updatedPlayerFoostepsVolume:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &972618656

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9183fb7c628b9984d9904564c8d10820, type: 3}
   m_Name: Scar
   m_EditorClassIdentifier: 
-  lootItem: {fileID: 2207874534432571295, guid: 0de1529265b0e654ba6e3242f9adf834, type: 3}
+  lootItem: {fileID: 1987822036887406615, guid: e8acf73c00ead534cbeb3949e5800852, type: 3}
   dropChance: 60

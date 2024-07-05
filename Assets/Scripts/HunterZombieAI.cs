@@ -100,6 +100,11 @@ public class HunterZombieAI : MonoBehaviour
 
     public void DealDamage()
     {
-        playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+        if (Vector3.Distance(playerPos.position, transform.position) < 1.3f)
+        {
+
+            playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+        }
+        
     }
 }

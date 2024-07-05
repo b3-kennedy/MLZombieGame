@@ -24,9 +24,13 @@ public class AssaultRifleAttachments : Attachments
 
     Shoot shootScript;
 
+    AudioClip normalSound;
+    public AudioClip suppressedSound;
+
     private void Start()
     {
         shootScript = transform.GetChild(0).GetComponent<Shoot>();
+        normalSound = shootScript.shotSound;
     }
 
     private void Update()
@@ -55,6 +59,7 @@ public class AssaultRifleAttachments : Attachments
             barrelAttachment = newAttachment;
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
             currentGun.audioRange /= 2;
+            currentGun.shotSound = suppressedSound;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -124,6 +129,7 @@ public class AssaultRifleAttachments : Attachments
     public override void UnequipBarrel()
     {
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        currentGun.shotSound = normalSound;
         currentGun.audioRange *= 2;
     }
 

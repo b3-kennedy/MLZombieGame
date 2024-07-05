@@ -271,6 +271,7 @@ MonoBehaviour:
   ironSights:
   - {fileID: 232054421346984073}
   - {fileID: 232127330970837427}
+  suppressedSound: {fileID: 8300000, guid: d157e812a0aa85e42be5ae2f2ec49c54, type: 3}
 --- !u!1 &8555443902207794240
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunAudio: {fileID: 0}
   muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
