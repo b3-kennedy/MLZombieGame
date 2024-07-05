@@ -376,15 +376,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce4bbb7b0afba4ea4f489c55ded10d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.452255
+      value: -6.0881634
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce4bbb7b0afba4ea4f489c55ded10d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce4bbb7b0afba4ea4f489c55ded10d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.42788
+      value: 16.629412
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8cce4bbb7b0afba4ea4f489c55ded10d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1069,9 +1069,10 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   walkSpeed: 2.5
-  runSpeed: 5
+  runSpeed: 4
   maxAudioTime: 5
   groundCheck: {fileID: 570569049297654629}
+  attackRate: 3
 --- !u!114 &8078461906859159865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,6 +1112,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   health: 0
+  anim: {fileID: 6435521033768527619}
+  colliders:
+  - {fileID: 1008986199606449238}
+  - {fileID: 8655057814103322520}
+  - {fileID: 5725405699013560023}
+  - {fileID: 401376722689878079}
+  - {fileID: 6612781454249046499}
+  - {fileID: 6883049033362591999}
+  - {fileID: 5518543595661995889}
+  - {fileID: 1946577927436477048}
+  - {fileID: 2019310581490115199}
 --- !u!65 &1008986199606449238
 BoxCollider:
   m_ObjectHideFlags: 0

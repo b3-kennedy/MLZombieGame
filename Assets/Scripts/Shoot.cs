@@ -10,7 +10,6 @@ public class Shoot : MonoBehaviour
     public enum ShootType {SINGLE, AUTO};
     public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG};
 
-    public AudioSource gunAudio;
 
     public GameObject muzzleFlashSpawner;
 
@@ -90,7 +89,7 @@ public class Shoot : MonoBehaviour
         anim = transform.parent.parent.GetComponent<Animator>();
 
         recoil = transform.parent.parent.parent.parent.parent.gameObject.GetComponent<Recoil>();
-
+        recoil.targetRot = Vector3.zero;
         recoil.recoilX = recoilX;
         recoil.recoilY = recoilY;
         recoil.recoilZ = recoilZ;
@@ -102,7 +101,6 @@ public class Shoot : MonoBehaviour
         normalRecoilY = recoilY;
         normalRecoilZ = recoilZ;
 
-        gunAudio.clip = shotSound;
 
         if(SettingsMenuManager.Instance != null)
         {

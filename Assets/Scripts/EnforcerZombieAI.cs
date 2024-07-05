@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,10 @@ public class EnforcerZombieAI : MonoBehaviour
     Vector3 audioPos;
     ScoutZombieAudioManager audioManager;
     public Transform groundCheck;
+    bool attacked;
+    public float attackRate;
+    float attackTimer;
+    bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -93,8 +98,24 @@ public class EnforcerZombieAI : MonoBehaviour
         {
             Attack();
         }
-        
 
+        if (!canAttack)
+        {
+            //anim.SetBool("swipe", false);
+            attackTimer += Time.deltaTime;
+            if(attackTimer >= attackRate)
+            {
+                canAttack = true;
+                
+                attackTimer = 0;
+            }
+        }
+
+    }
+
+    public void DealDamage()
+    {
+        player.GetComponent<PlayerHealth>().TakeDamage(50f);
     }
 
     void Patrol()
@@ -115,32 +136,39 @@ public class EnforcerZombieAI : MonoBehaviour
         }
     }
 
+
+    public void CancelAttack()
+    {
+        anim.SetBool("swipe", false);
+    }
+
     void Attack()
     {
         agent.speed = runSpeed;
-        anim.SetBool("patrolling", false);
         anim.SetBool("attacking", true);
         agent.SetDestination(player.position);
-        if(Vector3.Distance(transform.position, player.position) < 1.5f)
+        
+        if(Vector3.Distance(transform.position, player.position) < 2f)
         {
-            Debug.Log("attack");
+            if (canAttack)
+            {
+
+                anim.SetBool("swipe", true);
+                canAttack = false;
+            }
+            
             if (MLPatrol2.Instance != null)
             {
                 MLPatrol2.Instance.AddReward(1f);
             }
-            if(player != null && player.GetComponent<PlayerHealth>())
-            {
-                player.GetComponent<PlayerHealth>().TakeDamage(10f);
-            }
             
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
     public void HeardSound(Vector3 pos)
     {
         state = ZombiePatrolAI.ZombieState.HEARD_SOUND;
-        Debug.Log(state);
         audioPos = pos;
     }
 

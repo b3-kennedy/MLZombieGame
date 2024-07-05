@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8751af7fdb9ac3b4ba24cd72a877c65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunObject: {fileID: 8032746332267949652, guid: 57326c386d31b884dad184167225eb05, type: 3}
+  gunObject: {fileID: 1477555378831325812, guid: fd10ce19aff726543be47ade139d382a, type: 3}
 --- !u!1001 &8151221095529807682
 PrefabInstance:
   m_ObjectHideFlags: 0

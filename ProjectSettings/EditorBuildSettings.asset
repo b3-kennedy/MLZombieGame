@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PatrolTest.unity
     guid: 19e8feb3c8e87fe42b264b25153d8608
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 52aea8eb0d2669f4fa0d74855e26ad96
   m_configObjects: {}

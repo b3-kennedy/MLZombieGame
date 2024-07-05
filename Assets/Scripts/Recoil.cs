@@ -7,8 +7,8 @@ public class Recoil : MonoBehaviour
 
     public static Recoil Instance;
 
-    Vector3 currentRot;
-    Vector3 targetRot;
+    public Vector3 currentRot;
+    public Vector3 targetRot;
 
     public float recoilX;
     public float recoilY;
@@ -36,6 +36,7 @@ public class Recoil : MonoBehaviour
         targetRot = Vector3.Lerp(targetRot, Vector3.zero, returnSpeed * Time.deltaTime);
         currentRot = Vector3.Slerp(currentRot, targetRot, snap * Time.fixedDeltaTime);
         transform.localRotation = Quaternion.Euler(currentRot);
+
     }
 
     public void RecoilFire()

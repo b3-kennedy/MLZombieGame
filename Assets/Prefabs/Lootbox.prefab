@@ -234,6 +234,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4a959af8de02b23409448753c9aa9cfa, type: 2}
     - {fileID: 11400000, guid: c58c8d3c24e939f49ae0a9c7848f31d7, type: 2}
     - {fileID: 11400000, guid: 9a6f7cd098ff74443aff7ea0152ea061, type: 2}
+    - {fileID: 11400000, guid: e74b0752548d124498ac80ef4b800688, type: 2}
+    - {fileID: 11400000, guid: 916c865fe21cf4249b75dd03e61f63c6, type: 2}
+    - {fileID: 11400000, guid: 3828cdc9bd9c23048b486ba1a032035c, type: 2}
     ammoList:
     - {fileID: 11400000, guid: 5d7217100e9fd1b448b62eb2efe66b78, type: 2}
     - {fileID: 11400000, guid: b9243bcdb5519004ea9aa4070b6e9a90, type: 2}

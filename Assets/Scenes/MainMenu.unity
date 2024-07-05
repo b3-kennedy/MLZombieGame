@@ -2180,12 +2180,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 862875630}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadNewScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef1ef2e35771df4583ce47073be00d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 0
+  sceneIndex: 2
 --- !u!1 &897188819
 GameObject:
   m_ObjectHideFlags: 0

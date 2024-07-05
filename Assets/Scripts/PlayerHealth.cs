@@ -24,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
     float vigTimer;
     float newVigVal;
 
+    public Recoil camRecoil;
+    public float flinchVal;
+
+    public AudioSource hurtSource;
 
 
     // Start is called before the first frame update
@@ -71,19 +75,35 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Flinch()
+    {
+        Debug.Log("flinch");
+        hurtSource.Play();
+        camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
+    }
+
     public void TakeDamage(float dmg)
     {
         if(currentHealth - dmg <= 0)
         {
             currentHealth = 0;
-            GameManager.Instance.Lose();
-            MLPatrol2.Instance.AddReward(2f);
-            MLPatrol2.Instance.End();
+            if(GameManager.Instance != null)
+            {
+                GameManager.Instance.Lose();
+            }
+            
+            if(MLPatrol2.Instance != null)
+            {
+                MLPatrol2.Instance.AddReward(2f);
+                MLPatrol2.Instance.End();
+            }
+            Flinch();
             //gameObject.SetActive(false);
             
         }
         else
         {
+            Flinch();
             currentHealth -= dmg;
             hasTakenDamage = true;
             canRegen = false;

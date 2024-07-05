@@ -2517,6 +2517,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  anim: {fileID: 5177569913403882317}
+  colliders:
+  - {fileID: 2996861525576401538}
+  - {fileID: 5723806068443572278}
 --- !u!114 &8985734664299624950
 MonoBehaviour:
   m_ObjectHideFlags: 0
