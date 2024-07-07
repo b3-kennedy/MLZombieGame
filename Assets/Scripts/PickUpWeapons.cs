@@ -182,11 +182,14 @@ public class PickUpWeapons : MonoBehaviour
                 {
                     if (gun.activeSelf)
                     {
+                        
                         gun.SetActive(false);
+                        
                     }
                     else
                     {
                         gun.SetActive(true);
+                        currentActiveGun.transform.GetChild(0).GetChild(0).localEulerAngles = Vector3.zero;
                         currentActiveGun = gun;
                         InventoryManager.Instance.activeGun = gun;
                         UpdateHud();

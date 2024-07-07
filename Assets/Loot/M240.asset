@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: M240
   m_EditorClassIdentifier: 
   lootItem: {fileID: 6334675240617735533, guid: 6fdca6e595f04d247a11f2ef0086270d, type: 3}
-  dropChance: 50
+  dropChance: 15

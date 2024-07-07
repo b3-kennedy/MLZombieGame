@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LMGMag
   m_EditorClassIdentifier: 
   lootItem: {fileID: 1555030766045069831, guid: 9012fb8ca0e4a2e468474f75884685f2, type: 3}
-  dropChance: 30
+  dropChance: 10

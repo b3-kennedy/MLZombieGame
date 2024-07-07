@@ -36,7 +36,7 @@ public class SettingsMenuManager : MonoBehaviour
     [HideInInspector] public UnityEvent updatedGunVolume;
     [HideInInspector] public UnityEvent updatedPlayerFoostepsVolume;
 
-    string path = "Assets/Resources/Settings.txt";
+    string path;
 
     void Awake()
     {
@@ -56,25 +56,23 @@ public class SettingsMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        path = Application.persistentDataPath + "/Settings.txt";
         if(!File.Exists(path))
         {
             File.CreateText(path);
         }
         else
         {
-            var file = Resources.Load<TextAsset>("Settings");
+            var file = File.ReadAllLines(path);
 
-            string text = file.text;
-            string[] lines = Regex.Split(text, "\n");
-
-            foreach (string line in lines) 
+            foreach (string line in file) 
             {
                 Debug.Log(line);
             }
             
-            mouseSensValue = float.Parse(lines[0]);
-            gunVolumeValue = float.Parse(lines[1]);
-            playerFoostepsVolumeValue = float.Parse(lines[2]);
+            mouseSensValue = float.Parse(file[0]);
+            gunVolumeValue = float.Parse(file[1]);
+            playerFoostepsVolumeValue = float.Parse(file[2]);
             mouseSensitivitySlider.value = mouseSensValue / 100f;
             gunVolumeSlider.value = gunVolumeValue / 100f;
             playerFoostepsVolumeSlider.value = playerFoostepsVolumeValue / 100f;

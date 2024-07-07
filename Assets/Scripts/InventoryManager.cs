@@ -74,40 +74,44 @@ public class InventoryManager : MonoBehaviour
 
         foreach (var slot in attachmentSlots)
         {
-            if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.SIGHT)
+            if (slot.GetComponent<AttachmentSlotType>())
             {
-                sight = Instantiate(sightSlot, attachmesntSlotSpawns[slotNumber].transform);
-                createdSlots.Add(sight);
-                if (slot.transform.childCount > 0)
+                if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.SIGHT)
                 {
-                    sight.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
-                    sight.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                    sight.GetComponent<Image>().color = Color.green;
-                }
+                    sight = Instantiate(sightSlot, attachmesntSlotSpawns[slotNumber].transform);
+                    createdSlots.Add(sight);
+                    if (slot.transform.childCount > 0)
+                    {
+                        sight.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
+                        sight.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
+                        sight.GetComponent<Image>().color = Color.green;
+                    }
 
-            }
-            else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.BARREL)
-            {
-                barrel = Instantiate(barrelSlot, attachmesntSlotSpawns[slotNumber].transform);
-                createdSlots.Add(barrel);
-                if (slot.transform.childCount > 0)
+                }
+                else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.BARREL)
                 {
-                    barrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
-                    barrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                    barrel.GetComponent<Image>().color = Color.green;
+                    barrel = Instantiate(barrelSlot, attachmesntSlotSpawns[slotNumber].transform);
+                    createdSlots.Add(barrel);
+                    if (slot.transform.childCount > 0)
+                    {
+                        barrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
+                        barrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
+                        barrel.GetComponent<Image>().color = Color.green;
+                    }
+                }
+                else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
+                {
+                    underbarrel = Instantiate(underbarrelSlot, attachmesntSlotSpawns[slotNumber].transform);
+                    createdSlots.Add(underbarrel);
+                    if (slot.transform.childCount > 0)
+                    {
+                        underbarrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
+                        underbarrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
+                        underbarrel.GetComponent<Image>().color = Color.green;
+                    }
                 }
             }
-            else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
-            {
-                underbarrel = Instantiate(underbarrelSlot, attachmesntSlotSpawns[slotNumber].transform);
-                createdSlots.Add(underbarrel);
-                if (slot.transform.childCount > 0)
-                {
-                    underbarrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
-                    underbarrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                    underbarrel.GetComponent<Image>().color = Color.green;
-                }
-            }
+
         }
         List<GameObject> tempList = attachmentsList;
         foreach (var attachment in tempList)

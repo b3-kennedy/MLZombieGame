@@ -184,21 +184,25 @@ public class ZombiePatrolAI : MonoBehaviour
 
     public void GenerateNewPoint()
     {
-        Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
-        Vector3 newDestPoint = new Vector3(point.x, 0, point.z);
-        if (gameObject.activeSelf)
+        if (!GetComponent<Health>().dead)
         {
-            NavMeshPath newPath = new NavMeshPath();
-            if (agent.CalculatePath(newDestPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
+            Vector3 point = patrolPoint.position + (Random.insideUnitSphere * radius);
+            Vector3 newDestPoint = new Vector3(point.x, 0, point.z);
+            if (gameObject.activeSelf)
             {
-                agent.SetDestination(newDestPoint);
-            }
-            else
-            {
-                agent.SetDestination(transform.position);
-            }
+                NavMeshPath newPath = new NavMeshPath();
+                if (agent.CalculatePath(newDestPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
+                {
+                    agent.SetDestination(newDestPoint);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                }
 
+            }
         }
+
 
     }
 
@@ -249,7 +253,7 @@ public class ZombiePatrolAI : MonoBehaviour
             {
                 if (GameManager.Instance.player.activeSelf)
                 {
-                    GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
+                    //GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
                 }
                 
             }

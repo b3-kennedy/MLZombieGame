@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public float health;
     public Animator anim;
     public List<Collider> colliders;
+    [HideInInspector] public bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,12 @@ public class Health : MonoBehaviour
         health -= dmg;
         if(health <= 0)
         {
+            dead = true;
             if(anim != null)
             {
                 anim.SetBool("dead", true);
                 GetComponent<NavMeshAgent>().ResetPath();
+                GetComponent<NavMeshAgent>().velocity = Vector3.zero;
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().enabled = false;

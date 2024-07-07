@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35ddb0213d2ac542a3016773632e5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7.25
+  distance: 15
   angle: 34.7
   height: 2
   rayStartHeight: 1.5
@@ -1123,6 +1123,7 @@ MonoBehaviour:
   - {fileID: 5518543595661995889}
   - {fileID: 1946577927436477048}
   - {fileID: 2019310581490115199}
+  dead: 0
 --- !u!65 &1008986199606449238
 BoxCollider:
   m_ObjectHideFlags: 0
