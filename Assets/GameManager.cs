@@ -19,9 +19,21 @@ public class GameManager : MonoBehaviour
     public GameObject[] scoutZombies;
     public float scoutTimer;
 
+    public GameObject smokeCamera;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void EnableSmokeCamera()
+    {
+        smokeCamera.SetActive(true);
+    }
+
+    public void DisableSmokeCamera()
+    {
+        smokeCamera.SetActive(false);
     }
 
     public void Win()

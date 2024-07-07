@@ -85,6 +85,8 @@ public class RigidbodyMovement : MonoBehaviour
         pam = GetComponent<PlayerAudioManager>();
         Instance = this;
         rb = GetComponent<Rigidbody>();
+
+        Physics.IgnoreLayerCollision(7, 12);
     }
 
     public bool IsGrounded()
