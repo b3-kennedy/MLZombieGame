@@ -20,7 +20,7 @@ public class ZombiePatrolAI : MonoBehaviour
     [HideInInspector] public bool playerSpotted = false;
     Transform playerPos;
     bool audioHeard;
-    Vector3 audioPos;
+    [HideInInspector] public Vector3 audioPos;
     public float maxAudioTime;
     float audioTimer;
     public float normalSpeed;
@@ -172,7 +172,7 @@ public class ZombiePatrolAI : MonoBehaviour
 
     }
 
-    void LookAtPoint(Vector3 pos)
+    public void LookAtPoint(Vector3 pos)
     {
         anim.SetBool("run", false);
         anim.SetBool("moving", false);

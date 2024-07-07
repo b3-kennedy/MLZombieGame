@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -17,9 +18,21 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
-    public virtual void TakeDamage(float dmg)
+    public virtual void TakeDamage(float dmg, Vector3 pos, Transform target)
     {
         health -= dmg;
+        if (GetComponent<ZombiePatrolAI>())
+        {
+            
+            GetComponent<ZombiePatrolAI>().audioPos = pos;
+            GetComponent<ZombiePatrolAI>().state = ZombiePatrolAI.ZombieState.HEARD_SOUND;
+        }
+        else if (GetComponent<EnforcerZombieAI>())
+        {
+            GetComponent<EnforcerZombieAI>().player = target;
+        }
+
+
         if(health <= 0)
         {
             dead = true;

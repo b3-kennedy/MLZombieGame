@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.LowLevel;
 
 public class Shoot : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class Shoot : MonoBehaviour
     public enum ShootType {SINGLE, AUTO};
     public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG};
 
+    GameObject player;
 
     public GameObject muzzleFlashSpawner;
 
@@ -81,7 +82,11 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        
+
         ammoHolder = transform.parent.parent.parent.GetComponent<AmmoHolder>();
+        player = ammoHolder.player;
         //currentAmmo = maxAmmo;
 
         UpdateMagCount();
@@ -401,11 +406,11 @@ public class Shoot : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Head"))
                     {
-                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage);
+                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage, transform.position, player.transform);
                     }
                     else if (hit.collider.CompareTag("Body"))
                     {
-                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage);
+                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage, transform.position, player.transform);
                     }
                 }
             }
@@ -452,12 +457,12 @@ public class Shoot : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Head"))
                 {
-                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage);
+                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage, transform.position, player.transform);
                    
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
-                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage);
+                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage, transform.position, player.transform);
                 }
             }
             else if (hit.collider.GetComponent<Bottle>())

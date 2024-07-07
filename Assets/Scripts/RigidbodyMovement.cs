@@ -102,6 +102,7 @@ public class RigidbodyMovement : MonoBehaviour
         rb.freezeRotation = true;
         normalCol = GetComponent<Collider>();
         playerState = PlayerState.NORMAL;
+        cameraHolder.GetChild(0).GetChild(0).GetChild(0).GetComponent<AmmoHolder>().player = gameObject;
     }
 
     void CheckAudioRange(Vector3 footStepPos)
@@ -202,6 +203,7 @@ public class RigidbodyMovement : MonoBehaviour
             }
             
         }
+
     }
 
     void Lean()

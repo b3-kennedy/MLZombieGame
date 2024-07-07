@@ -19,7 +19,7 @@ public class EnforcerZombieAI : MonoBehaviour
     public float runSpeed;
     public float maxAudioTime;
     float audioTimer;
-    Vector3 audioPos;
+    [HideInInspector] public Vector3 audioPos;
     ScoutZombieAudioManager audioManager;
     public Transform groundCheck;
     bool attacked;
@@ -145,6 +145,7 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         agent.speed = runSpeed;
         anim.SetBool("attacking", true);
+        anim.SetBool("patrolling", false);
         agent.SetDestination(player.position);
         
         if(Vector3.Distance(transform.position, player.position) < 2f)

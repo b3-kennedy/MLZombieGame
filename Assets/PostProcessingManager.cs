@@ -11,6 +11,7 @@ public class PostProcessingManager : MonoBehaviour
     public UnityEngine.Rendering.Volume volume;
 
     [HideInInspector] public Vignette vignette;
+    [HideInInspector] public LensDistortion distortion;
 
 
     private void Awake()
@@ -29,6 +30,7 @@ public class PostProcessingManager : MonoBehaviour
     void Start()
     {
         volume.profile.TryGet(out vignette);
+        volume.profile.TryGet(out distortion);
 
     }
 

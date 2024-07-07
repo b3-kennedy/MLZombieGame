@@ -17,7 +17,7 @@ public class DummyHealth : Health
         
     }
 
-    public override void TakeDamage(float dmg)
+    public override void TakeDamage(float dmg, Vector3 pos, Transform target)
     {
         if (health - dmg <= 0)
         {

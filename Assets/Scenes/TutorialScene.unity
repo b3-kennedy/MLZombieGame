@@ -17523,6 +17523,46 @@ PrefabInstance:
       propertyPath: crouchFootstepInterval
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127159232113125901, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
