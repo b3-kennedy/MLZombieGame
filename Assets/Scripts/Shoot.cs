@@ -8,7 +8,7 @@ public class Shoot : MonoBehaviour
 {
     
     public enum ShootType {SINGLE, AUTO};
-    public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG};
+    public enum GunType {PISTOL, ASSAULT_RIFLE, SHOTGUN, SMG, LMG, SNIPER};
 
     GameObject player;
 
@@ -138,6 +138,9 @@ public class Shoot : MonoBehaviour
                 break;
             case GunType.LMG:
                 currentMags = ammoHolder.lmgMags;
+                break;
+            case GunType.SNIPER:
+                currentMags = ammoHolder.sniperMags;
                 break;
 
         }
@@ -342,6 +345,11 @@ public class Shoot : MonoBehaviour
             anim.SetBool("reload", true);
             reload = true;
         }
+        else if (Input.GetKeyDown(KeyCode.R) && gunType == GunType.SNIPER && ammoHolder.sniperMags > 0)
+        {
+            anim.SetBool("reload", true);
+            reload = true;
+        }
 
         Reload();
     }
@@ -370,6 +378,9 @@ public class Shoot : MonoBehaviour
                         break;
                     case GunType.SMG:
                         ammoHolder.smgMags -= 1;
+                        break;
+                    case GunType.SNIPER:
+                        ammoHolder.sniperMags -= 1;
                         break;
 
                 }

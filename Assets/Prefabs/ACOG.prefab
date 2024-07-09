@@ -101,6 +101,8 @@ MonoBehaviour:
   attachmentUI: {fileID: 411028760406493008, guid: a641980a4b42972478eaed9d9fd9dd90, type: 3}
   M4position: {x: 0, y: -0.006, z: -0.0178}
   scorpionPosition: {x: 0, y: -0.0081, z: 0.0275}
+  m200Position: {x: 0, y: -0.006, z: 0.04}
+  tarPosition: {x: 0, y: -0.007, z: 0.062}
 --- !u!1 &3215369372619362621
 GameObject:
   m_ObjectHideFlags: 0

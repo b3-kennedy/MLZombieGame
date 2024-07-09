@@ -9,6 +9,7 @@ public class AmmoHolder : MonoBehaviour
     public int shotgunShells;
     public int smgMags;
     public int lmgMags;
+    public int sniperMags;
 
     [HideInInspector] public GameObject player;
 

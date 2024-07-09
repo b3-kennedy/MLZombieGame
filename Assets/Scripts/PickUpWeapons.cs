@@ -57,6 +57,9 @@ public class PickUpWeapons : MonoBehaviour
                     case (MagazineType.MagType.SHOTGUN):
                         HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up shotgun shells");
                         break;
+                    case (MagazineType.MagType.SNIPER):
+                        HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up sniper magazine");
+                        break;
                 }
                 
                 HUDManager.Instance.ShowInteractPrompt();
@@ -248,6 +251,10 @@ public class PickUpWeapons : MonoBehaviour
         {
             GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().lmgMags);
         }
+        else if(shootScript.gunType == Shoot.GunType.SNIPER)
+        {
+            GetComponent<HUDManager>().UpdateAmmoText(shootScript.currentAmmo, weaponPos.GetComponent<AmmoHolder>().sniperMags);
+        }
         GetComponent<HUDManager>().UpdateGunText(shootScript.gunName);
     }
 
@@ -282,6 +289,9 @@ public class PickUpWeapons : MonoBehaviour
                 break;
             case (MagazineType.MagType.LMG):
                 weaponPos.GetComponent<AmmoHolder>().lmgMags++;
+                break;
+            case (MagazineType.MagType.SNIPER):
+                weaponPos.GetComponent<AmmoHolder>().sniperMags++;
                 break;
         }
 
