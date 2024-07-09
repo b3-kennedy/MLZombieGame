@@ -74,6 +74,10 @@ public class RigidbodyMovement : MonoBehaviour
     public float crouchFootstepInterval;
     public float crouchVolume;
     public float normalVolume;
+
+    float defaultNormalVol;
+    float defaultCrouchVol;
+
     float footstepTimer;
     PlayerAudioManager pam;
 
@@ -105,6 +109,28 @@ public class RigidbodyMovement : MonoBehaviour
         normalCol = GetComponent<Collider>();
         playerState = PlayerState.NORMAL;
         cameraHolder.GetChild(0).GetChild(0).GetChild(0).GetComponent<AmmoHolder>().player = gameObject;
+
+        if (SettingsMenuManager.Instance != null)
+        {
+            SettingsMenuManager.Instance.updatedPlayerFoostepsVolume.AddListener(OnFootstepVolumeChange);
+        }
+        defaultNormalVol = normalVolume;
+        defaultCrouchVol = crouchVolume;
+    }
+
+    public void OnFootstepVolumeChange()
+    {
+        if(SettingsMenuManager.Instance.playerFoostepsVolumeValue == 0)
+        {
+            normalVolume = 0;
+            crouchVolume = 0;
+        }
+        else
+        {
+            normalVolume = defaultNormalVol * (SettingsMenuManager.Instance.playerFoostepsVolumeValue / 100f);
+            crouchVolume = defaultCrouchVol * (SettingsMenuManager.Instance.playerFoostepsVolumeValue / 100f);
+        }
+
     }
 
     void CheckAudioRange(Vector3 footStepPos)
@@ -397,6 +423,7 @@ public class RigidbodyMovement : MonoBehaviour
         {
             adsScript = GetComponent<PickUpWeapons>().currentActiveGun.transform.GetChild(0).GetComponent<ADS>();
             adsScript.isAiming = false;
+            adsScript.aimedOut.Invoke();
         }
     }
 

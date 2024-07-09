@@ -9,15 +9,10 @@ public class ScarAttachments : Attachments
     public Transform barrelAttachmentPos;
 
 
-    Shoot shootScript;
 
     AudioClip normalShot;
     public AudioClip suppressedShotSound;
 
-    private void Start()
-    {
-        shootScript = transform.GetChild(0).GetComponent<Shoot>();
-    }
 
     public override void AttachBarrel(GameObject attachment, GameObject button)
     {

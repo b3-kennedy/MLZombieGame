@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ADS : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class ADS : MonoBehaviour
     public Vector3 normalPosition;
     public Vector3 adsPosition;     
     public float adsSpeed = 5.0f;     
-
     [HideInInspector] public bool isAiming = false;   
     private float aimProgress = 0.0f;
+    [HideInInspector] public UnityEvent aimedIn;
+    [HideInInspector] public UnityEvent aimedOut;
 
 
     private void Start()
@@ -35,16 +37,19 @@ public class ADS : MonoBehaviour
         {
             transform.localPosition = Vector3.zero;
             isAiming = true;
+            aimedIn.Invoke();
         }
         else if (Input.GetMouseButtonUp(1))
         {
             isAiming = false;
+            aimedOut.Invoke();
         }
 
         if (isAiming)
         {
             //PlayerUI.Instance.crosshair.SetActive(false);
             aimProgress += Time.deltaTime * adsSpeed;
+
         }
         else
         {

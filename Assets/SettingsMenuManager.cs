@@ -32,9 +32,22 @@ public class SettingsMenuManager : MonoBehaviour
     public TextMeshProUGUI playerFoostepsSliderText;
     public TMP_InputField playerFoostepsInputField;
 
+    [Header("Acog Sensitivity Slider")]
+    public float acogSensValue;
+    public Slider acogSensSlider;
+    public TextMeshProUGUI acogSensSliderText;
+    public TMP_InputField acogSensInputField;
+
+    [Header("Holo Sensitivity Slider")]
+    public float holoSensValue;
+    public Slider holoSensSlider;
+    public TextMeshProUGUI holoSensSliderText;
+    public TMP_InputField holoSensInputField;
+
     [HideInInspector] public UnityEvent updatedSens;
     [HideInInspector] public UnityEvent updatedGunVolume;
     [HideInInspector] public UnityEvent updatedPlayerFoostepsVolume;
+    [HideInInspector] public UnityEvent updatedAcogSens;
 
     string path;
 
@@ -57,6 +70,7 @@ public class SettingsMenuManager : MonoBehaviour
     void Start()
     {
         path = Application.persistentDataPath + "/Settings.txt";
+        Debug.Log(path);
         if(!File.Exists(path))
         {
             File.CreateText(path);
@@ -73,6 +87,10 @@ public class SettingsMenuManager : MonoBehaviour
             mouseSensValue = float.Parse(file[0]);
             gunVolumeValue = float.Parse(file[1]);
             playerFoostepsVolumeValue = float.Parse(file[2]);
+            acogSensValue = float.Parse(file[3]);
+            acogSensSlider.value = acogSensValue;
+            holoSensValue = float.Parse(file[4]);
+            holoSensSlider.value= holoSensValue;
             mouseSensitivitySlider.value = mouseSensValue / 100f;
             gunVolumeSlider.value = gunVolumeValue / 100f;
             playerFoostepsVolumeSlider.value = playerFoostepsVolumeValue / 100f;
@@ -141,12 +159,47 @@ public class SettingsMenuManager : MonoBehaviour
         updatedPlayerFoostepsVolume.Invoke();
     }
 
+    public void UpdateAcogSens()
+    {
+        float val = acogSensSlider.value;
+        acogSensValue = Mathf.Round(val * 10f) / 10f;
+
+        acogSensSliderText.text = acogSensValue.ToString();
+        acogSensInputField.text = acogSensValue.ToString();
+        updatedSens.Invoke();
+    }
+
+    public void UpdateAcogSensFromInput()
+    {
+        acogSensValue = float.Parse(acogSensInputField.text);
+        acogSensSlider.value =  acogSensValue;
+        updatedSens.Invoke();
+    }
+
+    public void UpdateHoloSens()
+    {
+        float val = holoSensSlider.value;
+        holoSensValue = Mathf.Round(val * 10f) / 10f;
+
+        holoSensSliderText.text = holoSensValue.ToString();
+        holoSensInputField.text = holoSensValue.ToString();
+        updatedSens.Invoke();
+    }
+
+    public void UpdateHoloSensFromInput()
+    {
+        holoSensValue = float.Parse(holoSensInputField.text);
+        holoSensSlider.value = holoSensValue;
+        updatedSens.Invoke();
+    }
+
     public void WriteSettingsToFile()
     {
         StreamWriter writer = new StreamWriter(path, false);
         writer.WriteLine(mouseSensValue.ToString());
         writer.WriteLine(gunVolumeValue.ToString());
         writer.WriteLine(playerFoostepsVolumeValue.ToString());
+        writer.WriteLine(acogSensValue.ToString());
         writer.Close();
     }
 

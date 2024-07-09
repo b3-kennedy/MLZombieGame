@@ -351,6 +351,8 @@ public class PickUpWeapons : MonoBehaviour
                         droppedGun.GetComponent<WeaponPickupObject>().currentAmmo = currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().currentAmmo;
                         Destroy(currentGun);
                         guns.Remove(currentGun);
+
+                       
                     }
                 }
 
@@ -384,6 +386,7 @@ public class PickUpWeapons : MonoBehaviour
 
             Destroy(gun);
             InventoryManager.Instance.OnPickUpWeapon(newGun);
+            GetComponent<MouseLook>().OnGunPickedUp();
         }
 
     }

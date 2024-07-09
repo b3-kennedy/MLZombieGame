@@ -117,7 +117,15 @@ public class Shoot : MonoBehaviour
 
     public void ChangeVolume()
     {
-        volume = 1f * (SettingsMenuManager.Instance.gunVolumeValue / 100f);
+        
+        if(SettingsMenuManager.Instance.gunVolumeValue == 0)
+        {
+            volume = 0f;
+        }
+        else
+        {
+            volume = 1f * (SettingsMenuManager.Instance.gunVolumeValue / 100f);
+        }
     }
 
     public void UpdateMagCount()

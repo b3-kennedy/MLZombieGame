@@ -22,24 +22,9 @@ public class AssaultRifleAttachments : Attachments
 
     public GameObject[] ironSights;
 
-    Shoot shootScript;
 
-    AudioClip normalSound;
+
     public AudioClip suppressedSound;
-
-    private void Start()
-    {
-        shootScript = transform.GetChild(0).GetComponent<Shoot>();
-        normalSound = shootScript.shotSound;
-    }
-
-    private void Update()
-    {
-
-
-
-
-    }
 
 
     public override void AttachBarrel(GameObject attachment, GameObject button)
@@ -73,6 +58,17 @@ public class AssaultRifleAttachments : Attachments
             
             Destroy(sightAttachment);
             GameObject newAttachment = Instantiate(attachment, sightAttachmentPos);
+
+            switch (newAttachment.GetComponent<SightAttachment>().sightType)
+            {
+                case SightAttachment.SightType.ACOG:
+                    player.GetComponent<MouseLook>().acog = true;
+                    break;
+                case SightAttachment.SightType.HOLO:
+                    player.GetComponent<MouseLook>().holo = true;
+                    break;
+            }
+
             switch (gun)
             {
                 case Gun.M4:
@@ -135,6 +131,9 @@ public class AssaultRifleAttachments : Attachments
 
     public override void UnequipSight()
     {
+        player.GetComponent<MouseLook>().acog = false;
+        player.GetComponent<MouseLook>().holo = false;
+
         if (ironSights.Length > 0)
         {
             ironSights[0].SetActive(true);

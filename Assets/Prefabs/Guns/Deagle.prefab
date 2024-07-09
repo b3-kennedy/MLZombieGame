@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableMouseSway: 1
-  enableMoveRot: 1
+  enableMoveRot: 0
   enableMoveOnMove: 0
   swayAmount: 10
   maxSway: 5
@@ -137,6 +137,12 @@ MonoBehaviour:
   adsPosition: {x: 0, y: -0.017, z: -0.233}
   adsSpeed: 5
   isAiming: 0
+  aimedIn:
+    m_PersistentCalls:
+      m_Calls: []
+  aimedOut:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &9171109832437067769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a356035c93eeb78458aaab802e46283b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  shootScript: {fileID: 0}
+  normalSound: {fileID: 0}
   gun: 1
   barrelAttachment: {fileID: 0}
   barrelAttachmentPos: {fileID: 0}
+  suppressedShotSound: {fileID: 0}
 --- !u!1 &8754172628722415075
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd3956a06eb8be47a3bd14eea76d858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunAudio: {fileID: 0}
   muzzleFlashSpawner: {fileID: 445021677656517858, guid: d1f4516ab5d48d44e8d0cb7ea74f336c, type: 3}
   shotSound: {fileID: 8300000, guid: 8bd11a9c60aa56b458189e0545315d28, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}

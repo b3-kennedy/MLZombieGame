@@ -13,15 +13,9 @@ public class M200Attachments : Attachments
     public Transform sightAttachmentPos;
 
 
-    Shoot shootScript;
 
     AudioClip normalShot;
     public AudioClip suppressedShotSound;
-
-    private void Start()
-    {
-        shootScript = transform.GetChild(0).GetComponent<Shoot>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -67,7 +61,15 @@ public class M200Attachments : Attachments
             newAttachment.transform.rotation = sightAttachmentPos.rotation;
             sightAttachment = newAttachment;
 
-
+            switch (newAttachment.GetComponent<SightAttachment>().sightType)
+            {
+                case SightAttachment.SightType.ACOG:
+                    player.GetComponent<MouseLook>().acog = true;
+                    break;
+                case SightAttachment.SightType.HOLO:
+                    player.GetComponent<MouseLook>().holo = true;
+                    break;
+            }
 
             switch (gun)
             {
@@ -92,6 +94,12 @@ public class M200Attachments : Attachments
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
         currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
+    }
+
+    public override void UnequipSight()
+    {
+        player.GetComponent<MouseLook>().holo = false;
+        player.GetComponent<MouseLook>().acog = false;
     }
 
 }

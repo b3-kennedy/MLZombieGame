@@ -9,7 +9,6 @@ public class GlockAttachments : Attachments
     public GameObject barrelAttachment;
     public Transform barrelAttachmentPos;
 
-    AudioClip normalShot;
     public AudioClip suppressedShotSound;
 
     public override void AttachBarrel(GameObject attachment, GameObject button)
@@ -36,7 +35,7 @@ public class GlockAttachments : Attachments
     {
 
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
-        currentGun.shotSound = normalShot;
+        currentGun.shotSound = normalSound;
         currentGun.audioRange *= 2;
     }
 }

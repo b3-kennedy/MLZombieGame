@@ -13,8 +13,10 @@ public class PlayerAudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
+
+
 
     public void PlayFootstep(AudioClip[] type)
     {

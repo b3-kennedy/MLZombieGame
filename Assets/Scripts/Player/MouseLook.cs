@@ -40,20 +40,62 @@ public class MouseLook : MonoBehaviour
     public Transform camHolder;
     public Transform orientation;
 
+    ADS adsScript;
+
+    public bool acog;
+    public bool holo;
+
+    float acogSens;
+    float holoSens;
+    float normalSens;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if(SettingsMenuManager.Instance != null)
+        if (SettingsMenuManager.Instance != null)
         {
             SettingsMenuManager.Instance.updatedSens.AddListener(OnSensitivityChange);
             OnSensitivityChange();
         }
     }
 
+    public void OnGunPickedUp()
+    {
+        adsScript = GetComponent<PickUpWeapons>().currentActiveGun.transform.GetChild(0).GetComponent<ADS>();
+        adsScript.aimedIn.AddListener(OnAds);
+        adsScript.aimedOut.AddListener(OnUnAds);
+    }
+
     public void OnSensitivityChange()
     {
         sensitivity = maxSensitivity * (SettingsMenuManager.Instance.mouseSensValue / 100);
+        acogSens = sensitivity * SettingsMenuManager.Instance.acogSensValue;
+        holoSens = sensitivity * SettingsMenuManager.Instance.holoSensValue;
+        normalSens = sensitivity;
+        
+    }
+
+    public void OnAds()
+    {
+        normalSens = sensitivity;
+        if (acog)
+        {
+            sensitivity = acogSens;
+        }
+        else if (holo)
+        {
+            sensitivity = holoSens;
+        }
+        else
+        {
+            sensitivity = normalSens;
+        }
+    }
+
+    public void OnUnAds()
+    {
+        sensitivity = normalSens;
     }
 
     // Update is called once per frame
