@@ -301,7 +301,9 @@ public class PickUpWeapons : MonoBehaviour
             currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().UpdateMagCount();
             UpdateHud();
         }
-        
+
+        InventoryManager.Instance.UpdateAmmoInInventory();
+
         Destroy(mag);
     }
 

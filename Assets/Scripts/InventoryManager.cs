@@ -31,6 +31,15 @@ public class InventoryManager : MonoBehaviour
     public GameObject underbarrel;
 
     public Image throwableSlot;
+
+    public TextMeshProUGUI pistolMagText;
+    public TextMeshProUGUI arMagText;
+    public TextMeshProUGUI smgMagText;
+    public TextMeshProUGUI lmgMagText;
+    public TextMeshProUGUI sniperMagText;
+    public TextMeshProUGUI shotgunMagText;
+
+
     private void Awake()
     {
         Instance = this;
@@ -60,6 +69,18 @@ public class InventoryManager : MonoBehaviour
         //    GunInventoryUI(weaponPos.GetChild(0).gameObject, 0);
         //    GunInventoryUI(weaponPos.GetChild(1).gameObject, 1);
         //}
+
+    }
+
+    public void UpdateAmmoInInventory()
+    {
+        AmmoHolder holder = weaponPos.GetComponent<AmmoHolder>();
+        pistolMagText.text = holder.pistolMags.ToString();
+        arMagText.text = holder.arMags.ToString();
+        smgMagText.text = holder.smgMags.ToString();
+        lmgMagText.text = holder.lmgMags.ToString();
+        sniperMagText.text = holder.sniperMags.ToString();
+        shotgunMagText.text = holder.shotgunShells.ToString();
 
     }
 

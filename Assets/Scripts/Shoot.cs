@@ -153,7 +153,9 @@ public class Shoot : MonoBehaviour
 
         }
 
-        
+        InventoryManager.Instance.UpdateAmmoInInventory();
+
+
     }
 
     void WithPauseMenu()
@@ -389,6 +391,9 @@ public class Shoot : MonoBehaviour
                         break;
                     case GunType.SNIPER:
                         ammoHolder.sniperMags -= 1;
+                        break;
+                    case GunType.LMG:
+                        ammoHolder.lmgMags -= 1;
                         break;
 
                 }

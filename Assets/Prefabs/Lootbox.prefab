@@ -237,12 +237,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e74b0752548d124498ac80ef4b800688, type: 2}
     - {fileID: 11400000, guid: 916c865fe21cf4249b75dd03e61f63c6, type: 2}
     - {fileID: 11400000, guid: 3828cdc9bd9c23048b486ba1a032035c, type: 2}
+    - {fileID: 11400000, guid: 82bc7ba07b12d7e4a98b3bb06eb32f5d, type: 2}
+    - {fileID: 11400000, guid: d4bdaf33bca564041876b59922f87cc7, type: 2}
     ammoList:
     - {fileID: 11400000, guid: 5d7217100e9fd1b448b62eb2efe66b78, type: 2}
     - {fileID: 11400000, guid: b9243bcdb5519004ea9aa4070b6e9a90, type: 2}
     - {fileID: 11400000, guid: f2c8895997f0b7541b6e11f7da330716, type: 2}
     - {fileID: 11400000, guid: 53f1ca3d139da9b47ab2c430f9d7b554, type: 2}
     - {fileID: 11400000, guid: c710a4397b4f71546984f6dc19d486c8, type: 2}
+    - {fileID: 11400000, guid: 8d4d3aa693373fe4a93f9378c2f983bc, type: 2}
     attachmentList:
     - {fileID: 11400000, guid: add3ec33a7e4560448e65a503737b4f7, type: 2}
     - {fileID: 11400000, guid: 6f984579a36e56540908eb94134ca7cb, type: 2}
