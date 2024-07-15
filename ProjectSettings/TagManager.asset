@@ -18,6 +18,7 @@ TagManager:
   - BlueKey
   - GreenKey
   - smoke
+  - BossCritPoint
   layers:
   - Default
   - TransparentFX

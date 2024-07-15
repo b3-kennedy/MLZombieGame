@@ -35,7 +35,7 @@ public class MouseLook : MonoBehaviour
 
     public Transform cam;
     Vector2 turnVec;
-    public float sensitivity;
+    public float sensitivity = 1.0f;
     public float maxSensitivity = 5.0f;
     public Transform camHolder;
     public Transform orientation;
@@ -58,6 +58,7 @@ public class MouseLook : MonoBehaviour
             SettingsMenuManager.Instance.updatedSens.AddListener(OnSensitivityChange);
             OnSensitivityChange();
         }
+        normalSens = sensitivity;
     }
 
     public void OnGunPickedUp()

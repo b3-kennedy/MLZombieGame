@@ -437,6 +437,23 @@ public class Shoot : MonoBehaviour
                         hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage, transform.position, player.transform);
                     }
                 }
+                else if (hit.collider.transform.root.GetComponent<BossHealth>())
+                {
+                    if (hit.collider.CompareTag("BossCritPoint"))
+                    {
+                        hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(headshotDamage);
+                        Destroy(hit.collider.gameObject);
+                        hit.collider.transform.root.GetComponent<BossHealth>().ClearNullPositions();
+                    }
+                    else if (hit.collider.CompareTag("Body"))
+                    {
+                        hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(damage); ;
+                    }
+                }
+                else if (hit.collider.GetComponent<Bottle>())
+                {
+                    hit.collider.GetComponent<Bottle>().Explode();
+                }
             }
 
 
@@ -492,6 +509,19 @@ public class Shoot : MonoBehaviour
             else if (hit.collider.GetComponent<Bottle>())
             {
                 hit.collider.GetComponent<Bottle>().Explode();
+            }
+            else if (hit.collider.transform.root.GetComponent<BossHealth>())
+            {
+                if (hit.collider.CompareTag("BossCritPoint"))
+                {
+                    hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(headshotDamage);
+                    Destroy(hit.collider.gameObject);
+                    hit.collider.transform.root.GetComponent<BossHealth>().ClearNullPositions();
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(damage); ;
+                }
             }
 
         }
