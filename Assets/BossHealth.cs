@@ -53,7 +53,7 @@ public class BossHealth : MonoBehaviour
             {
                 int randomNum = Random.Range(0, tempList.Count);
                 GameObject point = Instantiate(critPoint, tempList[randomNum].position, Quaternion.identity);
-                point.transform.SetParent(critPositions[randomNum]);
+                point.transform.SetParent(tempList[randomNum]);
                 spawnedCritPos.Add(point);
                 tempList.RemoveAt(randomNum);
             }

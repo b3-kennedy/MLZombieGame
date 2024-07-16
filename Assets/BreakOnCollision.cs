@@ -24,7 +24,7 @@ public class BreakOnCollision : MonoBehaviour
     {
         if (active)
         {
-            Debug.Log("break");
+            Destroy(gameObject);
         }
         
     }

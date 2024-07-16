@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrowAttack : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
     public Transform throwPoint;
     public GameObject rock;
     GameObject spawnedRock;
@@ -13,7 +13,6 @@ public class ThrowAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
         boss = GetComponent<BossAI>();
     }
 
@@ -24,7 +23,6 @@ public class ThrowAttack : MonoBehaviour
         spawnedRock.transform.localPosition = Vector3.zero;
         spawnedRock.GetComponent<Rigidbody>().isKinematic = true;
         spawnedRock.GetComponent<Collider>().enabled = false;
-
         anim.SetBool("throw", true);
     }
 

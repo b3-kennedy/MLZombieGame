@@ -19,6 +19,7 @@ TagManager:
   - GreenKey
   - smoke
   - BossCritPoint
+  - wall
   layers:
   - Default
   - TransparentFX
