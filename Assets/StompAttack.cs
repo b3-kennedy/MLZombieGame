@@ -39,6 +39,7 @@ public class StompAttack : MonoBehaviour
     {
         anim.SetBool("stomp", false);
         stompAOE.SetActive(false);
+        bossAI.OnEndAttack();
     }
 
     // Update is called once per frame

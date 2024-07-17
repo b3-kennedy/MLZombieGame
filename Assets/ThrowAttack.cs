@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class ThrowAttack : MonoBehaviour
 {
+
+    public AnimationCurve trajectory;
+    public float duration;
+    public float heightY;
+
+    public float impactRadius;
+
     public Animator anim;
     public Transform throwPoint;
     public GameObject rock;
+    public GameObject aoe;
+    GameObject throwAoe;
     GameObject spawnedRock;
     BossAI boss;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +41,43 @@ public class ThrowAttack : MonoBehaviour
     {
         if(spawnedRock != null)
         {
-            Vector3 dir = boss.target.position - transform.position;
             spawnedRock.transform.SetParent(null);
-            spawnedRock.GetComponent<Rigidbody>().isKinematic = false;
-            spawnedRock.GetComponent<Rigidbody>().AddForce(dir * 1, ForceMode.Impulse);
-            spawnedRock.GetComponent<Collider>().enabled = true;
+            StartCoroutine(FollowCurve(throwPoint.transform.position, boss.target.position));
+            throwAoe = Instantiate(aoe, new Vector3(boss.target.position.x, 0.1f, boss.target.position.z), Quaternion.identity);
+            CircleDrawer circle = throwAoe.GetComponent<CircleDrawer>();
+            circle.radius = impactRadius;
+            anim.SetBool("throw", false);
+            boss.canLookAt = true;
+            boss.OnEndAttack();
         }
+    }
+
+    public IEnumerator FollowCurve(Vector3 start, Vector3 target)
+    {
+        float timePassed = 0f;
+
+        Vector3 end = target;
+
+        while(timePassed < duration)
+        {
+            timePassed += Time.deltaTime;
+            float linearTime = timePassed / duration;
+            float heightTime = trajectory.Evaluate(linearTime);
+
+            float height = Mathf.Lerp(0f, heightY, heightTime);
+
+            spawnedRock.transform.position = Vector3.Lerp(start, end, linearTime) + new Vector3(0, height, 0);
+
+            yield return null;
+        }
+
+        if(Vector3.Distance(boss.target.position, spawnedRock.transform.position) < impactRadius)
+        {
+            Debug.Log("damage player");
+        }
+        Destroy(throwAoe);
+        Destroy(spawnedRock);
+
     }
 
     // Update is called once per frame

@@ -2813,9 +2813,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754324ec87142364eba03a1cf65f50a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trajectory:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.790582
+      outSlope: 3.790582
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.108333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.9809885
+      outSlope: -2.9809885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.125
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 1.5
+  heightY: 5
+  impactRadius: 5
   anim: {fileID: 1648720495}
   throwPoint: {fileID: 1512122081}
   rock: {fileID: 6278313280136909174, guid: 264e86be09b85df4ebb1c9b1646f24a8, type: 3}
+  aoe: {fileID: 1389440629749831126, guid: cd676cfeeafda2845b63d7b51d5928a9, type: 3}
 --- !u!4 &1648720498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cce4bbb7b0afba4ea4f489c55ded10d, type: 3}

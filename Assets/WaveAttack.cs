@@ -9,6 +9,7 @@ public class WaveAttack : MonoBehaviour
     public float multiplier;
     bool isActive;
     BossAI bossAI;
+    bool canDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class WaveAttack : MonoBehaviour
 
     public void WaveExecute()
     {
+        canDamage = true;
         drawer.gameObject.SetActive(true);
         isActive = true;
     }
@@ -35,6 +37,7 @@ public class WaveAttack : MonoBehaviour
         drawer.gameObject.SetActive(false);
         drawer.radius = 1;
         isActive = false;
+        bossAI.OnEndAttack();
     }
 
     // Update is called once per frame
@@ -45,12 +48,20 @@ public class WaveAttack : MonoBehaviour
             drawer.radius += Time.deltaTime * multiplier;
         }
 
-        if(Vector3.Distance(bossAI.target.position, bossAI.transform.position) < drawer.radius)
+
+        if (Vector3.Distance(bossAI.target.position, bossAI.transform.position) < drawer.radius)
         {
-            if (!bossAI.target.GetComponent<RigidbodyMovement>().isCrouched)
+            if (canDamage && !bossAI.target.GetComponent<RigidbodyMovement>().isCrouched)
             {
-                Debug.Log("take damage");
+                Debug.Log("yes");
             }
+
         }
+        if (drawer.radius > Vector3.Distance(bossAI.target.position, bossAI.transform.position))
+        {
+            canDamage = false;
+        }
+
+
     }
 }
