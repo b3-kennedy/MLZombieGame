@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BossAI : MonoBehaviour
 {
-
+    public enum BossState {CHARGE, WAVE, THROW, STOMP};
+    public BossState state;
     public Transform target;
     ThrowAttack throwAttack;
     ChargeAttack chargeAttack;
@@ -12,6 +13,8 @@ public class BossAI : MonoBehaviour
     StompAttack stompAttack;
     float distance;
     [HideInInspector] public bool canLookAt;
+    float betweenStateTimer;
+    bool startbetweenStateTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +23,7 @@ public class BossAI : MonoBehaviour
         chargeAttack = GetComponent<ChargeAttack>();
         waveAttack = GetComponent<WaveAttack>();
         stompAttack = GetComponent<StompAttack>();
-        SelectState();
+        
         
     }
 
@@ -29,43 +32,80 @@ public class BossAI : MonoBehaviour
         distance = Vector3.Distance(transform.position, target.position);
         if(distance < 10)
         {
-            stompAttack.StompExecute();
+            int num = Random.Range(0, 2);
+            if(num == 0 && state != BossState.STOMP)
+            {
+                state = BossState.STOMP;
+                stompAttack.StompExecute();
+            }
+            else if(num == 1 && state != BossState.CHARGE)
+            {
+                state = BossState.CHARGE;
+                chargeAttack.ChargeExecute();
+            }
+            else
+            {
+                SelectState();
+            }
+            
         }
         else if(distance >= 10)
         {
             int num = Random.Range(0, 3);
 
-            if(num == 0)
+            if(num == 0 && state != BossState.CHARGE)
             {
+                state = BossState.CHARGE;
                 chargeAttack.ChargeExecute();
             }
-            else if(num == 1)
+            else if(num == 1 && state != BossState.WAVE)
             {
-                waveAttack.WaveExecute();
+                state = BossState.WAVE;
+                waveAttack.StartAttack();
             }
-            else if(num == 2)
+            else if(num == 2 && state != BossState.THROW)
             {
+                state = BossState.THROW;
                 throwAttack.Execute();
+            }
+            else
+            {
+                SelectState();
             }
         }
     }
 
-    public void OnEndAttack()
+    public void StartBossFight()
     {
         SelectState();
+    }
+
+    public void OnEndAttack()
+    {
+        startbetweenStateTimer = true;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+        if (startbetweenStateTimer)
+        {
+            betweenStateTimer += Time.deltaTime;
+            if(betweenStateTimer > 0.5f)
+            {
+                SelectState();
+                betweenStateTimer = 0;
+                startbetweenStateTimer = false;
+            }
+        }
 
         LookAtPoint(target.position);
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    chargeAttack.ChargeExecute();
-        //}
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            StartBossFight();
+        }
         //if (Input.GetKeyDown(KeyCode.Z))
         //{
         //    waveAttack.StartAttack();
@@ -86,7 +126,7 @@ public class BossAI : MonoBehaviour
         {
             Vector3 dir = pos - transform.position;
             Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 2 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 5 * Time.deltaTime);
         }
 
     }

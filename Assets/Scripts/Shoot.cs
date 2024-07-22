@@ -426,28 +426,30 @@ public class Shoot : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, CalculateShootingDir(), out hit))
             {
-                if (hit.collider.transform.root.GetComponent<Health>())
+                var hitObjHealth = hit.collider.transform.root.GetComponent<Health>();
+                if (hitObjHealth)
                 {
                     if (hit.collider.CompareTag("Head"))
                     {
-                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage, transform.position, player.transform);
+                        hitObjHealth.TakeDamage(headshotDamage, transform.position, player.transform);
                     }
                     else if (hit.collider.CompareTag("Body"))
                     {
-                        hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage, transform.position, player.transform);
+                        hitObjHealth.TakeDamage(damage, transform.position, player.transform);
                     }
                 }
                 else if (hit.collider.transform.root.GetComponent<BossHealth>())
                 {
+                    var bossHealth = hit.collider.transform.root.GetComponent<BossHealth>();
                     if (hit.collider.CompareTag("BossCritPoint"))
                     {
-                        hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(headshotDamage);
+                        bossHealth.TakeDamage(headshotDamage);
                         Destroy(hit.collider.gameObject);
-                        hit.collider.transform.root.GetComponent<BossHealth>().ClearNullPositions();
+                        bossHealth.ClearNullPositions();
                     }
                     else if (hit.collider.CompareTag("Body"))
                     {
-                        hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(damage); ;
+                        bossHealth.TakeDamage(damage); ;
                     }
                 }
                 else if (hit.collider.GetComponent<Bottle>())
@@ -493,35 +495,36 @@ public class Shoot : MonoBehaviour
         //Debug.Log("shoot");
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
         {
-            
-            if (hit.collider.transform.root.GetComponent<Health>())
+
+            var hitObjHealth = hit.collider.transform.root.GetComponent<Health>();
+            if (hitObjHealth)
             {
                 if (hit.collider.CompareTag("Head"))
                 {
-                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(headshotDamage, transform.position, player.transform);
-                   
+                    hitObjHealth.TakeDamage(headshotDamage, transform.position, player.transform);
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
-                    hit.collider.transform.root.GetComponent<Health>().TakeDamage(damage, transform.position, player.transform);
+                    hitObjHealth.TakeDamage(damage, transform.position, player.transform);
+                }
+            }
+            else if (hit.collider.transform.root.GetComponent<BossHealth>())
+            {
+                var bossHealth = hit.collider.transform.root.GetComponent<BossHealth>();
+                if (hit.collider.CompareTag("BossCritPoint"))
+                {
+                    bossHealth.TakeDamage(headshotDamage);
+                    Destroy(hit.collider.gameObject);
+                    bossHealth.ClearNullPositions();
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    bossHealth.TakeDamage(damage); ;
                 }
             }
             else if (hit.collider.GetComponent<Bottle>())
             {
                 hit.collider.GetComponent<Bottle>().Explode();
-            }
-            else if (hit.collider.transform.root.GetComponent<BossHealth>())
-            {
-                if (hit.collider.CompareTag("BossCritPoint"))
-                {
-                    hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(headshotDamage);
-                    Destroy(hit.collider.gameObject);
-                    hit.collider.transform.root.GetComponent<BossHealth>().ClearNullPositions();
-                }
-                else if (hit.collider.CompareTag("Body"))
-                {
-                    hit.collider.transform.root.GetComponent<BossHealth>().TakeDamage(damage); ;
-                }
             }
 
         }

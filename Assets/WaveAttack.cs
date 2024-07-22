@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class WaveAttack : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
     public CircleDrawer drawer;
     public float multiplier;
     bool isActive;
     BossAI bossAI;
     bool canDamage;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
     {
         bossAI = GetComponent<BossAI>();
-        anim = GetComponent<Animator>();
     }
 
     public void StartAttack()
@@ -53,7 +53,7 @@ public class WaveAttack : MonoBehaviour
         {
             if (canDamage && !bossAI.target.GetComponent<RigidbodyMovement>().isCrouched)
             {
-                Debug.Log("yes");
+                bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
 
         }

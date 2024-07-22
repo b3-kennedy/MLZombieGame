@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -135,12 +136,28 @@ public class PickUpWeapons : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         hit.collider.gameObject.SetActive(false);
+                        GameManager.Instance.SwitchToBossScene();
+  
+
                     }
                 }
                 else
                 {
                     HUDManager.Instance.UpdateInteractPrompt("Find all keys to open door");
                     HUDManager.Instance.ShowInteractPrompt();
+                }
+            }
+            else if (hit.collider.CompareTag("Button"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if(BossFightManager.Instance != null)
+                    {
+                        BossFightManager.Instance.OpenBossDoor();
+                    }
                 }
             }
             else

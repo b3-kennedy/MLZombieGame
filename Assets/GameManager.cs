@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+    }
+
     public void EnableSmokeCamera()
     {
         smokeCamera.SetActive(true);
@@ -65,6 +69,26 @@ public class GameManager : MonoBehaviour
         //}
 
 
+    }
+
+    public void SwitchToBossScene()
+    {
+
+        player.GetComponent<Rigidbody>().position = new Vector3(0, 1, -21);
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.SwitchToScene(3);
+        }
+        PauseMenuManager.Instance.player = player.transform.parent.gameObject;
+        DontDestroyOnLoad(player.transform.parent);
+        
+    }
+
+    public void MovePlayerPos()
+    {
+        player.transform.parent.position = new Vector3(0, 1, -21);
+        player.transform.localPosition = Vector3.zero;
+        Debug.Log("switched");
     }
 
     public void Lose()

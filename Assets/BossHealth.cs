@@ -10,6 +10,7 @@ public class BossHealth : MonoBehaviour
     public GameObject critPoint;
     public List<Transform> critPositions;
     public List<GameObject> spawnedCritPos;
+    public GameObject healthBar;
 
     public float critSpawnTime;
     float critSpawnTimer;
@@ -69,5 +70,7 @@ public class BossHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        healthBar.GetComponent<RectTransform>().localScale = new Vector3(currentHealth / maxHealth, healthBar.GetComponent<RectTransform>().localScale.y,
+            healthBar.GetComponent<RectTransform>().localScale.z);
     }
 }

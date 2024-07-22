@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: 52aea8eb0d2669f4fa0d74855e26ad96
+  - enabled: 1
+    path: Assets/Scenes/BossFight.unity
+    guid: 7b193218ba4108142a38f77db2a92ec5
   m_configObjects: {}

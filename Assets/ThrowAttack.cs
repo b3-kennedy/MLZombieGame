@@ -18,6 +18,7 @@ public class ThrowAttack : MonoBehaviour
     GameObject throwAoe;
     GameObject spawnedRock;
     BossAI boss;
+    public float damage;
 
 
 
@@ -46,10 +47,15 @@ public class ThrowAttack : MonoBehaviour
             throwAoe = Instantiate(aoe, new Vector3(boss.target.position.x, 0.1f, boss.target.position.z), Quaternion.identity);
             CircleDrawer circle = throwAoe.GetComponent<CircleDrawer>();
             circle.radius = impactRadius;
-            anim.SetBool("throw", false);
-            boss.canLookAt = true;
-            boss.OnEndAttack();
+            EndAttack();
         }
+    }
+
+    public void EndAttack()
+    {
+        anim.SetBool("throw", false);
+        boss.canLookAt = true;
+        boss.OnEndAttack();
     }
 
     public IEnumerator FollowCurve(Vector3 start, Vector3 target)
@@ -73,7 +79,7 @@ public class ThrowAttack : MonoBehaviour
 
         if(Vector3.Distance(boss.target.position, spawnedRock.transform.position) < impactRadius)
         {
-            Debug.Log("damage player");
+            boss.target.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
         Destroy(throwAoe);
         Destroy(spawnedRock);

@@ -20,6 +20,7 @@ TagManager:
   - smoke
   - BossCritPoint
   - wall
+  - Button
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class PauseMenuManager : MonoBehaviour
     public static PauseMenuManager Instance;
     public GameObject pauseCanvas;
     [HideInInspector] public bool isPaused;
+    [HideInInspector] public GameObject player;
 
     private void Awake()
     {
@@ -51,6 +52,10 @@ public class PauseMenuManager : MonoBehaviour
     {
         OnPause();
         Destroy(gameObject);
+        if(player != null)
+        {
+            Destroy(player);
+        }
         LevelManager.Instance.SwitchToScene(0);
     }
 

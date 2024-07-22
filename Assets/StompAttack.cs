@@ -5,20 +5,21 @@ using UnityEngine;
 public class StompAttack : MonoBehaviour
 {
 
-    Animator anim;
+    public Animator anim;
     public GameObject stompAOE;
+    public float damage;
     BossAI bossAI;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
         bossAI = GetComponent<BossAI>();
     }
 
 
     public void StompExecute()
     {
+        anim.SetBool("charge", false);
         anim.SetBool("stomp", true);
         stompAOE.SetActive(true);
     }
@@ -29,7 +30,7 @@ public class StompAttack : MonoBehaviour
         {
             if (bossAI.target.GetComponent<RigidbodyMovement>().IsGrounded())
             {
-                Debug.Log("player hit");
+                bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
             
         }
