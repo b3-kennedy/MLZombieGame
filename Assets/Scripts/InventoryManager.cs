@@ -39,6 +39,8 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI sniperMagText;
     public TextMeshProUGUI shotgunMagText;
 
+    public TextMeshProUGUI bandagesText;
+
 
     private void Awake()
     {
@@ -81,6 +83,13 @@ public class InventoryManager : MonoBehaviour
         lmgMagText.text = holder.lmgMags.ToString();
         sniperMagText.text = holder.sniperMags.ToString();
         shotgunMagText.text = holder.shotgunShells.ToString();
+
+
+    }
+
+    public void UpdateBandagesText()
+    {
+        bandagesText.text = GetComponent<PlayerHealth>().numberOfBandages.ToString();
 
     }
 

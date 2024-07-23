@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 public class RigidbodyMovement : MonoBehaviour
 {
 
-    public enum PlayerState {NORMAL, CROUCH, SPRINT };
+    public enum PlayerState {NORMAL, CROUCH, SPRINT, BANDAGING};
     public PlayerState playerState;
 
     public static RigidbodyMovement Instance;
@@ -49,7 +49,7 @@ public class RigidbodyMovement : MonoBehaviour
     public float sprintRecoveryTime;
     public float sprintTimer;
     public float recoveryTimer;
-    bool canSprint = true;
+    [HideInInspector] public bool canSprint = true;
     bool isSprinting;
 
 
@@ -383,6 +383,13 @@ public class RigidbodyMovement : MonoBehaviour
                     FootstepAudio(sprintFootstepInterval);
                     currentSpeed = sprintSpeed;
                     break;
+                case (PlayerState.BANDAGING):
+                    rb.AddForce(moveDir * crouchSpeed * 10, ForceMode.Force);
+                    pam.footstepSource.volume = crouchVolume;
+                    FootstepAudio(crouchFootstepInterval);
+                    currentSpeed = crouchSpeed;
+                    break;
+
 
             }
         }

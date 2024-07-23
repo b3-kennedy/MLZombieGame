@@ -17185,8 +17185,16 @@ PrefabInstance:
       value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 3571301665161525268, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: healAmount
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571301665161525268, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
       propertyPath: currentHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571301665161525268, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
+      propertyPath: numberOfBandages
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5028007478418686264, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19311,6 +19319,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7985748445076781168}
   m_SourcePrefab: {fileID: 100100000, guid: ebcf6ae81c910294ba0891ff2c6b4129, type: 3}
+--- !u!1001 &7762655960890866828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.2072725
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.835131
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090860863608741804, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864020550128895254, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
+      propertyPath: m_Name
+      value: Bandage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
 --- !u!4 &7985748445076781162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2574711361855186892, guid: ebcf6ae81c910294ba0891ff2c6b4129, type: 3}
@@ -19472,3 +19537,4 @@ SceneRoots:
   - {fileID: 6247727176620582077}
   - {fileID: 821998889246517081}
   - {fileID: 8595168101902743357}
+  - {fileID: 7762655960890866828}

@@ -160,6 +160,18 @@ public class PickUpWeapons : MonoBehaviour
                     }
                 }
             }
+            else if (hit.collider.CompareTag("Bandage"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up bandage");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GetComponent<PlayerHealth>().numberOfBandages++;
+                    GetComponent<InventoryManager>().UpdateBandagesText();
+                    Destroy(hit.collider.gameObject);
+                }
+            }
             else
             {
                 HUDManager.Instance.HideInteractPrompt();

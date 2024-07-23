@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -12,6 +13,16 @@ public class PlayerHealth : MonoBehaviour
     float regenTimer;
     bool hasTakenDamage;
     bool canRegen;
+
+    public int numberOfBandages;
+    public float bandageTime;
+    public float healAmount;
+    public GameObject healBar;
+    public GameObject healUI;
+    float bandageTimer;
+    bool isBandaging;
+    Animator anim;
+    Shoot shootScript;
 
     [Range(0.0f, 1.0f)]
     public float vignetteMultiplier;
@@ -34,11 +45,54 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        anim = GetComponent<PickUpWeapons>().weaponPos.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.B) && !isBandaging && numberOfBandages > 0)
+        {
+            anim.SetBool("bandaging", true);
+            if(GetComponent<PickUpWeapons>().currentActiveGun != null)
+            {
+                GetComponent<PickUpWeapons>().currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().canShoot = false;
+            }
+            
+            healUI.SetActive(true);
+            isBandaging = true;
+            GetComponent<RigidbodyMovement>().canSprint = false;
+            
+        }
+
+        if (isBandaging)
+        {
+            GetComponent<RigidbodyMovement>().playerState = RigidbodyMovement.PlayerState.BANDAGING;
+            bandageTimer += Time.deltaTime;
+            healBar.GetComponent<RectTransform>().localScale = new Vector3(bandageTimer / bandageTime, healBar.GetComponent<RectTransform>().localScale.y,
+                healBar.GetComponent<RectTransform>().localScale.z);
+            currentHealth += healAmount;
+            if(bandageTimer >= bandageTime)
+            {
+                anim.SetBool("bandaging", false);
+                healUI.SetActive(false);
+                healBar.GetComponent<RectTransform>().localScale = new Vector3(0, healBar.GetComponent<RectTransform>().localScale.y,
+                    healBar.GetComponent<RectTransform>().localScale.z);
+                currentHealth += healAmount;
+                numberOfBandages -= 1;
+                GetComponent<InventoryManager>().UpdateBandagesText();
+                bandageTimer = 0;
+                if (GetComponent<PickUpWeapons>().currentActiveGun != null)
+                {
+                    GetComponent<PickUpWeapons>().currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().canShoot = true;
+                }
+                GetComponent<RigidbodyMovement>().canSprint = true;
+                GetComponent<RigidbodyMovement>().playerState = RigidbodyMovement.PlayerState.NORMAL;
+                isBandaging = false;
+            }
+        }
+
         if (hasTakenDamage)
         {
             regenTimer += Time.deltaTime;

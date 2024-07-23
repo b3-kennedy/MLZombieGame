@@ -21,6 +21,7 @@ TagManager:
   - BossCritPoint
   - wall
   - Button
+  - Bandage
   layers:
   - Default
   - TransparentFX

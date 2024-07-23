@@ -83,7 +83,7 @@ public class Shoot : MonoBehaviour
     void Start()
     {
 
-        
+        canShoot = true;
 
         ammoHolder = transform.parent.parent.parent.GetComponent<AmmoHolder>();
         player = ammoHolder.player;
@@ -162,7 +162,7 @@ public class Shoot : MonoBehaviour
     {
         if (!PauseMenuManager.Instance.isPaused)
         {
-            if (!InventoryManager.Instance.inventory.activeSelf && !reload)
+            if (!InventoryManager.Instance.inventory.activeSelf && !reload && canShoot)
             {
                 if (currentAmmo > 0)
                 {
@@ -236,7 +236,7 @@ public class Shoot : MonoBehaviour
 
     void WithoutPauseMenu()
     {
-        if (!InventoryManager.Instance.inventory.activeSelf && !reload)
+        if (!InventoryManager.Instance.inventory.activeSelf && !reload && canShoot)
         {
             if (currentAmmo > 0)
             {
