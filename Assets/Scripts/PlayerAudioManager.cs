@@ -9,6 +9,7 @@ public class PlayerAudioManager : MonoBehaviour
 
     public AudioClip[] concreteStepsWalk;
     public AudioClip[] grassStepsWalk;
+    public AudioClip[] metalStepsWalk;
 
     // Start is called before the first frame update
     void Start()

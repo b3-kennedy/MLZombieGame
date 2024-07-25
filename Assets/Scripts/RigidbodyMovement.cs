@@ -347,6 +347,9 @@ public class RigidbodyMovement : MonoBehaviour
                     case Material.MaterialType.CONCRETE:
                         pam.PlayFootstep(pam.concreteStepsWalk);
                         break;
+                    case Material.MaterialType.METAL:
+                        pam.PlayFootstep(pam.metalStepsWalk);
+                        break;
                     default:
                         pam.PlayFootstep(pam.grassStepsWalk);
                         break;

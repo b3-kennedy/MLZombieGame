@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -68,11 +67,16 @@ public class PlayerHealth : MonoBehaviour
 
         if (isBandaging)
         {
+
             GetComponent<RigidbodyMovement>().playerState = RigidbodyMovement.PlayerState.BANDAGING;
             bandageTimer += Time.deltaTime;
             healBar.GetComponent<RectTransform>().localScale = new Vector3(bandageTimer / bandageTime, healBar.GetComponent<RectTransform>().localScale.y,
                 healBar.GetComponent<RectTransform>().localScale.z);
-            currentHealth += healAmount;
+            if (currentHealth < 100)
+            {
+                currentHealth += healAmount;
+            }
+            
             if(bandageTimer >= bandageTime)
             {
                 anim.SetBool("bandaging", false);

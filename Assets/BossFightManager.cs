@@ -7,6 +7,8 @@ public class BossFightManager : MonoBehaviour
     public static BossFightManager Instance;
     public BossAI boss;
     public GameObject bossDoor;
+    public GameObject bossDoor2;
+    public GameObject bossHealthBar;
 
 
     private void Awake()
@@ -24,6 +26,12 @@ public class BossFightManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BossDefeated()
+    {
+        bossHealthBar.SetActive(false);
+        bossDoor2.GetComponent<Animator>().SetBool("open", true);
     }
 
     public void StartFight()

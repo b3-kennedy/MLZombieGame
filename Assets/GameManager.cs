@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(winScreen.transform.parent.gameObject);
     }
 
     private void Start()

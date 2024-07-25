@@ -22,6 +22,7 @@ TagManager:
   - wall
   - Button
   - Bandage
+  - KillButton
   layers:
   - Default
   - TransparentFX

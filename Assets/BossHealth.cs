@@ -68,6 +68,7 @@ public class BossHealth : MonoBehaviour
         currentHealth -= dmg;
         if(currentHealth <= 0)
         {
+            BossFightManager.Instance.BossDefeated();
             Destroy(gameObject);
         }
         healthBar.GetComponent<RectTransform>().localScale = new Vector3(currentHealth / maxHealth, healthBar.GetComponent<RectTransform>().localScale.y,

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -170,6 +169,19 @@ public class PickUpWeapons : MonoBehaviour
                     GetComponent<PlayerHealth>().numberOfBandages++;
                     GetComponent<InventoryManager>().UpdateBandagesText();
                     Destroy(hit.collider.gameObject);
+                }
+            }
+            else if (hit.collider.CompareTag("KillButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if(GameManager.Instance != null)
+                    {
+                        GameManager.Instance.Win();
+                    }
                 }
             }
             else
