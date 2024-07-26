@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class ChargeAttack : MonoBehaviour
@@ -15,6 +14,9 @@ public class ChargeAttack : MonoBehaviour
     float distanceCheckTimer;
     public float damage;
     public float force;
+    bool collided;
+    public float damageCooldown;
+    float damageTimer;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,6 +36,16 @@ public class ChargeAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (collided)
+        {
+            damageTimer += Time.deltaTime;
+            if(damageTimer >= damageCooldown)
+            {
+                damageTimer = 0;
+                collided = false;
+            }
+        }
 
         if (distanceCheck)
         {
@@ -86,8 +98,9 @@ public class ChargeAttack : MonoBehaviour
             bossAI.canLookAt = true;
             bossAI.OnEndAttack();
         }
-        else if (other.collider.GetComponent<PlayerHealth>())
+        else if (other.collider.GetComponent<PlayerHealth>() && !collided)
         {
+            collided = true;
             bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             Vector3 dir = (other.collider.transform.position - transform.position).normalized;
             other.collider.GetComponent<Rigidbody>().AddForce(dir * force);

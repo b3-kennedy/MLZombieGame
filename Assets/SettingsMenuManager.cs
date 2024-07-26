@@ -73,7 +73,14 @@ public class SettingsMenuManager : MonoBehaviour
         Debug.Log(path);
         if(!File.Exists(path))
         {
-            File.CreateText(path);
+            //File.CreateText(path);
+            StreamWriter writer = new StreamWriter(path, false);
+            writer.WriteLine(100);
+            writer.WriteLine(100);
+            writer.WriteLine(100);
+            writer.WriteLine(1);
+            writer.WriteLine(1);
+            writer.Close();
         }
         else
         {
@@ -200,6 +207,7 @@ public class SettingsMenuManager : MonoBehaviour
         writer.WriteLine(gunVolumeValue.ToString());
         writer.WriteLine(playerFoostepsVolumeValue.ToString());
         writer.WriteLine(acogSensValue.ToString());
+        writer.WriteLine(holoSensValue.ToString());
         writer.Close();
     }
 

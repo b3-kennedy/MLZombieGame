@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Material : MonoBehaviour
 {
-    public enum MaterialType {GRASS, CONCRETE, METAL};
+    public enum MaterialType {GRASS, CONCRETE, METAL, WOOD};
     public MaterialType matType;
 }

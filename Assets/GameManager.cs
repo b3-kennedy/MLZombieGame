@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(winScreen.transform.parent.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -101,7 +101,16 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+        LevelManager.Instance.SwitchToScene(1);
+        OnRestart();
+        
+    }
+
+    public void OnRestart()
+    {
+        Destroy(gameObject);
+        Destroy(player.transform.parent.gameObject);
     }
 
     public void Quit()
@@ -111,6 +120,8 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        LevelManager.Instance.SwitchToScene(0);
+        OnRestart();
         Debug.Log("go to main menu");
     }
 }

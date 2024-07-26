@@ -30,6 +30,9 @@ public class ThrowAttack : MonoBehaviour
 
     public void Execute()
     {
+        anim.SetBool("charge", false);
+        anim.SetBool("wave", false);
+        anim.SetBool("stomp", false);
         spawnedRock = Instantiate(rock, throwPoint.transform.position, Quaternion.identity);
         spawnedRock.transform.SetParent(throwPoint);
         spawnedRock.transform.localPosition = Vector3.zero;
@@ -47,7 +50,7 @@ public class ThrowAttack : MonoBehaviour
             throwAoe = Instantiate(aoe, new Vector3(boss.target.position.x, 0.1f, boss.target.position.z), Quaternion.identity);
             CircleDrawer circle = throwAoe.GetComponent<CircleDrawer>();
             circle.radius = impactRadius;
-            EndAttack();
+            
         }
     }
 
@@ -81,6 +84,7 @@ public class ThrowAttack : MonoBehaviour
         {
             boss.target.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
+        EndAttack();
         Destroy(throwAoe);
         Destroy(spawnedRock);
 

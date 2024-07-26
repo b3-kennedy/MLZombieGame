@@ -52,6 +52,10 @@ public class PauseMenuManager : MonoBehaviour
     {
         OnPause();
         Destroy(gameObject);
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.OnRestart();
+        }
         if(player != null)
         {
             Destroy(player);

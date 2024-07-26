@@ -20,6 +20,9 @@ public class WaveAttack : MonoBehaviour
 
     public void StartAttack()
     {
+        anim.SetBool("charge", false);
+        anim.SetBool("throw", false);
+        anim.SetBool("stomp", false);
         anim.SetBool("wave", true);
     }
 
