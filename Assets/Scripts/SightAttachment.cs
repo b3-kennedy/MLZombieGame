@@ -8,6 +8,8 @@ public class SightAttachment : Attachment
     public enum SightType {ACOG, HOLO};
     public SightType sightType;
 
+    
+
     public Vector3 M4position;
     public Vector3 scorpionPosition;
     public Vector3 m200Position;

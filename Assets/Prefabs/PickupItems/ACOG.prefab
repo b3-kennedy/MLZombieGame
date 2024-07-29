@@ -149,3 +149,4 @@ MonoBehaviour:
   attachmentType: 0
   itemName: ACOG
   UIElement: {fileID: 411028760406493008, guid: a641980a4b42972478eaed9d9fd9dd90, type: 3}
+  itemIcon: {fileID: 21300000, guid: d414b1c244959ef40ad4008844276de9, type: 3}

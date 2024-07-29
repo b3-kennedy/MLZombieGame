@@ -6,6 +6,7 @@ public class Attachment : MonoBehaviour
 {
 
     public GameObject attachmentUI;
+    public Sprite itemIcon;
 
     // Start is called before the first frame update
     void Start()

@@ -10,6 +10,15 @@ public class AttachmentSlot : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Button>().onClick.AddListener(delegate { InventoryManager.Instance.OnUnequipItem(attachmentUI, attachmentObj, GetComponent<Image>()); });
+        GetComponent<Button>().onClick.AddListener(delegate { OnClick(); });
+    }
+
+    public void OnClick()
+    {
+        if(attachmentObj != null)
+        {
+            InventoryManager.Instance.OnUnequipItem(attachmentUI, attachmentObj, GetComponent<Image>());
+        }
+        
     }
 }

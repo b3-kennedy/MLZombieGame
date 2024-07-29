@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentUI: {fileID: 411028760406493008, guid: 2d8aa234cc2b18348a4925d83ab6d698, type: 3}
+  itemIcon: {fileID: 21300000, guid: 92f2997b822afff438c5caa6de37b751, type: 3}
   sightType: 1
   M4position: {x: 0, y: -0.0055, z: 0}
   scorpionPosition: {x: 0, y: -0.0055, z: 0}

@@ -114,7 +114,10 @@ public class InventoryManager : MonoBehaviour
                     {
                         sight.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
                         sight.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                        sight.GetComponent<Image>().color = Color.green;
+                        sight.transform.GetChild(0).GetComponent<Image>().sprite = slot.transform.GetChild(0).GetComponent<Attachment>().itemIcon;
+                        sight.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+
+
                     }
 
                 }
@@ -126,7 +129,8 @@ public class InventoryManager : MonoBehaviour
                     {
                         barrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
                         barrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                        barrel.GetComponent<Image>().color = Color.green;
+                        barrel.transform.GetChild(0).GetComponent<Image>().sprite = slot.transform.GetChild(0).GetComponent<Attachment>().itemIcon;
+                        barrel.transform.GetChild(0).GetComponent<Image>().color = Color.white;
                     }
                 }
                 else if (slot.GetComponent<AttachmentSlotType>().attachmentType == AttachmentSlotType.AttachmentType.UNDERBARREL)
@@ -137,7 +141,8 @@ public class InventoryManager : MonoBehaviour
                     {
                         underbarrel.GetComponent<AttachmentSlot>().attachmentUI = slot.transform.GetChild(0).GetComponent<Attachment>().attachmentUI;
                         underbarrel.GetComponent<AttachmentSlot>().attachmentObj = slot.transform.GetChild(0).gameObject;
-                        underbarrel.GetComponent<Image>().color = Color.green;
+                        underbarrel.transform.GetChild(0).GetComponent<Image>().sprite = slot.transform.GetChild(0).GetComponent<Attachment>().itemIcon;
+                        underbarrel.transform.GetChild(0).GetComponent<Image>().color = Color.white;
                     }
                 }
             }
@@ -202,6 +207,9 @@ public class InventoryManager : MonoBehaviour
 
                     Debug.Log(activeGun);
                     activeGun.transform.GetChild(0).GetComponent<Attachments>().UnequipSight();
+                    slot.GetComponent<AttachmentSlot>().attachmentObj = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().color = new Color(0.254902f, 0.254902f, 0.254902f, 0.5f);
 
                     break;
                 case AttachmentSlotType.AttachmentType.BARREL:
@@ -214,7 +222,9 @@ public class InventoryManager : MonoBehaviour
                     });
 
                     activeGun.transform.GetChild(0).GetComponent<Attachments>().UnequipBarrel();
-
+                    slot.GetComponent<AttachmentSlot>().attachmentObj = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().color = new Color(0.254902f, 0.254902f, 0.254902f, 0.5f);
                     break;
                 case AttachmentSlotType.AttachmentType .UNDERBARREL:
                     attachmentUI.GetComponent<Button>().onClick.AddListener(delegate {
@@ -226,7 +236,9 @@ public class InventoryManager : MonoBehaviour
                     });
 
                     activeGun.transform.GetChild(0).GetComponent<Attachments>().UnequipUnderBarrel();
-
+                    slot.GetComponent<AttachmentSlot>().attachmentObj = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                    slot.transform.GetChild(0).GetComponent<Image>().color = new Color(0.254902f, 0.254902f, 0.254902f, 0.5f);
                     break;
             }
         }
