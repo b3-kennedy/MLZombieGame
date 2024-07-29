@@ -17312,7 +17312,8 @@ PrefabInstance:
       propertyPath: sprintCameraEffectCurve.m_Curve.Array.data[1].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2062867655560444531, guid: e48c0e8b73b476a4b924abefa8be545b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

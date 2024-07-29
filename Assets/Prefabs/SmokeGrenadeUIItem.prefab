@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottle: {fileID: 1458021842603073368, guid: 73ed1a7b4ea4d424e8643b8fd7dcd613, type: 3}
+  itemIcon: {fileID: 21300000, guid: 9b67adec39da77d45a1c26d229ad3304, type: 3}
 --- !u!1 &1092964067439265711
 GameObject:
   m_ObjectHideFlags: 0

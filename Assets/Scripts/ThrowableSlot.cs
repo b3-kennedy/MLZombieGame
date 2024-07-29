@@ -24,7 +24,8 @@ public class ThrowableSlot : MonoBehaviour
     {
         if (item != null)
         {
-            GetComponent<Image>().color = Color.white;
+            transform.GetChild(0).GetComponent<Image>().color = new Color(0.254717f, 0.254717f, 0.254717f);
+            transform.GetChild(0).GetComponent<Image>().sprite = null;
             InventoryManager.Instance.PickUpThrowable(item);
             item = null;
         }

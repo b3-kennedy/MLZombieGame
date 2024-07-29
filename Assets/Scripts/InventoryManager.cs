@@ -267,8 +267,9 @@ public class InventoryManager : MonoBehaviour
         if(throwableSlot.GetComponent<ThrowableSlot>().item == null)
         {
             Destroy(ui);
-            throwableSlot.color = Color.green;
+            throwableSlot.transform.GetChild(0).GetComponent<Image>().color = Color.white;
             throwableSlot.GetComponent<ThrowableSlot>().item = ui.GetComponent<BottleItem>().bottle;
+            throwableSlot.transform.GetChild(0).GetComponent<Image>().sprite = ui.GetComponent<BottleItem>().itemIcon;
         }
 
     }
