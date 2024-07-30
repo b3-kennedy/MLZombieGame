@@ -11,6 +11,7 @@ public class WaveAttack : MonoBehaviour
     BossAI bossAI;
     bool canDamage;
     public float damage;
+    public AudioSource roarAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,15 @@ public class WaveAttack : MonoBehaviour
 
     public void StartAttack()
     {
+        if (GetComponent<StompAttack>().stompAOE.activeSelf)
+        {
+            GetComponent<StompAttack>().stompAOE.SetActive(false);
+        }
         anim.SetBool("charge", false);
         anim.SetBool("throw", false);
         anim.SetBool("stomp", false);
         anim.SetBool("wave", true);
+        roarAudioSource.Play();
     }
 
     public void WaveExecute()

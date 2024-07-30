@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class BossAI : MonoBehaviour
@@ -15,6 +16,9 @@ public class BossAI : MonoBehaviour
     [HideInInspector] public bool canLookAt;
     float betweenStateTimer;
     bool startbetweenStateTimer;
+
+    float waveTimer;
+    bool startWaveCd;
 
     // Start is called before the first frame update
     void Start()
@@ -58,10 +62,11 @@ public class BossAI : MonoBehaviour
                 state = BossState.CHARGE;
                 chargeAttack.ChargeExecute();
             }
-            else if(num == 1 && state != BossState.WAVE)
+            else if(num == 1 && state != BossState.WAVE && !startWaveCd)
             {
                 state = BossState.WAVE;
                 waveAttack.StartAttack();
+                startWaveCd = true;
             }
             else if(num == 2 && state != BossState.THROW)
             {
@@ -89,6 +94,16 @@ public class BossAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (startWaveCd)
+        {
+            waveTimer += Time.deltaTime;
+            if(waveTimer > 5f)
+            {
+                waveTimer = 0;
+                startWaveCd = false;
+            }
+        }
 
         if (startbetweenStateTimer)
         {

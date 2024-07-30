@@ -17,26 +17,100 @@ public class ChargeAttack : MonoBehaviour
     bool collided;
     public float damageCooldown;
     float damageTimer;
+    public Transform groundCheck;
+    ScoutZombieAudioManager audioManager;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bossAI = GetComponent<BossAI>();
+        audioManager = GetComponent<ScoutZombieAudioManager>();
         
     }
 
     public void ChargeExecute()
     {
+        if (GetComponent<StompAttack>().stompAOE.activeSelf)
+        {
+            GetComponent<StompAttack>().stompAOE.SetActive(false);
+        }
         startWaitTimer = true;
+        anim.SetBool("charge", true);
+        anim.SetBool("throw", false);
+        anim.SetBool("stomp", false);
+        anim.SetBool("wave", false);
 
-        
+    }
+
+    public void PlayFootseps()
+    {
+
+        GetSurface();
+    }
+
+    void GetSurface()
+    {
+        var surfaces = Physics.RaycastAll(groundCheck.position, -Vector3.up, 1f);
+
+
+        foreach (var surface in surfaces)
+        {
+            if (surface.collider.GetComponent<Material>())
+            {
+                Material mat = surface.collider.GetComponent<Material>();
+                switch (mat.matType)
+                {
+                    case Material.MaterialType.GRASS:
+                        audioManager.PlayFootstep(audioManager.grassStepsWalk);
+                        break;
+                    case Material.MaterialType.CONCRETE:
+                        audioManager.PlayFootstep(audioManager.concreteStepsWalk);
+                        break;
+                    case Material.MaterialType.WOOD:
+                        audioManager.PlayFootstep(audioManager.woodStepsWalk);
+                        break;
+
+                    default:
+                        audioManager.PlayFootstep(audioManager.grassStepsWalk);
+                        break;
+                }
+            }
+        }
+
+        //if (Physics.Raycast(groundCheck.position, -Vector3.up, out RaycastHit hit, 1f))
+        //{
+        //    Debug.Log(hit.collider);   
+        //    if (hit.collider.GetComponent<Material>())
+        //    {
+        //        Debug.Log("test");
+        //        Material mat = hit.collider.GetComponent<Material>();
+        //        switch (mat.matType)
+        //        {
+        //            case Material.MaterialType.GRASS:
+        //                audioManager.PlayFootstep(audioManager.grassStepsWalk);
+        //                break;
+        //            case Material.MaterialType.CONCRETE:
+        //                audioManager.PlayFootstep(audioManager.concreteStepsWalk);
+        //                break;
+        //            default:
+        //                audioManager.PlayFootstep(audioManager.grassStepsWalk);
+        //                break;
+        //        }
+        //    }
+        //}
+    }
+
+    private void OnDrawGizmos()
+    {
+        Ray ray = new Ray(groundCheck.position, -Vector3.up * 1f);
+        Gizmos.DrawRay(ray);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Debug.DrawRay(groundCheck.position, -Vector3.up * 1f, Color.white);
         if (collided)
         {
             damageTimer += Time.deltaTime;
@@ -78,7 +152,6 @@ public class ChargeAttack : MonoBehaviour
         if(Vector3.Distance(transform.position, bossAI.target.position) <= 10 && !distanceCheck)
         {
             int num = Random.Range(0, 3);
-            Debug.Log(num);
             if(num == 0)
             {
                 anim.SetBool("charge", false);

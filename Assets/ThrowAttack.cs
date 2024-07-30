@@ -20,6 +20,7 @@ public class ThrowAttack : MonoBehaviour
     BossAI boss;
     public float damage;
 
+    public AudioClip rockBreak;
 
 
     // Start is called before the first frame update
@@ -30,6 +31,10 @@ public class ThrowAttack : MonoBehaviour
 
     public void Execute()
     {
+        if (GetComponent<StompAttack>().stompAOE.activeSelf)
+        {
+            GetComponent<StompAttack>().stompAOE.SetActive(false);
+        }
         anim.SetBool("charge", false);
         anim.SetBool("wave", false);
         anim.SetBool("stomp", false);
@@ -84,6 +89,7 @@ public class ThrowAttack : MonoBehaviour
         {
             boss.target.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
+        AudioSource.PlayClipAtPoint(rockBreak, spawnedRock.transform.position);
         EndAttack();
         Destroy(throwAoe);
         Destroy(spawnedRock);

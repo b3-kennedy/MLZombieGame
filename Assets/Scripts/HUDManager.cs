@@ -22,6 +22,7 @@ public class HUDManager : MonoBehaviour
     public Sprite breakIcon;
 
 
+
     private void Awake()
     {
         Instance = this;
@@ -41,6 +42,20 @@ public class HUDManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void SetWhiteText()
+    {
+        gunNameText.color = Color.white;
+        ammoCountText.color = Color.white;
+        interactPrompt.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+    }
+
+    public void SetBlackText()
+    {
+        gunNameText.color = Color.black;
+        ammoCountText.color = Color.black;
+        interactPrompt.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.black;
     }
 
     private void Start()

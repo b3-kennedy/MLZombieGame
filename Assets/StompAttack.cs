@@ -9,6 +9,7 @@ public class StompAttack : MonoBehaviour
     public GameObject stompAOE;
     public float damage;
     BossAI bossAI;
+    public AudioSource stompAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,10 @@ public class StompAttack : MonoBehaviour
         bossAI = GetComponent<BossAI>();
     }
 
+    public void PlayStompSound()
+    {
+        stompAudioSource.Play();
+    }
 
     public void StompExecute()
     {
