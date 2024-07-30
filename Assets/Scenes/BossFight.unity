@@ -7124,7 +7124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9d12357d132f2448476cb21b31fb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 10000
   currentHealth: 0
   critPoint: {fileID: 6551511143673668817, guid: cfd5b1f1fb145854dac82132abbf1838, type: 3}
   critPositions:
