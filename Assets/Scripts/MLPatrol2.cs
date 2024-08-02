@@ -23,6 +23,7 @@ public class MLPatrol2 : Agent
     public List<EnforcerPatrol> enforcerZombies;
     public LayerMask sphereLayer;
     public Transform player;
+    public GameObject playerObject;
     PlayerHealth playerHealth;
     public float randomPatrolTime;
     float randomPatrolTimer;
@@ -61,6 +62,7 @@ public class MLPatrol2 : Agent
 
     void ResetZombiePositions()
     {
+
         for (int i = 0; i < groups.Count; i++)
         {
             groups[i].patrolPoint.position = scoutZombieStartingPatrolPos[i];
@@ -78,13 +80,18 @@ public class MLPatrol2 : Agent
             
         }
 
-        for (int i = 0;i < enforcerZombies.Count; i++)
+        if(EnforcerBrain.Instance != null)
         {
-            enforcerZombies[i].enforcerZombie.SetActive(true);
-            enforcerZombies[i].patrolPoint.position = enforcerZombieStartingPatrolPos[i];
-            enforcerZombies[i].enforcerZombie.transform.position = enforcerZombieStartingPatrolPos[i];
-            enforcerZombies[i].enforcerZombie.GetComponent<NavMeshAgent>().ResetPath();
+            EnforcerBrain.Instance.End();
         }
+
+        //for (int i = 0;i < enforcerZombies.Count; i++)
+        //{
+        //    enforcerZombies[i].enforcerZombie.SetActive(true);
+        //    enforcerZombies[i].patrolPoint.position = enforcerZombieStartingPatrolPos[i];
+        //    enforcerZombies[i].enforcerZombie.transform.position = enforcerZombieStartingPatrolPos[i];
+        //    enforcerZombies[i].enforcerZombie.GetComponent<NavMeshAgent>().ResetPath();
+        //}
 
 
     }
@@ -142,8 +149,8 @@ public class MLPatrol2 : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        int posX = actions.DiscreteActions[0] * 8;
-        int posY = actions.DiscreteActions[1] * 8;
+        int posX = Mathf.RoundToInt(actions.DiscreteActions[0] * 9.5f);
+        int posY = Mathf.RoundToInt(actions.DiscreteActions[1] * 9.5f);
         int groupNum = actions.DiscreteActions[2];
         int boolVal = actions.DiscreteActions[3];
         int enforcerNum = actions.DiscreteActions[4];
@@ -156,7 +163,7 @@ public class MLPatrol2 : Agent
 
         if(enforcerBoolVal == 1)
         {
-            RandomEnforcerPatrol(pos, enforcerNum);
+            //RandomEnforcerPatrol(pos, enforcerNum);
         }
 
         if(boolVal == 1)

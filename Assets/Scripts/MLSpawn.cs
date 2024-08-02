@@ -80,12 +80,16 @@ public class MLSpawn : Agent
 
     public void SpawnHunter()
     {
-        for (int i = 0; i < hunterCount; i++)
+        if (player.gameObject.activeSelf)
         {
-            GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
-            hunterZombie.GetComponent<HunterZombieAI>().playerPos = player;
-            hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+            for (int i = 0; i < hunterCount; i++)
+            {
+                GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
+                hunterZombie.GetComponent<HunterZombieAI>().playerPos = player;
+                hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+            }
         }
+
 
         
     }

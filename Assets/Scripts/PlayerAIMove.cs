@@ -72,6 +72,7 @@ public class PlayerAIMove : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, positions[index].position) < 2f)
             {
+                positions[index].gameObject.SetActive(false);
                 positions.RemoveAt(index);
                 PickPos();
                 MLPatrol2.Instance.AddReward(-5f);

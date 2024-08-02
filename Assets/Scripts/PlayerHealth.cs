@@ -97,7 +97,7 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        if (hasTakenDamage)
+        if (hasTakenDamage && !canRegen)
         {
             regenTimer += Time.deltaTime;
             if(regenTimer >= timeToRegen)
@@ -135,9 +135,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void Flinch()
     {
-        Debug.Log("flinch");
-        hurtSource.Play();        
-        camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
+        if (camRecoil != null)
+        {
+            Debug.Log("flinch");
+            hurtSource.Play();
+            camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
+        }
+
     }
 
     public void TakeDamage(float dmg)
@@ -164,6 +168,7 @@ public class PlayerHealth : MonoBehaviour
             Flinch();
             currentHealth -= dmg;
             hasTakenDamage = true;
+            regenTimer = 0;
             canRegen = false;
         }
         

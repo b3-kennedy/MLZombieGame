@@ -249,11 +249,12 @@ public class ZombiePatrolAI : MonoBehaviour
                 MLPatrol2.Instance.RequestAction();
             }
 
-            if(GameManager.Instance != null)
+            if(MLPatrol2.Instance != null)
             {
-                if (GameManager.Instance.player.activeSelf)
+                MLPatrol2.Instance.player.parent.GetComponent<PlayerHealth>().TakeDamage(3f);
+                if (MLPatrol2.Instance.player.gameObject.activeSelf)
                 {
-                    //GameManager.Instance.player.GetComponent<PlayerHealth>().TakeDamage(2f);
+                    
                 }
                 
             }
