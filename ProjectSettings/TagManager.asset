@@ -23,6 +23,12 @@ TagManager:
   - Button
   - Bandage
   - KillButton
+  - DamageButton
+  - TutorialDoorButton
+  - ScoutButton
+  - HunterButton
+  - EnforcerButton
+  - EnterTestChamber
   layers:
   - Default
   - TransparentFX

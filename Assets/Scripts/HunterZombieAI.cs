@@ -85,6 +85,10 @@ public class HunterZombieAI : MonoBehaviour
                 anim.SetBool("attack", true);
                 attacked = true;
             }
+            else
+            {
+                anim.SetBool("attack", false);
+            }
 
             if(decayTimer > targetDecayTime)
             {

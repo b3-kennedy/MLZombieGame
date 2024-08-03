@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PickUpWeapons : MonoBehaviour
@@ -181,6 +182,72 @@ public class PickUpWeapons : MonoBehaviour
                     if(GameManager.Instance != null)
                     {
                         GameManager.Instance.Win();
+                    }
+                }
+            }
+            else if (hit.collider.CompareTag("DamageButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    GetComponent<PlayerHealth>().TakeDamage(50);
+                }
+            }
+            else if (hit.collider.CompareTag("TutorialDoorButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if (LevelManager.Instance != null)
+                    {
+                        LevelManager.Instance.SwitchToScene(1);
+                    }
+                    else
+                    {
+                        Debug.Log("No LevelManager Instance");
+                    }
+                }
+            }
+            else if (hit.collider.CompareTag("ScoutButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if(ZombieSpawnerManager.Instance != null)
+                    {
+                        ZombieSpawnerManager.Instance.SpawnScout();
+                    }
+                }
+            }
+            else if (hit.collider.CompareTag("HunterButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if (ZombieSpawnerManager.Instance != null)
+                    {
+                        ZombieSpawnerManager.Instance.SpawnHunter();
+                    }
+                }
+            }
+            else if (hit.collider.CompareTag("EnforcerButton"))
+            {
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to interact");
+                HUDManager.Instance.ShowInteractPrompt();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    if (ZombieSpawnerManager.Instance != null)
+                    {
+                        ZombieSpawnerManager.Instance.SpawnEnforcer();
                     }
                 }
             }
