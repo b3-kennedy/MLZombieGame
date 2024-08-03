@@ -18,6 +18,6 @@ public class Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.Rotate(rotateVec.x * rotateSpeed * Time.deltaTime, rotateVec.y * rotateSpeed * Time.deltaTime, rotateVec.z * rotateSpeed * Time.deltaTime, Space.Self);
+        transform.Rotate(rotateVec.x * rotateSpeed * Time.deltaTime, rotateVec.y * rotateSpeed * Time.deltaTime, rotateVec.z * rotateSpeed * Time.deltaTime, Space.Self);
     }
 }
