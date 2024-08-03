@@ -36,6 +36,8 @@ public class EnforcerBrain : Agent
 
     public List<Vector3> enforcerZombieStartingPatrolPos;
 
+    public GameObject testPoint;
+
 
     private void Awake()
     {
@@ -48,7 +50,10 @@ public class EnforcerBrain : Agent
 
     void ResetZombiePositions()
     {
-
+        key1GridPos = new Vector2(Mathf.RoundToInt(key1Pos.position.x / 9.5f), Mathf.RoundToInt(key1Pos.position.z / 9.5f));
+        key2GridPos = new Vector2(Mathf.RoundToInt(key2Pos.position.x / 9.5f), Mathf.RoundToInt(key2Pos.position.z / 9.5f));
+        key3GridPos = new Vector2(Mathf.RoundToInt(key3Pos.position.x / 9.5f), Mathf.RoundToInt(key3Pos.position.z / 9.5f));
+        barnGridPos = new Vector2(Mathf.RoundToInt(barnPos.position.x / 9.5f), Mathf.RoundToInt(barnPos.position.z / 9.5f));
         for (int i = 0; i < enforcerZombies.Count; i++)
         {
             enforcerZombies[i].enforcerZombie.SetActive(true);
@@ -57,10 +62,9 @@ public class EnforcerBrain : Agent
             enforcerZombies[i].enforcerZombie.GetComponent<NavMeshAgent>().ResetPath();
         }
 
-        foreach (var item in player.parent.GetComponent<PlayerAIMove>().positions)
-        {
-            item.gameObject.SetActive(true);
-        }
+        key1Pos.gameObject.SetActive(true);
+        key2Pos.gameObject.SetActive(true);
+        key3Pos.gameObject.SetActive(true);
         
 
 
@@ -88,7 +92,6 @@ public class EnforcerBrain : Agent
     {
         int randomNum = Random.Range(0, playerSpawns.Length);
         playerHealth.currentHealth = 100;
-        Debug.Log(randomNum);
 
         ResetZombiePositions();
 
@@ -130,6 +133,8 @@ public class EnforcerBrain : Agent
         {
             RandomEnforcerPatrol(pos, enforcerNum);
         }
+
+        //Debug.Log(Vector2.Distance(new Vector2(testPoint.transform.position.x / 9.5f, testPoint.transform.position.z / 9.5f), key1GridPos));
     }
 
 
@@ -141,17 +146,17 @@ public class EnforcerBrain : Agent
     void RandomEnforcerPatrol(Vector2 pos, int group)
     {
 
-        if(key1Pos == null)
+        if(!key1Pos.gameObject.activeSelf)
         {
             key1GridPos = new Vector2(999, 999);
         }
 
-        if(key2Pos == null)
+        if(!key2Pos.gameObject.activeSelf)
         {
             key2GridPos = new Vector2(999, 999);
         }
 
-        if(key3GridPos == null)
+        if(!key3Pos.gameObject.activeSelf)
         {
             key3GridPos = new Vector2(999, 999);
         }
@@ -159,7 +164,7 @@ public class EnforcerBrain : Agent
 
         enforcerZombies[group].patrolPoint.position = new Vector3(Mathf.RoundToInt(pos.x*9.5f), 0, Mathf.RoundToInt(pos.y*9.5f));
         
-        if(Vector2.Distance(pos, key1GridPos) < 10)
+        if(Vector2.Distance(pos, key1GridPos) <= 5)
         {
             AddReward(3f);
         }
@@ -168,7 +173,7 @@ public class EnforcerBrain : Agent
             AddReward(-0.5f);
         }
 
-        if (Vector2.Distance(pos, key2GridPos) < 10)
+        if (Vector2.Distance(pos, key2GridPos) <= 5)
         {
             AddReward(3f);
         }
@@ -177,7 +182,7 @@ public class EnforcerBrain : Agent
             AddReward(-0.5f);
         }
 
-        if (Vector2.Distance(pos, key3GridPos) < 10)
+        if (Vector2.Distance(pos, key3GridPos) <= 5)
         {
             AddReward(3f);
         }
@@ -186,7 +191,7 @@ public class EnforcerBrain : Agent
             AddReward(-0.5f);
         }
 
-        if(Vector2.Distance(pos, barnGridPos) < 10)
+        if(Vector2.Distance(pos, barnGridPos) <= 5)
         {
             AddReward(3f);
         }

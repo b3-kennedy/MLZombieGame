@@ -149,7 +149,7 @@ public class PlayerHealth : MonoBehaviour
         if(currentHealth - dmg <= 0)
         {
             currentHealth = 0;
-            if(GameManager.Instance != null)
+            if(GameManager.Instance != null && !GetComponent<PlayerAIMove>())
             {
                 GameManager.Instance.Lose();
             }
@@ -158,6 +158,12 @@ public class PlayerHealth : MonoBehaviour
             {
                 MLPatrol2.Instance.AddReward(2f);
                 MLPatrol2.Instance.End();
+            }
+
+            if (GetComponent<PlayerAIMove>())
+            {
+                GetComponent<PlayerAIMove>().mlIdentifier.SetActive(true);
+                GetComponent<PlayerAIMove>().mlIdentifierTimer = 0;
             }
             Flinch();
             //gameObject.SetActive(false);

@@ -119,11 +119,22 @@ public class EnforcerZombieAI : MonoBehaviour
 
     void Patrol()
     {
-        anim.SetBool("patrolling", true);
-        agent.speed = walkSpeed;
+        if(Vector3.Distance(transform.position, agent.destination) > 25f)
+        {
+            anim.SetBool("run", true);
+            anim.SetBool("patrolling", false);
+            agent.speed = runSpeed;
+        }
+        else if(Vector3.Distance(transform.position, agent.destination) > 1f && Vector3.Distance(transform.position, agent.destination) <= 25f)
+        {
+            anim.SetBool("patrolling", true);
+            anim.SetBool("run", false);
+            agent.speed = walkSpeed;
+        }
+
         if (Vector3.Distance(transform.position, agent.destination) < 1f)
         {
-            
+            anim.SetBool("run", false);
             anim.SetBool("patrolling", false);
             timer += Time.deltaTime;
             if (timer > positionChangeInterval)

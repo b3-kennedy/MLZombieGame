@@ -17,7 +17,7 @@ public class PlayerAIMove : MonoBehaviour
     public Transform key3;
 
     public GameObject mlIdentifier;
-    float mlIdentifierTimer;
+    [HideInInspector] public float mlIdentifierTimer;
     private void Awake()
     {
         activePositions = positions;
