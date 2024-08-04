@@ -18,7 +18,7 @@ public class Smoke : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.DisableSmokeCamera();
+        //GameManager.Instance.DisableSmokeCamera();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Smoke : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (other.CompareTag("MainCamera"))
         {
-            GameManager.Instance.EnableSmokeCamera();
+            //GameManager.Instance.EnableSmokeCamera();
         }
     }
 
@@ -41,7 +41,7 @@ public class Smoke : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            GameManager.Instance.DisableSmokeCamera();
+            //GameManager.Instance.DisableSmokeCamera();
         }
     }
 }

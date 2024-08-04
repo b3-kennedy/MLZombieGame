@@ -45,7 +45,6 @@ public class SmokeGrenade : MonoBehaviour
     {
         if (isActive)
         {
-            Debug.Log("test");
             startFuse = true;
         }
 
