@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SmokeGrenade
   m_EditorClassIdentifier: 
   lootItem: {fileID: 1458021842603073368, guid: 73ed1a7b4ea4d424e8643b8fd7dcd613, type: 3}
-  dropChance: 100
+  dropChance: 20

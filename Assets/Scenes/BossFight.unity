@@ -3290,7 +3290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &870338337
 Transform:
   m_ObjectHideFlags: 0
@@ -7124,7 +7124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9d12357d132f2448476cb21b31fb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
+  maxHealth: 7500
   currentHealth: 0
   critPoint: {fileID: 6551511143673668817, guid: cfd5b1f1fb145854dac82132abbf1838, type: 3}
   critPositions:

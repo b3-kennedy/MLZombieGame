@@ -240,6 +240,7 @@ public class ZombiePatrolAI : MonoBehaviour
         {
             if(MLSpawn.Instance != null)
             {
+                
                 MLSpawn.Instance.SpawnHunter();
             }
             

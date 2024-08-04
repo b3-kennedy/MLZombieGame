@@ -129,7 +129,16 @@ public class EnforcerBrain : Agent
 
         List<Vector3> points = new List<Vector3>();
 
-        if (enforcerBoolVal == 1)
+
+        if(enforcerBoolVal == 0)
+        {
+            if (Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key1GridPos) <= 5 || Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key2GridPos) <= 5 
+                || Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key3GridPos) <= 5)
+            {
+                AddReward(6f);
+            }
+        }
+        else
         {
             RandomEnforcerPatrol(pos, enforcerNum);
         }
@@ -166,7 +175,7 @@ public class EnforcerBrain : Agent
         
         if(Vector2.Distance(pos, key1GridPos) <= 5)
         {
-            AddReward(3f);
+            AddReward(2f);
         }
         else
         {
@@ -175,7 +184,7 @@ public class EnforcerBrain : Agent
 
         if (Vector2.Distance(pos, key2GridPos) <= 5)
         {
-            AddReward(3f);
+            AddReward(2f);
         }
         else
         {
@@ -184,7 +193,7 @@ public class EnforcerBrain : Agent
 
         if (Vector2.Distance(pos, key3GridPos) <= 5)
         {
-            AddReward(3f);
+            AddReward(2f);
         }
         else
         {
@@ -193,7 +202,7 @@ public class EnforcerBrain : Agent
 
         if(Vector2.Distance(pos, barnGridPos) <= 5)
         {
-            AddReward(3f);
+            AddReward(2f);
         }
         else
         {

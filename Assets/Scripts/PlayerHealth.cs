@@ -37,6 +37,8 @@ public class PlayerHealth : MonoBehaviour
     public Recoil camRecoil;
     public float flinchVal;
 
+    public bool invulnerable;
+
     public AudioSource hurtSource;
 
 
@@ -146,37 +148,41 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        if(currentHealth - dmg <= 0)
+        if (!invulnerable)
         {
-            currentHealth = 0;
-            if(GameManager.Instance != null && !GetComponent<PlayerAIMove>())
+            if (currentHealth - dmg <= 0)
             {
-                GameManager.Instance.Lose();
-            }
-            
-            if(MLPatrol2.Instance != null)
-            {
-                MLPatrol2.Instance.AddReward(2f);
-                MLPatrol2.Instance.End();
-            }
+                currentHealth = 0;
+                if (GameManager.Instance != null && !GetComponent<PlayerAIMove>())
+                {
+                    GameManager.Instance.Lose();
+                }
 
-            if (GetComponent<PlayerAIMove>())
-            {
-                GetComponent<PlayerAIMove>().mlIdentifier.SetActive(true);
-                GetComponent<PlayerAIMove>().mlIdentifierTimer = 0;
+                if (MLPatrol2.Instance != null)
+                {
+                    MLPatrol2.Instance.AddReward(2f);
+                    MLPatrol2.Instance.End();
+                }
+
+                if (GetComponent<PlayerAIMove>())
+                {
+                    GetComponent<PlayerAIMove>().mlIdentifier.SetActive(true);
+                    GetComponent<PlayerAIMove>().mlIdentifierTimer = 0;
+                }
+                Flinch();
+                //gameObject.SetActive(false);
+
             }
-            Flinch();
-            //gameObject.SetActive(false);
-            
+            else
+            {
+                Flinch();
+                currentHealth -= dmg;
+                hasTakenDamage = true;
+                regenTimer = 0;
+                canRegen = false;
+            }
         }
-        else
-        {
-            Flinch();
-            currentHealth -= dmg;
-            hasTakenDamage = true;
-            regenTimer = 0;
-            canRegen = false;
-        }
+
         
     }
 }

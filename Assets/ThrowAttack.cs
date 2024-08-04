@@ -35,6 +35,10 @@ public class ThrowAttack : MonoBehaviour
         {
             GetComponent<StompAttack>().stompAOE.SetActive(false);
         }
+        if(spawnedRock != null)
+        {
+            Destroy(spawnedRock);
+        }
         anim.SetBool("charge", false);
         anim.SetBool("wave", false);
         anim.SetBool("stomp", false);

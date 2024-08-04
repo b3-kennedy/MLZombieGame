@@ -14,6 +14,11 @@ public class PickUpWeapons : MonoBehaviour
     public Transform throwPoint;
     public float throwForce = 10;
     public AudioClip openBox;
+    bool openingDoor;
+    public GameObject openingUI;
+    public GameObject openingBar;
+    public float openTime = 3f;
+    float openingTimer;
 
     private void Start()
     {
@@ -22,7 +27,43 @@ public class PickUpWeapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3))
+
+
+
+        Interaction();
+        SwitchWeapon();
+        if (openingDoor)
+        {
+
+            openingTimer += Time.deltaTime;
+            openingBar.GetComponent<RectTransform>().localScale = new Vector3(openingTimer / openTime, openingBar.GetComponent<RectTransform>().localScale.y,
+                openingBar.GetComponent<RectTransform>().localScale.z);
+
+            if(openingTimer >= openTime)
+            {
+                openingBar.GetComponent<RectTransform>().localScale = new Vector3(0, openingBar.GetComponent<RectTransform>().localScale.y,
+                    openingBar.GetComponent<RectTransform>().localScale.z);
+                openingDoor = false;
+                openingUI.SetActive(false);
+                openingTimer = 0;
+                GameManager.Instance.SwitchToBossScene();
+            }
+
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                openingBar.GetComponent<RectTransform>().localScale = new Vector3(0, openingBar.GetComponent<RectTransform>().localScale.y,
+                    openingBar.GetComponent<RectTransform>().localScale.z);
+                openingDoor = false;
+                openingUI.SetActive(false);
+                openingTimer = 0;
+            }
+        }
+
+    }
+
+    void Interaction()
+    {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3))
         {
             if (hit.collider.CompareTag("Gun"))
             {
@@ -62,7 +103,7 @@ public class PickUpWeapons : MonoBehaviour
                         HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up sniper magazine");
                         break;
                 }
-                
+
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("Attachment"))
@@ -84,7 +125,7 @@ public class PickUpWeapons : MonoBehaviour
                 }
                 HUDManager.Instance.UpdateInteractPrompt("Press 'F' to open");
                 HUDManager.Instance.ShowInteractPrompt();
-                
+
 
             }
             else if (hit.collider.CompareTag("Throwable"))
@@ -102,9 +143,9 @@ public class PickUpWeapons : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     GameManager.Instance.hasRedKey = true;
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.gameObject.SetActive(false);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up red key");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up key");
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("BlueKey"))
@@ -112,9 +153,9 @@ public class PickUpWeapons : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     GameManager.Instance.hasBlueKey = true;
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.gameObject.SetActive(false);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up blue key");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up key");
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("GreenKey"))
@@ -122,22 +163,21 @@ public class PickUpWeapons : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     GameManager.Instance.hasGreenKey = true;
-                    Destroy (hit.collider.gameObject);
+                    hit.collider.gameObject.SetActive(false);
                 }
-                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up green key");
+                HUDManager.Instance.UpdateInteractPrompt("Press 'F' to pick up key");
                 HUDManager.Instance.ShowInteractPrompt();
             }
             else if (hit.collider.CompareTag("KeyWall"))
             {
-                if(GameManager.Instance.hasRedKey && GameManager.Instance.hasBlueKey && GameManager.Instance.hasGreenKey)
+                if (GameManager.Instance.hasRedKey && GameManager.Instance.hasBlueKey && GameManager.Instance.hasGreenKey)
                 {
-                    HUDManager.Instance.UpdateInteractPrompt("Press 'F' to open door");
+                    HUDManager.Instance.UpdateInteractPrompt("Hold 'F' to open door");
                     HUDManager.Instance.ShowInteractPrompt();
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        hit.collider.gameObject.SetActive(false);
-                        GameManager.Instance.SwitchToBossScene();
-  
+                        openingUI.SetActive(true);
+                        openingDoor = true;
 
                     }
                 }
@@ -154,7 +194,7 @@ public class PickUpWeapons : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    if(BossFightManager.Instance != null)
+                    if (BossFightManager.Instance != null)
                     {
                         BossFightManager.Instance.OpenBossDoor();
                     }
@@ -179,7 +219,7 @@ public class PickUpWeapons : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    if(GameManager.Instance != null)
+                    if (GameManager.Instance != null)
                     {
                         GameManager.Instance.Win();
                     }
@@ -219,7 +259,7 @@ public class PickUpWeapons : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    if(ZombieSpawnerManager.Instance != null)
+                    if (ZombieSpawnerManager.Instance != null)
                     {
                         ZombieSpawnerManager.Instance.SpawnScout();
                     }
@@ -254,16 +294,18 @@ public class PickUpWeapons : MonoBehaviour
             else
             {
                 HUDManager.Instance.HideInteractPrompt();
-                
+                openingDoor = false;
+                openingUI.SetActive(false);
+                openingTimer = 0;
             }
         }
         else
         {
             HUDManager.Instance.HideInteractPrompt();
+            openingDoor = false;
+            openingUI.SetActive(false);
+            openingTimer = 0;
         }
-
-        SwitchWeapon();
-
     }
 
     void PickUpThrowable(GameObject obj)

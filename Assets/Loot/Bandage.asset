@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bandage
   m_EditorClassIdentifier: 
   lootItem: {fileID: 8864020550128895254, guid: 62f06114642def945af09657a0a6b2fb, type: 3}
-  dropChance: 20
+  dropChance: 50
