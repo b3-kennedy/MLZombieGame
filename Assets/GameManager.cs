@@ -55,6 +55,18 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        //foreach (var zombie in scoutZombies)
+        //{
+        //    if (Vector3.Distance(zombie.transform.position, player.transform.position) > 21f)
+        //    {
+        //        zombie.GetComponent<ScoutZombieAudioManager>().footstepSource.enabled = false;
+        //    }
+        //    else
+        //    {
+        //        zombie.GetComponent<ScoutZombieAudioManager>().footstepSource.enabled = true;
+        //    }
+        //}
+
         //if (!activate)
         //{
         //    scoutTimer += Time.deltaTime;
@@ -66,7 +78,7 @@ public class GameManager : MonoBehaviour
         //        }
         //        activate = true;
         //    }
-            
+
         //}
 
 

@@ -24,6 +24,8 @@ public class MLSpawn : Agent
 
     public Transform hunterSpawn;
 
+    public Transform hunterParent;
+
     public enum ThreatState {MIN, MAX};
     public ThreatState threatState;
 
@@ -82,9 +84,14 @@ public class MLSpawn : Agent
     {
         for (int i = 0; i < hunterCount; i++)
         {
-            GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
-            hunterZombie.GetComponent<HunterZombieAI>().playerPos = player.transform.GetChild(0);
-            hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+            if (GameManager.Instance.player.activeSelf)
+            {
+                GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
+                hunterZombie.GetComponent<HunterZombieAI>().playerPos = player.transform.GetChild(0);
+                hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+                //hunterZombie.transform.SetParent(hunterParent);
+            }
+
         }
     }
 

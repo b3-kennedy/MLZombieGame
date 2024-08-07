@@ -48,6 +48,7 @@ public class Health : MonoBehaviour
                 }
                 else if (GetComponent<EnforcerZombieAI>())
                 {
+                    Debug.Log("dead");
                     GetComponent<EnforcerZombieAI>().enabled = false;
                     GetComponent<AISensor>().enabled = false;
                 }

@@ -790,7 +790,7 @@ Transform:
   m_GameObject: {fileID: 2064037587359734297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1030,6 +1030,7 @@ MonoBehaviour:
   positionChangeInterval: 5
   spotCd: 20
   playerSpotted: 0
+  audioPos: {x: 0, y: 0, z: 0}
   maxAudioTime: 5
   normalSpeed: 1
   sprintSpeed: 5
@@ -1081,6 +1082,7 @@ MonoBehaviour:
   - {fileID: 9172041494396146677}
   - {fileID: 6062706536269452038}
   - {fileID: 7143543194748616375}
+  dead: 0
 --- !u!114 &2015122044627322784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,6 +1126,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b04465ceef591864badb1aa5c65ee644, type: 3}
   - {fileID: 8300000, guid: 0bd6d911a80f46040977198422926d29, type: 3}
   - {fileID: 8300000, guid: b15f8eaceae712040a379ad0aaff9240, type: 3}
+  metalStepsWalk: []
+  woodStepsWalk: []
 --- !u!1 &3558923265224013863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,17 +1753,17 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 0
+  DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

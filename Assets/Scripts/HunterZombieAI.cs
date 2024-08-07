@@ -38,26 +38,38 @@ public class HunterZombieAI : MonoBehaviour
 
     void GetSurface()
     {
-        if (Physics.Raycast(groundCheck.position, -Vector3.up, out RaycastHit hit, 0.03f))
+        if (audioManager.footstepSource.enabled)
         {
-            if (hit.collider.GetComponent<Material>())
+
+            RaycastHit[] results = new RaycastHit[3];
+            Physics.RaycastNonAlloc(groundCheck.position, -Vector3.up, results, 1f);
+
+            foreach (var hit in results)
             {
-                Material mat = hit.collider.GetComponent<Material>();
-                switch (mat.matType)
+                if (hit.collider != null)
                 {
-                    case Material.MaterialType.GRASS:
-                        audioManager.PlayFootstep(audioManager.grassStepsWalk);
-                        break;
-                    case Material.MaterialType.CONCRETE:
-                        audioManager.PlayFootstep(audioManager.concreteStepsWalk);
-                        break;
-                    default:
-                        audioManager.PlayFootstep(audioManager.grassStepsWalk);
-                        break;
+                    if (hit.collider.GetComponent<Material>())
+                    {
+                        Material mat = hit.collider.GetComponent<Material>();
+                        switch (mat.matType)
+                        {
+                            case Material.MaterialType.GRASS:
+                                audioManager.PlayFootstep(audioManager.grassStepsWalk);
+                                break;
+                            case Material.MaterialType.CONCRETE:
+                                audioManager.PlayFootstep(audioManager.concreteStepsWalk);
+                                break;
+                            default:
+                                audioManager.PlayFootstep(audioManager.grassStepsWalk);
+                                break;
+                        }
+                    }
                 }
+
             }
         }
     }
+
 
     // Update is called once per frame
     void Update()

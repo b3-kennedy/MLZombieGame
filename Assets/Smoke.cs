@@ -30,7 +30,6 @@ public class Smoke : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.CompareTag("MainCamera"))
         {
             //GameManager.Instance.EnableSmokeCamera();

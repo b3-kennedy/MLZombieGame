@@ -294,7 +294,6 @@ public class RigidbodyMovement : MonoBehaviour
                 if (hit.collider)
                 {
                     objectAbove = true;
-                    Debug.Log("cant uncrouch");
                 }
             }
             else

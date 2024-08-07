@@ -59,25 +59,58 @@ public class ZombiePatrolAI : MonoBehaviour
 
     void GetSurface()
     {
-        if (Physics.Raycast(groundCheck.position, -Vector3.up, out RaycastHit hit, 0.03f))
+        if (szam.footstepSource.enabled)
         {
-            if (hit.collider.GetComponent<Material>())
+
+            RaycastHit[] results = new RaycastHit[3];
+            Physics.RaycastNonAlloc(groundCheck.position, -Vector3.up, results, 1f);
+
+            foreach (var hit in results)
             {
-                Material mat = hit.collider.GetComponent<Material>();
-                switch (mat.matType)
+                if(hit.collider != null)
                 {
-                    case Material.MaterialType.GRASS:
-                        szam.PlayFootstep(szam.grassStepsWalk);
-                        break;
-                    case Material.MaterialType.CONCRETE:
-                        szam.PlayFootstep(szam.concreteStepsWalk);
-                        break;
-                    default:
-                        szam.PlayFootstep(szam.grassStepsWalk);
-                        break;
+                    if (hit.collider.GetComponent<Material>())
+                    {
+                        Material mat = hit.collider.GetComponent<Material>();
+                        switch (mat.matType)
+                        {
+                            case Material.MaterialType.GRASS:
+                                szam.PlayFootstep(szam.grassStepsWalk);
+                                break;
+                            case Material.MaterialType.CONCRETE:
+                                szam.PlayFootstep(szam.concreteStepsWalk);
+                                break;
+                            default:
+                                szam.PlayFootstep(szam.grassStepsWalk);
+                                break;
+                        }
+                    }
                 }
+
             }
+
+            //if (Physics.Raycast(groundCheck.position, -Vector3.up, out RaycastHit hit, 1f))
+            //{
+            //    Debug.Log(hit.collider);
+            //    if (hit.collider.GetComponent<Material>())
+            //    {
+            //        Material mat = hit.collider.GetComponent<Material>();
+            //        switch (mat.matType)
+            //        {
+            //            case Material.MaterialType.GRASS:
+            //                szam.PlayFootstep(szam.grassStepsWalk);
+            //                break;
+            //            case Material.MaterialType.CONCRETE:
+            //                szam.PlayFootstep(szam.concreteStepsWalk);
+            //                break;
+            //            default:
+            //                szam.PlayFootstep(szam.grassStepsWalk);
+            //                break;
+            //        }
+            //    }
+            //}
         }
+
     }
 
     // Update is called once per frame
@@ -267,7 +300,7 @@ public class ZombiePatrolAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(patrolPoint.position, radius);
-        Gizmos.color = Color.green;
+        //Gizmos.DrawWireSphere(patrolPoint.position, radius);
+        //Gizmos.color = Color.green;
     }
 }

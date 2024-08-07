@@ -45,7 +45,8 @@ public class EnforcerBrain : Agent
         key1GridPos = new Vector2(Mathf.RoundToInt(key1Pos.position.x/9.5f), Mathf.RoundToInt(key1Pos.position.z/9.5f));
         key2GridPos = new Vector2(Mathf.RoundToInt(key2Pos.position.x / 9.5f), Mathf.RoundToInt(key2Pos.position.z / 9.5f));
         key3GridPos = new Vector2(Mathf.RoundToInt(key3Pos.position.x / 9.5f), Mathf.RoundToInt(key3Pos.position.z / 9.5f));
-        barnGridPos = new Vector2(Mathf.RoundToInt(barnPos.position.x / 9.5f), Mathf.RoundToInt(barnPos.position.z / 9.5f));
+        barnGridPos = new Vector2(999, 999);
+        barnPos.gameObject.SetActive(false);
     }
 
     void ResetZombiePositions()
@@ -53,7 +54,8 @@ public class EnforcerBrain : Agent
         key1GridPos = new Vector2(Mathf.RoundToInt(key1Pos.position.x / 9.5f), Mathf.RoundToInt(key1Pos.position.z / 9.5f));
         key2GridPos = new Vector2(Mathf.RoundToInt(key2Pos.position.x / 9.5f), Mathf.RoundToInt(key2Pos.position.z / 9.5f));
         key3GridPos = new Vector2(Mathf.RoundToInt(key3Pos.position.x / 9.5f), Mathf.RoundToInt(key3Pos.position.z / 9.5f));
-        barnGridPos = new Vector2(Mathf.RoundToInt(barnPos.position.x / 9.5f), Mathf.RoundToInt(barnPos.position.z / 9.5f));
+        barnGridPos = new Vector2(999, 999);
+        barnPos.gameObject.SetActive(false);
         for (int i = 0; i < enforcerZombies.Count; i++)
         {
             enforcerZombies[i].enforcerZombie.SetActive(true);
@@ -74,6 +76,8 @@ public class EnforcerBrain : Agent
     void Start()
     {
         playerHealth = player.parent.GetComponent<PlayerHealth>();
+
+        
 
         foreach (var enforcer in enforcerZombies)
         {
@@ -129,13 +133,26 @@ public class EnforcerBrain : Agent
 
         List<Vector3> points = new List<Vector3>();
 
+        if(!key1Pos.gameObject.activeSelf && !key2Pos.gameObject.activeSelf && !key3Pos.gameObject.activeSelf)
+        {
+            barnPos.gameObject.SetActive(true);
+            barnGridPos = new Vector2(Mathf.RoundToInt(barnPos.position.x / 9.5f), Mathf.RoundToInt(barnPos.position.z / 9.5f));
+        }
 
         if(enforcerBoolVal == 0)
         {
-            if (Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key1GridPos) <= 5 || Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key2GridPos) <= 5 
-                || Vector3.Distance(enforcerZombies[enforcerNum].patrolPoint.position, key3GridPos) <= 5)
+            Debug.Log("true");
+            foreach (var patrol in enforcerZombies)
             {
-                AddReward(6f);
+                if(Vector3.Distance(patrol.patrolPoint.position, key1GridPos) <= 5 || Vector3.Distance(patrol.patrolPoint.position, key2GridPos) <= 5 || 
+                    Vector3.Distance(patrol.patrolPoint.position, key3GridPos) <= 5)
+                {
+                    AddReward(6f);
+                }
+                else
+                {
+                    AddReward(-0.2f);
+                }
             }
         }
         else
@@ -170,8 +187,12 @@ public class EnforcerBrain : Agent
             key3GridPos = new Vector2(999, 999);
         }
 
-
-        enforcerZombies[group].patrolPoint.position = new Vector3(Mathf.RoundToInt(pos.x*9.5f), 0, Mathf.RoundToInt(pos.y*9.5f));
+        if (!enforcerZombies[group].enforcerZombie.GetComponent<Health>().anim.GetBool("dead"))
+        {
+            enforcerZombies[group].patrolPoint.position = new Vector3(Mathf.RoundToInt(pos.x * 9.5f), 0, Mathf.RoundToInt(pos.y * 9.5f));
+            enforcerZombies[group].enforcerZombie.GetComponent<EnforcerZombieAI>().GenerateNewPoint();
+        }
+       
         
         if(Vector2.Distance(pos, key1GridPos) <= 5)
         {
@@ -212,11 +233,11 @@ public class EnforcerBrain : Agent
 
 
 
-        for (int i = 0; i < enforcerZombies.Count; i++)
-        {
-            enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().patrolPoint = enforcerZombies[group].patrolPoint;
-            enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().GenerateNewPoint();
-        }
+        //for (int i = 0; i < enforcerZombies.Count; i++)
+        //{
+        //    enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().patrolPoint = enforcerZombies[group].patrolPoint;
+        //    enforcerZombies[i].enforcerZombie.GetComponent<EnforcerZombieAI>().GenerateNewPoint();
+        //}
     }
 
     //void RandomPatrol(Vector2 pos, int group)
