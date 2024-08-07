@@ -170,7 +170,7 @@ public class EnforcerZombieAI : MonoBehaviour
         anim.SetBool("patrolling", false);
         agent.SetDestination(player.position);
         
-        if(Vector3.Distance(transform.position, player.position) < 2f)
+        if(Vector3.Distance(transform.position, player.position) < 2.5f)
         {
             if (canAttack)
             {

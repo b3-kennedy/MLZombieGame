@@ -134,9 +134,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalPosition: {x: -0.14, y: -0.13, z: -0.39}
-  adsPosition: {x: 0, y: -0.0599, z: -0.33}
+  adsPosition: {x: 0, y: -0.0644, z: -0.33}
   adsSpeed: 5
   isAiming: 0
+  aimedIn:
+    m_PersistentCalls:
+      m_Calls: []
+  aimedOut:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7776253892647663103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cbf1b6dd3597c468dbf5dd0711fd20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  shootScript: {fileID: 0}
+  normalSound: {fileID: 0}
   gun: 6
   barrelAttachment: {fileID: 0}
   barrelAttachmentPos: {fileID: 8707118354394337690}

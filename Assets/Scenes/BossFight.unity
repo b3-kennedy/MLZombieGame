@@ -7313,7 +7313,7 @@ MonoBehaviour:
   anim: {fileID: 1648720495}
   drawer: {fileID: 1259561217}
   multiplier: 30
-  damage: 30
+  damage: 20
   roarAudioSource: {fileID: 1587468873}
 --- !u!114 &1648720503
 MonoBehaviour:
@@ -7329,7 +7329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1648720495}
   stompAOE: {fileID: 745863633}
-  damage: 40
+  damage: 25
   stompAudioSource: {fileID: 1084767596}
 --- !u!114 &1648720504
 MonoBehaviour:

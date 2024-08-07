@@ -177,6 +177,7 @@ public class ChargeAttack : MonoBehaviour
             bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             Vector3 dir = (other.collider.transform.position - transform.position).normalized;
             other.collider.GetComponent<Rigidbody>().AddForce(dir * force);
+            bossAI.OnEndAttack();
         }
 
     }

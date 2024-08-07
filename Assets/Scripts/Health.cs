@@ -41,6 +41,7 @@ public class Health : MonoBehaviour
                 anim.SetBool("dead", true);
                 GetComponent<NavMeshAgent>().ResetPath();
                 GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+                GetComponent<NavMeshAgent>().enabled = false;
                 if (GetComponent<ZombiePatrolAI>())
                 {
                     GetComponent<ZombiePatrolAI>().enabled = false;
