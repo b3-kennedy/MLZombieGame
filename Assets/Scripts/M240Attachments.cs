@@ -29,6 +29,7 @@ public class M240Attachments : Attachments
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
             currentGun.audioRange /= 2;
             currentGun.shotSound = suppressedShotSound;
+            currentGun.isSuppressed = true;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -41,5 +42,6 @@ public class M240Attachments : Attachments
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
         currentGun.shotSound = normalSound;
         currentGun.audioRange *= 2;
+        currentGun.isSuppressed = false;
     }
 }

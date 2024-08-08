@@ -43,6 +43,7 @@ public class M200Attachments : Attachments
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
             currentGun.audioRange /= 2;
             currentGun.shotSound = suppressedShotSound;
+            currentGun.isSuppressed = true;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -94,6 +95,7 @@ public class M200Attachments : Attachments
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
         currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
+        currentGun.isSuppressed = false;
     }
 
     public override void UnequipSight()

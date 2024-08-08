@@ -37,6 +37,7 @@ public class TarAttachments : Attachments
             Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
             currentGun.shotSound = suppressedShotSound;
             currentGun.audioRange /= 2;
+            currentGun.isSuppressed = true;
             InventoryManager.Instance.attachmentsList.Remove(button);
             Destroy(button);
         }
@@ -86,6 +87,7 @@ public class TarAttachments : Attachments
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
         currentGun.shotSound = normalShot;
         currentGun.audioRange *= 2;
+        currentGun.isSuppressed = false;
     }
 
     public override void UnequipSight()

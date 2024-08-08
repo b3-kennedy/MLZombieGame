@@ -125,7 +125,11 @@ public class EnforcerZombieAI : MonoBehaviour
 
     public void DealDamage()
     {
-        player.GetComponent<PlayerHealth>().TakeDamage(50f);
+        if (player.GetComponent<RigidbodyMovement>())
+        {
+            player.GetComponent<PlayerHealth>().TakeDamage(50f);
+        }
+        
     }
 
     void Patrol()

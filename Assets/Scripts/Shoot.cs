@@ -13,6 +13,7 @@ public class Shoot : MonoBehaviour
     GameObject player;
 
     public GameObject muzzleFlashSpawner;
+    public GameObject[] muzzleFlashes;
 
     [Header("Audio Settings")]
     public AudioClip shotSound;
@@ -78,6 +79,8 @@ public class Shoot : MonoBehaviour
     float timeValue;
 
     List<Vector3> shotgunHits = new List<Vector3>();
+
+    [HideInInspector] public bool isSuppressed;
 
     // Start is called before the first frame update
     void Start()
@@ -403,11 +406,21 @@ public class Shoot : MonoBehaviour
         }
     }
 
+    void SpawnMuzzleFlash()
+    {
+        int randomNum = Random.Range(0, muzzleFlashes.Length);
+        muzzleFlashes[randomNum].SetActive(true);
+    }
 
     void FireShotgun()
     {
-        GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
-        muzzleFlash.transform.SetParent(audioSpawn.transform);
+        if (!isSuppressed)
+        {
+            SpawnMuzzleFlash();
+        }
+        
+        //GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
+        //muzzleFlash.transform.SetParent(audioSpawn.transform);
         AudioSource.PlayClipAtPoint(shotSound, audioSpawn.position, volume);
         //source.transform.SetParent(audioSpawn.transform);
         Vector3 shotPos = audioSpawn.position;
@@ -479,9 +492,11 @@ public class Shoot : MonoBehaviour
 
     void Fire()
     {
-
-        GameObject muzzleFlash = Instantiate(muzzleFlashSpawner, audioSpawn.position, audioSpawn.transform.rotation);
-        muzzleFlash.transform.SetParent(audioSpawn.transform);
+        if (!isSuppressed)
+        {
+            SpawnMuzzleFlash();
+        }
+        
         SpawnAudioAtPoint(shotSound, audioSpawn.position, Random.Range(pitchMin, pitchMax), volume);
         //source.transform.SetParent(audioSpawn.transform);
         Vector3 shotPos = audioSpawn.position;
