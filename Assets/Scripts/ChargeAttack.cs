@@ -191,7 +191,7 @@ public class ChargeAttack : MonoBehaviour
             {
                 anim.SetBool("charge", false);
                 bossAI.canLookAt = true;
-                bossAI.OnEndAttack();
+                bossAI.OnEndAttack("charge1");
             }
             distanceCheck = true;
         }
@@ -205,16 +205,17 @@ public class ChargeAttack : MonoBehaviour
             isTooClose = false;
             anim.SetBool("charge", false);
             bossAI.canLookAt = true;
-            bossAI.OnEndAttack();
+            bossAI.OnEndAttack("charge2");
         }
         else if (other.collider.GetComponent<PlayerHealth>() && !collided)
         {
             isTooClose = false;
+            tooCloseTimer = 0;
             collided = true;
             bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             Vector3 dir = (other.collider.transform.position - transform.position).normalized;
             other.collider.GetComponent<Rigidbody>().AddForce(dir * force);
-            bossAI.OnEndAttack();
+            bossAI.OnEndAttack("charge3");
         }
 
     }

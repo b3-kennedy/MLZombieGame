@@ -32,6 +32,10 @@ public class BossAI : MonoBehaviour
 
     void SelectState()
     {
+        if (waveAttack.drawer.gameObject.activeSelf)
+        {
+            waveAttack.drawer.gameObject.SetActive(false);
+        }
         distance = Vector3.Distance(transform.position, target.position);
         if(distance < 10)
         {
@@ -84,15 +88,20 @@ public class BossAI : MonoBehaviour
         SelectState();
     }
 
-    public void OnEndAttack()
+    public void OnEndAttack(string script)
     {
         startbetweenStateTimer = true;
-        
+        Debug.Log(script);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(state == BossState.WAVE)
+        {
+            waveAttack.WaveUpdate();
+        }
 
         if (startWaveCd)
         {

@@ -42,15 +42,16 @@ public class WaveAttack : MonoBehaviour
 
     public void EndAttack()
     {
-        anim.SetBool("wave", false);
+        
         drawer.gameObject.SetActive(false);
         drawer.radius = 1;
         isActive = false;
-        bossAI.OnEndAttack();
+        bossAI.OnEndAttack("wave");
+        anim.SetBool("wave", false);
     }
 
     // Update is called once per frame
-    void Update()
+    public void WaveUpdate()
     {
         if (isActive)
         {
@@ -71,6 +72,9 @@ public class WaveAttack : MonoBehaviour
             canDamage = false;
         }
 
-
+        if(drawer.radius > 50)
+        {
+            EndAttack();
+        }
     }
 }

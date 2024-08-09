@@ -67,7 +67,7 @@ public class ThrowAttack : MonoBehaviour
     {
         anim.SetBool("throw", false);
         boss.canLookAt = true;
-        boss.OnEndAttack();
+        boss.OnEndAttack("throw");
     }
 
     public IEnumerator FollowCurve(Vector3 start, Vector3 target)
@@ -94,9 +94,13 @@ public class ThrowAttack : MonoBehaviour
             boss.target.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
         AudioSource.PlayClipAtPoint(rockBreak, spawnedRock.transform.position);
-        EndAttack();
+
+        
         Destroy(throwAoe);
         Destroy(spawnedRock);
+        yield return new WaitForSeconds(1.5f);
+        EndAttack();
+        
 
     }
 
