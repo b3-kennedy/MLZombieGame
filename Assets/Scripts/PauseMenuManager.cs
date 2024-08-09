@@ -8,6 +8,7 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject pauseCanvas;
     [HideInInspector] public bool isPaused;
     [HideInInspector] public GameObject player;
+    public GameObject controlsPanel;
 
     private void Awake()
     {
@@ -69,6 +70,16 @@ public class PauseMenuManager : MonoBehaviour
         {
             SettingsMenuManager.Instance.OpenSettings();
         }
+    }
+
+    public void OpenControlsMenu()
+    {
+        controlsPanel.SetActive(true);
+    }
+
+    public void CloseControlsMenu()
+    {
+        controlsPanel.SetActive(false);
     }
 
     // Start is called before the first frame update

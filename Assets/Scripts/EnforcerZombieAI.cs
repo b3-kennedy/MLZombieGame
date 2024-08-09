@@ -127,6 +127,7 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         if (player.GetComponent<RigidbodyMovement>())
         {
+            Debug.Log("enforcer hit");
             player.GetComponent<PlayerHealth>().TakeDamage(50f);
         }
         
@@ -231,8 +232,16 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         if(player == null)
         {
+            if (!GameManager.Instance.isTraining)
+            {
+                if (player.GetComponent<RigidbodyMovement>())
+                {
+                    player = playerObj;
+                }
+            }
+
             EnforcerBrain.Instance.AddReward(2f);
-            player = playerObj;
+            
         }
 
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject smokeCamera;
 
+    public bool isTraining;
+
     private void Awake()
     {
         Instance = this;
@@ -29,6 +32,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (isTraining)
+        {
+            Debug.LogWarning("Training mode is on");
+        }
     }
 
     public void EnableSmokeCamera()

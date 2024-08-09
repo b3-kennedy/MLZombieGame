@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  doorOpen: {fileID: 8300000, guid: b871043881aaf5849aa3d906f9f89c51, type: 3}
 --- !u!1001 &82496816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -953,6 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  doorOpen: {fileID: 0}
 --- !u!65 &154545436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1106,7 +1108,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78d5357e77c036e429b81fed20039b69, type: 2}
+  - {fileID: 2100000, guid: df52f4d0325777d49bbe6e566536e284, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2571,7 +2573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78d5357e77c036e429b81fed20039b69, type: 2}
+  - {fileID: 2100000, guid: df52f4d0325777d49bbe6e566536e284, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9337,6 +9339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  doorOpen: {fileID: 0}
 --- !u!65 &959897871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15653,7 +15656,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78d5357e77c036e429b81fed20039b69, type: 2}
+  - {fileID: 2100000, guid: df52f4d0325777d49bbe6e566536e284, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17976,7 +17979,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'To the right you can see guns you may acquire in the game. You can test
     out these guns here by shooting the blue dummy. To shoot press the left mouse
-    button and to aim down the sights press the right mouse button.
+    button and to aim down the sights press the right mouse button. The player can
+    carry two weapons at a time, Press the ''1'' button to switch weapons.
 
 
 '
@@ -18006,8 +18010,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.11
-  m_fontSizeBase: 1.11
+  m_fontSize: 0.96
+  m_fontSizeBase: 0.96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

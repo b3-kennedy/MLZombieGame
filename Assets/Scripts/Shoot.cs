@@ -528,7 +528,7 @@ public class Shoot : MonoBehaviour
                 var bossHealth = hit.collider.transform.root.GetComponent<BossHealth>();
                 if (hit.collider.CompareTag("BossCritPoint"))
                 {
-                    bossHealth.TakeDamage(headshotDamage);
+                    bossHealth.TakeDamage(headshotDamage * 1.5f);
                     Destroy(hit.collider.gameObject);
                     bossHealth.ClearNullPositions();
                 }

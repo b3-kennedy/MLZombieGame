@@ -45,8 +45,8 @@ public class MouseLook : MonoBehaviour
     public bool acog;
     public bool holo;
 
-    float acogSens;
-    float holoSens;
+    float acogSens = 1f;
+    float holoSens = 1f;
     float normalSens;
 
     // Start is called before the first frame update

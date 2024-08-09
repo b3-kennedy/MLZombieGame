@@ -139,7 +139,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (camRecoil != null)
         {
-            Debug.Log("flinch");
             hurtSource.Play();
             camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
         }

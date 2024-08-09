@@ -19,6 +19,7 @@ public class PickUpWeapons : MonoBehaviour
     public GameObject openingBar;
     public float openTime = 3f;
     float openingTimer;
+    public AudioClip doorOpen;
 
     private void Start()
     {
@@ -197,6 +198,7 @@ public class PickUpWeapons : MonoBehaviour
                     if (BossFightManager.Instance != null)
                     {
                         BossFightManager.Instance.OpenBossDoor();
+                        AudioSource.PlayClipAtPoint(doorOpen, hit.transform.position);
                     }
                 }
             }
@@ -262,6 +264,7 @@ public class PickUpWeapons : MonoBehaviour
                     if (ZombieSpawnerManager.Instance != null)
                     {
                         ZombieSpawnerManager.Instance.SpawnScout();
+                        AudioSource.PlayClipAtPoint(doorOpen, hit.transform.position);
                     }
                 }
             }
@@ -275,6 +278,7 @@ public class PickUpWeapons : MonoBehaviour
                     if (ZombieSpawnerManager.Instance != null)
                     {
                         ZombieSpawnerManager.Instance.SpawnHunter();
+                        AudioSource.PlayClipAtPoint(doorOpen, hit.transform.position);
                     }
                 }
             }
@@ -288,6 +292,7 @@ public class PickUpWeapons : MonoBehaviour
                     if (ZombieSpawnerManager.Instance != null)
                     {
                         ZombieSpawnerManager.Instance.SpawnEnforcer();
+                        AudioSource.PlayClipAtPoint(doorOpen, hit.transform.position);
                     }
                 }
             }

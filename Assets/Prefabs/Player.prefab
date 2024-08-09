@@ -1966,6 +1966,7 @@ MonoBehaviour:
   openingUI: {fileID: 9102555985752858420}
   openingBar: {fileID: 6798222468944406277}
   openTime: 3
+  doorOpen: {fileID: 8300000, guid: b871043881aaf5849aa3d906f9f89c51, type: 3}
 --- !u!114 &2416271409863669464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,6 +2198,7 @@ MonoBehaviour:
   vigPulseMultiplier: 0.01
   camRecoil: {fileID: 0}
   flinchVal: -30
+  invulnerable: 0
   hurtSource: {fileID: 4160347579118737884}
 --- !u!114 &2053906005368454362
 MonoBehaviour:
