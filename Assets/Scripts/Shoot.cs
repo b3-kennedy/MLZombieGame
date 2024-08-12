@@ -474,6 +474,7 @@ public class Shoot : MonoBehaviour
                 else
                 {
                     GameObject hole = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                    hole.transform.position += hole.transform.forward / 1000;
                 }
             }
 

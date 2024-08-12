@@ -615,7 +615,7 @@ MonoBehaviour:
   damage: 30
   headshotDamage: 50
   pelletsPerShot: 15
-  spreadAngle: 200
+  spreadAngle: 100
   range: 1000
   verticalSpreadMultiplier: 2
   recoil: {fileID: 0}
