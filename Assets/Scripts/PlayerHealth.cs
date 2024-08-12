@@ -41,6 +41,8 @@ public class PlayerHealth : MonoBehaviour
 
     public AudioSource hurtSource;
 
+    public bool isAbleToRegen;
+
 
     // Start is called before the first frame update
     void Start()
@@ -109,14 +111,18 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        if (canRegen && currentHealth < maxHealth)
+        if (isAbleToRegen)
         {
-            currentHealth += Time.deltaTime * regenerationRate;
+            if (canRegen && currentHealth < maxHealth)
+            {
+                currentHealth += Time.deltaTime * regenerationRate;
+            }
+            else
+            {
+                canRegen = false;
+            }
         }
-        else
-        {
-            canRegen = false;
-        }
+
 
         if(PostProcessingManager.Instance != null)
         {
@@ -159,7 +165,7 @@ public class PlayerHealth : MonoBehaviour
 
                 if (MLPatrol2.Instance != null)
                 {
-                    MLPatrol2.Instance.AddReward(2f);
+                    MLPatrol2.Instance.AddReward(5f);
                     MLPatrol2.Instance.End();
                 }
 

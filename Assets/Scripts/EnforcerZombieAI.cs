@@ -232,15 +232,17 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         if(player == null)
         {
-            if (!GameManager.Instance.isTraining)
-            {
-                if (player.GetComponent<RigidbodyMovement>())
-                {
-                    player = playerObj;
-                }
-            }
 
-            EnforcerBrain.Instance.AddReward(2f);
+            if (playerObj.GetComponent<RigidbodyMovement>())
+            {
+                    player = playerObj;
+            }
+            
+            if(EnforcerBrain.Instance != null)
+            {
+                EnforcerBrain.Instance.AddReward(2f);
+            }
+            
             
         }
 

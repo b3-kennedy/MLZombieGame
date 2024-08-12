@@ -17,7 +17,7 @@ public class ZombiePatrolAI : MonoBehaviour
     bool canSpawn;
     public float spotCd;
     float spotTimer;
-    [HideInInspector] public bool playerSpotted = false;
+    public bool playerSpotted = false;
     Transform playerPos;
     bool audioHeard;
     [HideInInspector] public Vector3 audioPos;
@@ -35,6 +35,8 @@ public class ZombiePatrolAI : MonoBehaviour
     public Transform groundCheck;
     GameObject mlIdentifier;
     float mlIdentifierTimer;
+    bool unspotted;
+    float unspottedTimer;
 
     private void Awake()
     {
@@ -202,6 +204,16 @@ public class ZombiePatrolAI : MonoBehaviour
             }
         }
 
+        if (unspotted)
+        {
+            unspottedTimer += Time.deltaTime;
+            if(unspottedTimer >= 5f)
+            {
+                playerSpotted = false;
+                unspotted = false;
+                unspottedTimer = 0;
+            }
+        }
 
     }
 
@@ -213,6 +225,11 @@ public class ZombiePatrolAI : MonoBehaviour
         Vector3 dir = pos - transform.position;
         Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
         transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 2 * Time.deltaTime);
+    }
+
+    public void OnUnspotted()
+    {
+        unspotted = true;
     }
 
     public void GenerateNewPoint()
@@ -277,20 +294,14 @@ public class ZombiePatrolAI : MonoBehaviour
                 MLSpawn.Instance.SpawnHunter();
             }
             
-            if (MLPatrol2.Instance != null)
-            {
-                MLPatrol2.Instance.GainReward(0.5f);
-                MLPatrol2.Instance.RequestAction();
-            }
 
             if(MLPatrol2.Instance != null)
             {
+                MLPatrol2.Instance.GainReward(1f);
                 MLPatrol2.Instance.player.parent.GetComponent<PlayerHealth>().TakeDamage(3f);
-                if (MLPatrol2.Instance.player.gameObject.activeSelf)
-                {
-                    
-                }
-                
+                MLPatrol2.Instance.player.gameObject.SetActive(true);
+                MLPatrol2.Instance.RequestAction();
+
             }
             
             canSpawn = false;

@@ -86,10 +86,10 @@ public class MLSpawn : Agent
         {
             if (GameManager.Instance.player.activeSelf)
             {
-                //GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
-                //hunterZombie.GetComponent<HunterZombieAI>().playerPos = player.transform.GetChild(0);
-                //hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
-                //hunterZombie.transform.SetParent(hunterParent);
+                GameObject hunterZombie = Instantiate(hunter, hunterSpawn.position, Quaternion.identity);
+                hunterZombie.GetComponent<HunterZombieAI>().playerPos = player.transform.GetChild(0);
+                hunterZombie.GetComponent<HunterZombieAI>().home = transform.parent;
+
             }
 
         }

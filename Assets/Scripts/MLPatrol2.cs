@@ -159,13 +159,6 @@ public class MLPatrol2 : Agent
 
         pos = new Vector2(posX, posY);
 
-        List<Vector3> points = new List<Vector3>();
-
-        if(enforcerBoolVal == 1)
-        {
-            //RandomEnforcerPatrol(pos, enforcerNum);
-        }
-
         if(boolVal == 1)
         {
             RandomPatrol(pos, groupNum);
@@ -268,8 +261,6 @@ public class MLPatrol2 : Agent
         discreteAction[1] = Random.Range(0, 24);
         discreteAction[2] = Random.Range(0, 10);
         discreteAction[3] = Random.Range(0, 2);
-        discreteAction[4] = Random.Range(0, 10);
-        discreteAction[5] = Random.Range(0, 2);
 
     }
 
@@ -299,11 +290,6 @@ public class MLPatrol2 : Agent
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeAction();
-        }
-
         //if (player.gameObject.activeSelf)
         //{
         //    timer = patrolTime;
