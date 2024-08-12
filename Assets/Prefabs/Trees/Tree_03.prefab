@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1860220280143052328}
   - component: {fileID: 7366725385985951755}
   - component: {fileID: 2515191101999279281}
-  - component: {fileID: 6085505106053891005}
+  - component: {fileID: 3004414192605075726}
   m_Layer: 0
   m_Name: Tree_03_LOD0
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6085505106053891005
+--- !u!64 &3004414192605075726
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

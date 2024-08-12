@@ -17,6 +17,8 @@ public class Shoot : MonoBehaviour
 
     public GameObject bulletHole;
 
+    public LayerMask layer;
+
     [Header("Audio Settings")]
     public AudioClip shotSound;
     public AudioClip emptySound;
@@ -439,7 +441,7 @@ public class Shoot : MonoBehaviour
         for (int i = 0; i < pelletsPerShot; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, CalculateShootingDir(), out hit))
+            if (Physics.Raycast(Camera.main.transform.position, CalculateShootingDir(), out hit, layer))
             {
                 var hitObjHealth = hit.collider.transform.root.GetComponent<Health>();
                 if (hitObjHealth)
@@ -515,7 +517,7 @@ public class Shoot : MonoBehaviour
         }
         anim.SetBool("shoot", true);
         //Debug.Log("shoot");
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 1000, layer))
         {
 
             var hitObjHealth = hit.collider.transform.root.GetComponent<Health>();

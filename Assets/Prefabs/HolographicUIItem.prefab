@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 981473288418771477, guid: bbcaf117194589d43997bb1f18134a9f, type: 3}
+  attachmentType: 0
 --- !u!1 &1092964067439265711
 GameObject:
   m_ObjectHideFlags: 0
