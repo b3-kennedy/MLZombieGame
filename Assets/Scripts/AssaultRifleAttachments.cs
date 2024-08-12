@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,8 @@ public class AssaultRifleAttachments : Attachments
 
     public GameObject[] ironSights;
 
-
+    float normalRecoilX;
+    float normalRecoilY;
 
     public AudioClip suppressedSound;
 
@@ -142,6 +144,17 @@ public class AssaultRifleAttachments : Attachments
             ironSights[0].SetActive(true);
             ironSights[1].transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
+    }
+
+    public override void UnequipUnderBarrel()
+    {
+        Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
+        shootScript.recoilY = shootScript.normalRecoilY;
+        shootScript.recoilX = shootScript.normalRecoilX;
+
+        shootScript.recoil.recoilY = shootScript.normalRecoilY;
+        shootScript.recoil.recoilX = shootScript.normalRecoilX;
+
     }
 
 }

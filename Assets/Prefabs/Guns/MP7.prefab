@@ -364,6 +364,7 @@ MonoBehaviour:
   - {fileID: 6630710981596451982}
   - {fileID: 6559960940176550506}
   - {fileID: 5649180034356414940}
+  bulletHole: {fileID: 7562513857196432545, guid: 1d46ceacf64cb604782c6cb036b796de, type: 3}
   shotSound: {fileID: 8300000, guid: 4758d794bc041d74db6808b323ea36db, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 3687622380752559388}

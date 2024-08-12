@@ -15,6 +15,8 @@ public class Shoot : MonoBehaviour
     public GameObject muzzleFlashSpawner;
     public GameObject[] muzzleFlashes;
 
+    public GameObject bulletHole;
+
     [Header("Audio Settings")]
     public AudioClip shotSound;
     public AudioClip emptySound;
@@ -469,6 +471,10 @@ public class Shoot : MonoBehaviour
                 {
                     hit.collider.GetComponent<Bottle>().Explode();
                 }
+                else
+                {
+                    GameObject hole = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                }
             }
 
 
@@ -540,6 +546,11 @@ public class Shoot : MonoBehaviour
             else if (hit.collider.GetComponent<Bottle>())
             {
                 hit.collider.GetComponent<Bottle>().Explode();
+            }
+            else
+            {
+                GameObject hole = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                hole.transform.position += hole.transform.forward / 1000;
             }
 
         }
