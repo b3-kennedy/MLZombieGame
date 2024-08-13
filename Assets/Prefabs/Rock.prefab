@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 10
-  rotateVec: {x: 10, y: 10, z: 10}
+  rotateVec: {x: 0, y: 0, z: 0}
 --- !u!1001 &3484100727153711643
 PrefabInstance:
   m_ObjectHideFlags: 0

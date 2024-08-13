@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject winScreen;
     public GameObject loseScreen;
+    public GameObject bossLoseScreen;
     public GameObject player;
     public bool gameOver;
     public bool hasRedKey;
@@ -124,7 +125,23 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         Cursor.lockState = CursorLockMode.Confined;
-        loseScreen.SetActive(true);
+        if(BossFightManager.Instance != null)
+        {
+            if (!BossFightManager.Instance.checkpoint)
+            {
+                loseScreen.SetActive(true);
+            }
+            else
+            {
+                bossLoseScreen.SetActive(true);
+            }
+        }
+        else
+        {
+            loseScreen.SetActive(true);
+        }
+
+        
     }
 
     public void Restart()
@@ -133,6 +150,18 @@ public class GameManager : MonoBehaviour
         LevelManager.Instance.SwitchToScene(1);
         OnRestart();
         
+    }
+
+    public void BossRestart()
+    {
+        
+        LevelManager.Instance.SwitchToScene(3);
+        bossLoseScreen.SetActive(false);
+        player.GetComponent<PlayerHealth>().currentHealth = 99f;
+        PostProcessingManager.Instance.vignette.intensity.value = 0f;
+        player.GetComponent<Rigidbody>().MovePosition(new Vector3(0, 1, -21));
+        Cursor.lockState = CursorLockMode.Locked;
+        gameOver = false;
     }
 
     public void OnRestart()

@@ -812,7 +812,7 @@ MonoBehaviour:
   bulletHole: {fileID: 7562513857196432545, guid: 1d46ceacf64cb604782c6cb036b796de, type: 3}
   layer:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 8063
   shotSound: {fileID: 8300000, guid: 812b50bb38b38c0429403c7a983720e0, type: 3}
   emptySound: {fileID: 8300000, guid: ca8e6c91275ad5247a68701a6e0fdd2d, type: 3}
   audioSpawn: {fileID: 2094216942178664539}

@@ -10,6 +10,7 @@ public class BossFightManager : MonoBehaviour
     public GameObject bossDoor2;
     public GameObject bossHealthBar;
     public AudioClip doorOpen;
+    public bool checkpoint;
 
 
     private void Awake()

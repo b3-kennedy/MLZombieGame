@@ -59,6 +59,7 @@ public class ThrowAttack : MonoBehaviour
             throwAoe = Instantiate(aoe, new Vector3(boss.target.position.x, 0.1f, boss.target.position.z), Quaternion.identity);
             CircleDrawer circle = throwAoe.GetComponent<CircleDrawer>();
             circle.radius = impactRadius;
+            spawnedRock.GetComponent<Rotate>().rotateVec = new Vector3(10, 10, 10);
             
         }
     }
@@ -93,7 +94,7 @@ public class ThrowAttack : MonoBehaviour
         {
             boss.target.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
-        AudioSource.PlayClipAtPoint(rockBreak, spawnedRock.transform.position);
+        AudioSource.PlayClipAtPoint(rockBreak, spawnedRock.transform.position, 0.5f);
 
         
         Destroy(throwAoe);
