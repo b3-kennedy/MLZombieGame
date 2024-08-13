@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,9 @@ public class HunterZombieAI : MonoBehaviour
     public float damage;
     ScoutZombieAudioManager audioManager;
     public Transform groundCheck;
+    bool patrol;
+    float patrolTimer;
+    public float patrolRadius;
 
 
     // Start is called before the first frame update
@@ -84,7 +88,7 @@ public class HunterZombieAI : MonoBehaviour
             }
         }
 
-        if(playerPos != null)
+        if(playerPos != null && !patrol)
         {
             agent.SetDestination(playerPos.position);
             agent.speed = runSpeed;
@@ -108,19 +112,66 @@ public class HunterZombieAI : MonoBehaviour
                 agent.speed = walkSpeed;
                 decayTimer = 0;
                 agent.SetDestination(home.position);
-                anim.SetBool("player", false);
+                
                 audioManager.footstepSource.volume = 0.5f;
+                patrol = true;
             }
         }
+        else if (patrol)
+        {
+            agent.speed = walkSpeed;
+            anim.SetBool("player", false);
+            patrolTimer += Time.deltaTime;
+            if(patrolTimer >= 5)
+            {
+                GenerateNewPoint();
+                patrolTimer = 0;
+            }
+        }
+
+    }
+
+    public void DoorUnlocking()
+    {
+        patrol = false;
+        playerPos = GameManager.Instance.player.transform;
+    }
+
+    public void GenerateNewPoint()
+    {
+        if (!GetComponent<Health>().dead)
+        {
+            Vector3 point = home.position + (Random.insideUnitSphere * patrolRadius);
+            Vector3 newDestPoint = new Vector3(point.x, 0, point.z);
+            if (gameObject.activeSelf)
+            {
+                NavMeshPath newPath = new NavMeshPath();
+                if (agent.CalculatePath(newDestPoint, newPath) && newPath.status == NavMeshPathStatus.PathComplete)
+                {
+                    agent.SetDestination(newDestPoint);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                }
+
+            }
+        }
+
+
     }
 
     public void DealDamage()
     {
-        if (Vector3.Distance(playerPos.position, transform.position) < 1.3f)
+        if(playerPos != null)
         {
+            if (Vector3.Distance(playerPos.position, transform.position) < 1.3f)
+            {
 
-            playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+                playerPos.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            }
         }
+
         
     }
 }

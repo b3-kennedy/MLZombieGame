@@ -94,7 +94,7 @@ public class EnforcerZombieAI : MonoBehaviour
             }
             else if (state == ZombiePatrolAI.ZombieState.HEARD_SOUND)
             {
-                LookAtPoint(audioPos);
+                LookAtPoint(audioPos, 2);
                 audioTimer += Time.deltaTime;
                 if(audioTimer >= maxAudioTime)
                 {
@@ -127,8 +127,12 @@ public class EnforcerZombieAI : MonoBehaviour
     {
         if (player.GetComponent<RigidbodyMovement>())
         {
-            Debug.Log("enforcer hit");
-            player.GetComponent<PlayerHealth>().TakeDamage(50f);
+            if(Vector3.Distance(transform.position, player.position) <= 2f)
+            {
+                Debug.Log("enforcer hit");
+                player.GetComponent<PlayerHealth>().TakeDamage(50f);
+            }
+
         }
         
     }
@@ -166,6 +170,7 @@ public class EnforcerZombieAI : MonoBehaviour
     public void CancelAttack()
     {
         anim.SetBool("swipe", false);
+        agent.angularSpeed = 120;
     }
 
     void Attack()
@@ -175,11 +180,11 @@ public class EnforcerZombieAI : MonoBehaviour
         anim.SetBool("patrolling", false);
         agent.SetDestination(player.position);
         
-        if(Vector3.Distance(transform.position, player.position) < 2.5f)
+        if(Vector3.Distance(transform.position, player.position) < 2f)
         {
             if (canAttack)
             {
-
+                agent.angularSpeed = 999;
                 anim.SetBool("swipe", true);
                 canAttack = false;
             }
@@ -199,14 +204,14 @@ public class EnforcerZombieAI : MonoBehaviour
         audioPos = pos;
     }
 
-    void LookAtPoint(Vector3 pos)
+    void LookAtPoint(Vector3 pos, float speed)
     {
         anim.SetBool("patrolling", false);
         anim.SetBool("attacking", false);
         agent.speed = 0;
         Vector3 dir = pos - transform.position;
         Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
-        transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 2 * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), speed * Time.deltaTime);
     }
 
     public void GenerateNewPoint()

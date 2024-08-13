@@ -7848,7 +7848,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Scout and enforcer zombies can hear you when you are nearby and when you
     fire a weapon. The  suppressor attachment can help reduce the sound a gunshot
-    makes and to avoid making footsteps crouch using the 'C' button.
+    makes and to lessen the sound of footsteps crouch using the 'C' button.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7875,8 +7875,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.11
-  m_fontSizeBase: 1.11
+  m_fontSize: 1.08
+  m_fontSizeBase: 1.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8972,7 +8972,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: After being spotted by a scout the hunter zombie will chase you. These
     zombies can do damage to you. You can either kill them or try to avoid them.
-    After a certain amount of time they will lose track of you
+    After a certain amount of time they will lose track of you. If you do not kill
+    the hunter zombie and you are spotted again, then they will begin to chase you
+    again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8999,8 +9001,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.11
-  m_fontSizeBase: 1.11
+  m_fontSize: 0.93
+  m_fontSizeBase: 0.93
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -19860,7 +19862,8 @@ MonoBehaviour:
 
     - Ways to avoid detection from patrolling zombies
 
-'
+    -
+    Experiment with zombie behaviour'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

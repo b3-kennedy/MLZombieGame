@@ -177,6 +177,7 @@ public class PickUpWeapons : MonoBehaviour
                     HUDManager.Instance.ShowInteractPrompt();
                     if (Input.GetKeyDown(KeyCode.F))
                     {
+                        GameManager.Instance.PlayerOpeningDoor();
                         openingUI.SetActive(true);
                         openingDoor = true;
 

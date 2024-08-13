@@ -285,6 +285,8 @@ public class ZombiePatrolAI : MonoBehaviour
             playAlertSound = false;
         }
 
+        GameManager.Instance.PlayerOpeningDoor();
+
 
         if (canSpawn)
         {

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public bool activate;
     public GameObject[] scoutZombies;
+    public List<GameObject> hunterZombies;
     public float scoutTimer;
 
     public GameObject smokeCamera;
@@ -35,6 +36,14 @@ public class GameManager : MonoBehaviour
         if (isTraining)
         {
             Debug.LogWarning("Training mode is on");
+        }
+    }
+
+    public void PlayerOpeningDoor()
+    {
+        foreach (GameObject zombie in hunterZombies)
+        {
+            zombie.GetComponent<HunterZombieAI>().DoorUnlocking();
         }
     }
 

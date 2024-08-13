@@ -2543,6 +2543,7 @@ MonoBehaviour:
   attackRate: 1
   damage: 10
   groundCheck: {fileID: 3669139064918373862}
+  patrolRadius: 20
 --- !u!114 &7860596225667715997
 MonoBehaviour:
   m_ObjectHideFlags: 0
