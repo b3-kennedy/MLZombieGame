@@ -254,6 +254,7 @@ MonoBehaviour:
     otherList:
     - {fileID: 11400000, guid: 02819fff9f06326439149be1d10fab07, type: 2}
     - {fileID: 11400000, guid: fd05f089ff857dc42b589e42fd09a498, type: 2}
+    - {fileID: 11400000, guid: a301ee8d0523d7143bf3fc5ea50215c6, type: 2}
   chances:
   - itemName: Gun
     type: 0
