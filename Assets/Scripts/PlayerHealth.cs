@@ -49,7 +49,11 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         anim = GetComponent<PickUpWeapons>().weaponPos.GetComponent<Animator>();
-        GameManager.Instance.muteAudio.AddListener(Mute);
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.muteAudio.AddListener(Mute);
+        }
+        
     }
 
     // Update is called once per frame

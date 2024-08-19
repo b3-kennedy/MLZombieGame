@@ -15,7 +15,11 @@ public class PlayerAudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.muteAudio.AddListener(Mute);
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.muteAudio.AddListener(Mute);
+        }
+        
     }
 
 

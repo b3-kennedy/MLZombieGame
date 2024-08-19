@@ -100,6 +100,8 @@ public class Shoot : MonoBehaviour
 
         anim = transform.parent.parent.GetComponent<Animator>();
 
+        anim.keepAnimatorStateOnDisable = true;
+
         recoil = transform.parent.parent.parent.parent.parent.gameObject.GetComponent<Recoil>();
         recoil.targetRot = Vector3.zero;
         recoil.recoilX = recoilX;

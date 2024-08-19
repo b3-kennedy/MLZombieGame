@@ -327,15 +327,15 @@ public class PickUpWeapons : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
 
-                if (currentActiveGun.GetComponent<Animator>().GetBool("reload"))
-                {
-                    Shoot shootScript = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>();
-                    currentActiveGun.GetComponent<Animator>().SetBool("reload", false);
-                    currentActiveGun.transform.localPosition = Vector3.zero;
-                    currentActiveGun.transform.localEulerAngles = Vector3.zero;
-                    shootScript.reload = false;
+                //if (currentActiveGun.GetComponent<Animator>().GetBool("reload"))
+                //{
+                //    Shoot shootScript = currentActiveGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>();
+                //    currentActiveGun.GetComponent<Animator>().SetBool("reload", false);
+                //    currentActiveGun.transform.localPosition = Vector3.zero;
+                //    currentActiveGun.transform.localEulerAngles = Vector3.zero;
+                //    shootScript.reload = false;
 
-                }
+                //}
 
                 foreach (var gun in guns)
                 {
