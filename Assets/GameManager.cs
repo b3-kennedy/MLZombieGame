@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -21,10 +22,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] scoutZombies;
     public List<GameObject> hunterZombies;
     public float scoutTimer;
-
     public GameObject smokeCamera;
 
     public bool isTraining;
+
+    public UnityEvent muteAudio;
 
     private void Awake()
     {
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        HUDManager.Instance.hudGameObject.SetActive(false);
+        muteAudio.Invoke();
         gameOver = true;
         Cursor.lockState = CursorLockMode.Confined;
         winScreen.SetActive(true);
@@ -123,6 +127,8 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        HUDManager.Instance.hudGameObject.SetActive(false);
+        muteAudio.Invoke();
         gameOver = true;
         Cursor.lockState = CursorLockMode.Confined;
         if(BossFightManager.Instance != null)

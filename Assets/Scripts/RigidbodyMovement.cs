@@ -178,6 +178,7 @@ public class RigidbodyMovement : MonoBehaviour
         Jump();
         Lean();
         CheckAudioRange(transform.position);
+        Sprint();
 
         if (Input.GetKey(KeyCode.LeftShift) && !objectAbove && canSprint)
         {
@@ -382,7 +383,6 @@ public class RigidbodyMovement : MonoBehaviour
                     break;
                 case (PlayerState.SPRINT):
                     UnAim();
-                    Sprint();
                     rb.AddForce(moveDir * sprintSpeed * 10, ForceMode.Force);
                     pam.footstepSource.volume = normalVolume;
                     FootstepAudio(sprintFootstepInterval);
@@ -409,21 +409,24 @@ public class RigidbodyMovement : MonoBehaviour
 
     void Sprint()
     {
-        
-        if(rb.velocity != Vector3.zero)
+        if (playerState == PlayerState.SPRINT)
         {
-            isSprinting = true;
-            sprintTimer += Time.deltaTime;
+            if (rb.velocity != Vector3.zero)
+            {
+                isSprinting = true;
+                sprintTimer += Time.deltaTime;
+            }
+
+            if (sprintTimer >= maxSprintTime)
+            {
+                playerState = PlayerState.NORMAL;
+                isSprinting = false;
+                canSprint = false;
+                sprintTimer = 0;
+                sprintAudioSource.Play();
+            }
         }
-        
-        if(sprintTimer >= maxSprintTime)
-        {
-            playerState = PlayerState.NORMAL;
-            isSprinting = false;
-            canSprint = false;
-            sprintTimer = 0;
-            sprintAudioSource.Play();
-        }
+
 
 
     }

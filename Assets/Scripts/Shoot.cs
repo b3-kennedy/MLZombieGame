@@ -159,7 +159,6 @@ public class Shoot : MonoBehaviour
                 break;
 
         }
-
         InventoryManager.Instance.UpdateAmmoInInventory();
 
 

@@ -49,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         anim = GetComponent<PickUpWeapons>().weaponPos.GetComponent<Animator>();
+        GameManager.Instance.muteAudio.AddListener(Mute);
     }
 
     // Update is called once per frame
@@ -149,6 +150,11 @@ public class PlayerHealth : MonoBehaviour
             camRecoil.targetRot += new Vector3(flinchVal, 0, 0);
         }
 
+    }
+
+    void Mute()
+    {
+        hurtSource.mute = true;
     }
 
     public void TakeDamage(float dmg)

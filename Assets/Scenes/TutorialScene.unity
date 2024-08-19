@@ -7978,6 +7978,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 186137629615060975, guid: da204f65994b8d54b826fc572dadb857, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858763794120987029, guid: da204f65994b8d54b826fc572dadb857, type: 3}
       propertyPath: m_Name
       value: MaleDummy
@@ -14120,7 +14124,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8078461906859159865, guid: dca6a17a5c02caf43a894be67137b157, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -22943,7 +22948,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1462109206706641569, guid: 5ea6395c915e81f44a8583a45d456a7b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -159,7 +159,6 @@ public class InventoryManager : MonoBehaviour
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         activeGun.transform.GetChild(0).GetComponent<Attachments>().AttachSight(attachment.GetComponent<AttachmentItem>().item, attachment);
                     });
-                    Debug.Log(attachment.GetComponent<Button>().onClick);
                     attachment.GetComponent<Button>().onClick.AddListener(delegate {
                         OnOpenInventory();
                     });

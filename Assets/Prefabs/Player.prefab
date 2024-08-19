@@ -2140,6 +2140,7 @@ MonoBehaviour:
   interactIcon: {fileID: 5595811490723178049}
   grabIcon: {fileID: 0}
   breakIcon: {fileID: 0}
+  hudGameObject: {fileID: 2783856542759900912}
 --- !u!114 &3571301665161525268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,6 +2201,7 @@ MonoBehaviour:
   flinchVal: -30
   invulnerable: 0
   hurtSource: {fileID: 4160347579118737884}
+  isAbleToRegen: 0
 --- !u!114 &2053906005368454362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -73,6 +73,12 @@ public class HunterZombieAI : MonoBehaviour
         }
     }
 
+    public void LookAtPoint(Vector3 pos)
+    {
+        Vector3 dir = pos - transform.position;
+        Quaternion toRot = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = Quaternion.Lerp(new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), new Quaternion(0, toRot.y, 0, toRot.w), 50 * Time.deltaTime);
+    }
 
     // Update is called once per frame
     void Update()
@@ -96,7 +102,7 @@ public class HunterZombieAI : MonoBehaviour
             audioManager.footstepSource.volume = 1f;
             if(Vector3.Distance(playerPos.position, transform.position) < 1.3f && !attacked)
             {
-                
+                LookAtPoint(playerPos.position);
                 anim.SetBool("attack", true);
                 attacked = true;
             }

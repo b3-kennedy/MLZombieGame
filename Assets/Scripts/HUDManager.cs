@@ -21,6 +21,8 @@ public class HUDManager : MonoBehaviour
     public Sprite grabIcon;
     public Sprite breakIcon;
 
+    public GameObject hudGameObject;
+
 
 
     private void Awake()

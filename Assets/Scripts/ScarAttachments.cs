@@ -9,8 +9,6 @@ public class ScarAttachments : Attachments
     public Transform barrelAttachmentPos;
 
 
-
-    AudioClip normalShot;
     public AudioClip suppressedShotSound;
 
 
@@ -42,7 +40,7 @@ public class ScarAttachments : Attachments
     public override void UnequipBarrel()
     {
         Shoot currentGun = transform.GetChild(0).GetComponent<Shoot>();
-        currentGun.shotSound = normalShot;
+        currentGun.shotSound = normalSound;
         currentGun.audioRange *= 2;
         currentGun.isSuppressed = false;
     }

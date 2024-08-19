@@ -15,7 +15,7 @@ public class PlayerAudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.Instance.muteAudio.AddListener(Mute);
     }
 
 
@@ -26,6 +26,12 @@ public class PlayerAudioManager : MonoBehaviour
         footstepSource.clip = type[randomNum];
         footstepSource.Play();
     }
+
+    void Mute()
+    {
+        footstepSource.mute = true;
+    }
+
 
     // Update is called once per frame
     void Update()

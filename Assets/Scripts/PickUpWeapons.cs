@@ -453,8 +453,15 @@ public class PickUpWeapons : MonoBehaviour
 
         if (weaponPos.childCount > 0)
         {
-            GameObject currentGun = weaponPos.GetChild(0).gameObject;
-            currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().UpdateMagCount();
+            for (int i = 0; i < weaponPos.childCount; i++)
+            {
+                if (weaponPos.GetChild(i).gameObject.activeSelf)
+                {
+                    GameObject currentGun = weaponPos.GetChild(i).gameObject;
+                    currentGun.transform.GetChild(0).GetChild(0).GetComponent<Shoot>().UpdateMagCount();
+                }
+            }
+
             UpdateHud();
         }
 
@@ -467,7 +474,6 @@ public class PickUpWeapons : MonoBehaviour
     {
         if(weaponPos.childCount < 3)
         {
-            Debug.Log("pickup");
             WeaponPickupObject wpo = gun.GetComponent<WeaponPickupObject>();
 
             
@@ -539,11 +545,12 @@ public class PickUpWeapons : MonoBehaviour
                 
             }
 
-            UpdateRecoilScript();
-            UpdateHud();
+
 
             Destroy(gun);
             InventoryManager.Instance.OnPickUpWeapon(newGun);
+            UpdateRecoilScript();
+            UpdateHud();
             GetComponent<MouseLook>().OnGunPickedUp();
         }
 
