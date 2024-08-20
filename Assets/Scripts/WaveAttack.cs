@@ -12,11 +12,13 @@ public class WaveAttack : MonoBehaviour
     bool canDamage;
     public float damage;
     public AudioSource roarAudioSource;
+    BossHealth bossHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         bossAI = GetComponent<BossAI>();
+        bossHealth = GetComponent<BossHealth>();
     }
 
     public void StartAttack()
@@ -61,7 +63,7 @@ public class WaveAttack : MonoBehaviour
 
         if (Vector3.Distance(bossAI.target.position, bossAI.transform.position) < drawer.radius)
         {
-            if (canDamage && !bossAI.target.GetComponent<RigidbodyMovement>().isCrouched)
+            if (canDamage && !bossAI.target.GetComponent<RigidbodyMovement>().isCrouched && drawer.gameObject.activeSelf)
             {
                 bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
@@ -75,6 +77,16 @@ public class WaveAttack : MonoBehaviour
         if(drawer.radius > 50)
         {
             EndAttack();
+        }
+
+
+    }
+
+    private void Update()
+    {
+        if (bossHealth.isDead)
+        {
+            drawer.gameObject.SetActive(false);
         }
     }
 }

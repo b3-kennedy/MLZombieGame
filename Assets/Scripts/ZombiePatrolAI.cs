@@ -51,7 +51,11 @@ public class ZombiePatrolAI : MonoBehaviour
         szam = GetComponent<ScoutZombieAudioManager>();
         spotTimer = spotCd;
         GenerateNewPoint();
-        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.muteAudio.AddListener(Mute);
+        }
+
     }
 
     public void PlayFootsteps()
@@ -59,6 +63,10 @@ public class ZombiePatrolAI : MonoBehaviour
         GetSurface();
     }
 
+    void Mute()
+    {
+        alertedSource.mute = true;
+    }
     void GetSurface()
     {
         if (szam.footstepSource.enabled)

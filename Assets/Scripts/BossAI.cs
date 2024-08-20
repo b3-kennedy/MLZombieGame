@@ -98,7 +98,13 @@ public class BossAI : MonoBehaviour
     void Update()
     {
 
-        if(state == BossState.WAVE)
+        if (state != BossState.CHARGE)
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+                
+        }
+
+        if (state == BossState.WAVE)
         {
             waveAttack.WaveUpdate();
         }

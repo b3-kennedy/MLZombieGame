@@ -10,11 +10,13 @@ public class StompAttack : MonoBehaviour
     public float damage;
     BossAI bossAI;
     public AudioSource stompAudioSource;
+    BossHealth bossHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         bossAI = GetComponent<BossAI>();
+        bossHealth = GetComponent<BossHealth>();
     }
 
     public void PlayStompSound()
@@ -51,6 +53,9 @@ public class StompAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (bossHealth.isDead)
+        {
+            stompAOE.SetActive(false);
+        }
     }
 }

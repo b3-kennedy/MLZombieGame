@@ -13,7 +13,7 @@ public class EnforcerZombieAI : MonoBehaviour
     float timer;
     NavMeshAgent agent;
     public Vector3 destPoint;
-    [HideInInspector] public Transform player;
+    public Transform player;
     Animator anim;
     public float walkSpeed;
     public float runSpeed;
@@ -25,7 +25,7 @@ public class EnforcerZombieAI : MonoBehaviour
     bool attacked;
     public float attackRate;
     float attackTimer;
-    bool canAttack = true;
+    public bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -115,9 +115,10 @@ public class EnforcerZombieAI : MonoBehaviour
             attackTimer += Time.deltaTime;
             if(attackTimer >= attackRate)
             {
+                attackTimer = 0;
                 canAttack = true;
                 
-                attackTimer = 0;
+                
             }
         }
 
@@ -179,7 +180,6 @@ public class EnforcerZombieAI : MonoBehaviour
         anim.SetBool("attacking", true);
         anim.SetBool("patrolling", false);
         agent.SetDestination(player.position);
-        
         if(Vector3.Distance(transform.position, player.position) < 2f)
         {
             if (canAttack)

@@ -20,6 +20,7 @@ public class PickUpWeapons : MonoBehaviour
     public float openTime = 3f;
     float openingTimer;
     public AudioClip doorOpen;
+    public LayerMask layerMask;
 
     private void Start()
     {
@@ -64,7 +65,7 @@ public class PickUpWeapons : MonoBehaviour
 
     void Interaction()
     {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3, layerMask))
         {
             if (hit.collider.CompareTag("Gun"))
             {

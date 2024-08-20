@@ -207,12 +207,12 @@ public class ChargeAttack : MonoBehaviour
             bossAI.canLookAt = true;
             bossAI.OnEndAttack("charge2");
         }
-        else if (other.collider.GetComponent<PlayerHealth>() && !collided)
+        else if (other.collider.GetComponent<PlayerHealth>() && !collided && !GetComponent<BossHealth>().isDead)
         {
             isTooClose = false;
             tooCloseTimer = 0;
             collided = true;
-            bossAI.target.GetComponent<PlayerHealth>().TakeDamage(damage);
+            
             Vector3 dir = (other.collider.transform.position - transform.position).normalized;
             other.collider.GetComponent<Rigidbody>().AddForce(dir * force);
             bossAI.OnEndAttack("charge3");

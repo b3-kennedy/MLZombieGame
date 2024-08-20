@@ -1967,6 +1967,9 @@ MonoBehaviour:
   openingBar: {fileID: 6798222468944406277}
   openTime: 3
   doorOpen: {fileID: 8300000, guid: b871043881aaf5849aa3d906f9f89c51, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 7295
 --- !u!114 &2416271409863669464
 MonoBehaviour:
   m_ObjectHideFlags: 0
