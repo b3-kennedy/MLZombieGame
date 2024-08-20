@@ -113,12 +113,10 @@ public class EnforcerZombieAI : MonoBehaviour
         {
             //anim.SetBool("swipe", false);
             attackTimer += Time.deltaTime;
-            if(attackTimer >= attackRate)
             {
-                attackTimer = 0;
                 canAttack = true;
                 
-                
+                attackTimer = 0;
             }
         }
 
