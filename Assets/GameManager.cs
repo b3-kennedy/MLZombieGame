@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public bool isTraining;
 
+    public GameObject barnSkyBeam;
+
     public UnityEvent muteAudio;
 
     private void Awake()
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        barnSkyBeam.SetActive(false);
+
         if (isTraining)
         {
             Debug.LogWarning("Training mode is on");
@@ -74,6 +78,11 @@ public class GameManager : MonoBehaviour
         if (gameOver)
         {
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        if(hasBlueKey && hasRedKey && hasGreenKey)
+        {
+            barnSkyBeam.SetActive(true);
         }
 
         //foreach (var zombie in scoutZombies)

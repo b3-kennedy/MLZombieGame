@@ -110,7 +110,7 @@ public class MLPatrol2 : Agent
             enforcerZombieStartingPatrolPos.Add(enforcer.patrolPoint.position);
         }
 
-        ResetZombiePositions();
+        //ResetZombiePositions();
     }
 
     public void TakeAction()
@@ -124,7 +124,7 @@ public class MLPatrol2 : Agent
         playerHealth.currentHealth = 100;
         Debug.Log(randomNum);
 
-        ResetZombiePositions();
+        //ResetZombiePositions();
 
         player.parent.GetComponent<PlayerAIMove>().index = Random.Range(0, player.parent.GetComponent<PlayerAIMove>().positions.Count);
         player.parent.GetComponent<NavMeshAgent>().Warp(playerSpawns[randomNum].position);
