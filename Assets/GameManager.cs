@@ -80,9 +80,14 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        
         if(hasBlueKey && hasRedKey && hasGreenKey)
         {
-            barnSkyBeam.SetActive(true);
+            if(barnSkyBeam != null)
+            {
+                barnSkyBeam.SetActive(true);
+            }
+            
         }
 
         //foreach (var zombie in scoutZombies)
@@ -176,6 +181,9 @@ public class GameManager : MonoBehaviour
         PostProcessingManager.Instance.vignette.intensity.value = 0f;
         player.GetComponent<Rigidbody>().MovePosition(new Vector3(0, 1, -21));
         Cursor.lockState = CursorLockMode.Locked;
+        HUDManager.Instance.hudGameObject.SetActive(true);
+        player.GetComponent<PlayerAudioManager>().footstepSource.mute = false;
+        player.GetComponent<PlayerHealth>().hurtSource.mute = false;
         gameOver = false;
     }
 
